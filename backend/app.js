@@ -1,16 +1,16 @@
+//REQUIREMENTS
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const debug = require('debug');
 const cors = require('cors');
 const csurf = require('csurf');
-
 require('./models/User');
 require('./config/passport');
 const passport = require('passport');
-
 const { isProduction } = require('./config/keys');
 
+//USES
 const app = express();
 
 app.use(logger('dev'));
@@ -33,11 +33,13 @@ app.use(
     })
 );
 
+//ROUTERS
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 
+//ERROR LOGGING
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.statusCode = 404;
