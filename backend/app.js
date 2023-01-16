@@ -2,13 +2,12 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const debug = require('debug');
+const cors = require('cors');
 const csurf = require('csurf');
 
-const cors = require('cors');
-const { isProduction } = require('./config/keys');
+require('./models/User');
 
-const csrfRouter = require('./routes/api/csrf');
-const usersRouter = require('./routes/api/users');
+const { isProduction } = require('./config/keys');
 
 const app = express();
 
@@ -16,6 +15,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+if (!isProduction) {
+    app.use(cors());
+}
+
 app.use(
     csurf({
         cookie: {
@@ -26,12 +30,11 @@ app.use(
     })
 );
 
-if (!isProduction) {
-    app.use(cors());
-}
-
-app.use('/api/csrf', csrfRouter);
+const usersRouter = require('./routes/api/users');
+const csrfRouter = require('./routes/api/csrf');
 app.use('/api/users', usersRouter);
+app.use('/api/csrf', csrfRouter);
+
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.statusCode = 404;
