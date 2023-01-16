@@ -37,8 +37,12 @@ app.use(
 
 //ROUTERS
 const usersRouter = require('./routes/api/users');
+const chatsRouter = require('./routes/api/chats');
+const messagesRouter = require('./routes/api/messages');
 const csrfRouter = require('./routes/api/csrf');
 app.use('/api/users', usersRouter);
+app.use('/api/chats', chatsRouter);
+app.use('/api/messages', messagesRouter);
 app.use('/api/csrf', csrfRouter);
 
 //ERROR LOGGING
