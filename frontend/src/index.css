@@ -1,1 +1,11 @@
 /* TODO Add site wide styles */
+
+/*LOGIN SIGNUP ERRORS*/
+form > .errors {
+    color: red;
+    font-size: 0.875em;
+    height: 15px;
+    display: flex;
+    align-items: center;
+  }
+/*LOGIN SIGNUP ERRORS*/
