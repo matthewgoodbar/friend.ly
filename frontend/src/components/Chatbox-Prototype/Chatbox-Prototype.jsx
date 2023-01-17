@@ -1,6 +1,6 @@
-import "./Chatbox.css"
+import "./Chatbox-Prototype.css"
 import { useEffect, useState } from "react";
-import TweetBox from "../Tweets/TweetBox";
+import TweetBox from "./Message-Prototype";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveNewMessage, fetchChatMessages, composeMessage } from '../../store/messages';
@@ -21,7 +21,7 @@ function ChatboxPrototype() {
     const messages = useSelector(state => Object.values(state.messages.all));
 
     useEffect(() => {
-        dispatch(fetchChatMessages(activeChatRoom));
+        // dispatch(fetchChatMessages(activeChatRoom));
         socket.emit("setup", user);
         socket.on("connected", () => console.log("socket connected"));
 
@@ -63,7 +63,7 @@ function ChatboxPrototype() {
             </div>
             <div id="demoChatBox">
                 {messages.map((message, i) => {
-                    if (message.chat == activeChatRoom) return <TweetBox key={i} text={tweet.text} username={tweet.author.username} />
+                    if (message.chat == activeChatRoom) return <TweetBox key={i} text={message.text} username={message.author.username} />
                 })}
             </div>
             <form className="composeTweet" onSubmit={handleSubmit}>
