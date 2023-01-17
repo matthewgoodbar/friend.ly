@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const debug = require('debug')('backend:server');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 const validateLoginInput = require('../../validations/login');
@@ -9,12 +10,18 @@ const validateRegisterInput = require('../../validations/register');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-router.get('/', (req, res, next) => {
-  res.json({
-    message: "GET /api/users"
-  });
+//Gets all users
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.find()
+      .sort({ createdAt: -1 });
+    return res.json(users);
+  } catch(err) {
+    return res.json([]);
+  }
 });
 
+//Get current user
 router.get('/current', restoreUser, (req, res) => {
   if (isProduction) {
     const csrfToken = req.csrfToken();
@@ -28,6 +35,7 @@ router.get('/current', restoreUser, (req, res) => {
   });
 });
 
+//Creates new user
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   const user = await User.findOne({
     $or: [{ email: req.body.email }, { username: req.body.username }]
@@ -68,6 +76,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
 });
 
+//Logs in user
 router.post('/login', validateLoginInput, async (req, res, next) => {
   passport.authenticate('local', async (err, user) => {
     if (err) return next(err);
