@@ -5,12 +5,13 @@ const apiKey = process.env.YELP_API_KEY;
 const client = yelp.client(apiKey);
 
 router.get('/', (req, res) => {
+    console.log(req.query)
     client.search({
-        location: req.params.location,
-        // offset: '0',
-        // limit: '50'
+        location: req.query.location,
+        term: req.query.term,
+        limit: req.query.limit
     }).then(response => {
-        console.log(JSON.stringify(response.jsonBody));
+        // console.log(JSON.stringify(response.jsonBody));
         res.send(response.jsonBody.businesses);
     }).catch(e => {
         console.log(e);
