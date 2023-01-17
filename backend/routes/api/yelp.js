@@ -1,0 +1,21 @@
+const express = require('express');
+const router = express.Router();
+const yelp = require('yelp-fusion');
+const apiKey = process.env.YELP_API_KEY;
+const client = yelp.client(apiKey);
+
+// solving yelp api cors issues
+router.get('/', (req, res) => {
+    client.search({
+        location:  "san francisco",
+        // offset: '0',
+        // limit: '50'
+    }).then(response => {
+        console.log(JSON.stringify(response.jsonBody));
+        res.send(response.jsonBody.businesses);
+    }).catch(e => {
+        console.log(e);
+    });
+})
+
+module.exports = router;

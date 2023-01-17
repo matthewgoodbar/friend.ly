@@ -36,8 +36,10 @@ app.use(
 //ROUTERS
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
+const yelpRouter = require('./routes/api/yelp')
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/yelp', yelpRouter);
 
 //ERROR LOGGING
 app.use((req, res, next) => {
@@ -58,5 +60,9 @@ app.use((err, req, res, next) => {
         errors: err.errors
     })
 });
+
+
+
+
 
 module.exports = app;
