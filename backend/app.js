@@ -40,10 +40,12 @@ const usersRouter = require('./routes/api/users');
 const chatsRouter = require('./routes/api/chats');
 const messagesRouter = require('./routes/api/messages');
 const csrfRouter = require('./routes/api/csrf');
+const yelpRouter = require('./routes/api/yelp');
 app.use('/api/users', usersRouter);
 app.use('/api/chats', chatsRouter);
 app.use('/api/messages', messagesRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/yelp', yelpRouter);
 
 //ERROR LOGGING
 app.use((req, res, next) => {
