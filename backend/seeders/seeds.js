@@ -3,6 +3,7 @@ const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Topic = require('../models/Topic');
 const Chat = require('../models/Chat');
+const Message = require("../models/Message.js");
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -12,7 +13,8 @@ const NUM_SEED_USERS = 10;
 const users = [];
 
 users.push(
-new User ({
+    new User ({
+        _id: mongoose.Types.ObjectId(1),
         username: 'matthew',
         email: 'matthew@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
@@ -24,6 +26,7 @@ new User ({
 
 users.push(
     new User ({
+        _id: mongoose.Types.ObjectId(2),
         username: 'marcos',
         email: 'marcos@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
@@ -35,6 +38,7 @@ users.push(
 
 users.push(
     new User ({
+        _id: mongoose.Types.ObjectId(3),
         username: 'vivian',
         email: 'vivian@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
@@ -46,6 +50,7 @@ users.push(
 
 users.push(
     new User ({
+        _id: mongoose.Types.ObjectId(4),
         username: 'evgenii',
         email: 'evgenii@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
@@ -57,6 +62,7 @@ users.push(
 
 users.push(
     new User ({
+        _id: mongoose.Types.ObjectId(5),
         username: 'diego',
         email: 'diego@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
@@ -86,6 +92,7 @@ const topics = [];
 
 topics.push(
     new Topic ({
+        _id: mongoose.Types.ObjectId(1),
         name: "hiking",
         category: "outdoors",
         users: []
@@ -94,6 +101,7 @@ topics.push(
 
 topics.push(
     new Topic ({
+        _id: mongoose.Types.ObjectId(2),
         name: "cycling",
         category: "outdoors",
         users: []
@@ -102,6 +110,7 @@ topics.push(
 
 topics.push(
     new Topic ({
+        _id: mongoose.Types.ObjectId(3),
         name: "rock climbing",
         category: "outdoors",
         users: []
@@ -113,7 +122,17 @@ const chats = [];
 
 chats.push(
     new Chat({
-        
+        _id: mongoose.Types.ObjectId(1),
+        users: [
+            mongoose.Types.ObjectId(1),
+            mongoose.Types.ObjectId(2),
+            mongoose.Types.ObjectId(3),
+            mongoose.Types.ObjectId(4),
+            mongoose.Types.ObjectId(5)
+        ],
+        messages: [],
+        daily: false,
+        topic: mongoose.Types.ObjectId(1)
     })
 )
     
@@ -131,18 +150,21 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
+  console.log("Resetting db and seeding...");
 
   User.collection.drop()
-                 .then(() => Tweet.collection.drop())
-                 .then(() => User.insertMany(users))
-                 .then(() => Topic.insertMany(topics))
-                 .then(() => {
-                   console.log("Done!");
-                   mongoose.disconnect();
-                 })
-                 .catch(err => {
-                   console.error(err.stack);
-                   process.exit(1);
-                 });
+                .then(() => Topic.collection.drop())
+                .then(() => Chat.collection.drop())
+                .then(() => Message.collection.drop())
+                .then(() => User.insertMany(users))
+                .then(() => Topic.insertMany(topics))
+                .then(() => Chat.insertMany(chats))
+                .then(() => {
+                    console.log("Done!");
+                    mongoose.disconnect();
+                })
+                .catch(err => {
+                    console.error(err.stack);
+                    process.exit(1);
+                });
 }
