@@ -1,10 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
+import chats from './chats';
+import messages from './messages';
 import errors from './errors';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  chats,
+  messages,
   errors
 });
 

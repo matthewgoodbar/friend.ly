@@ -20,7 +20,8 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "yelp-fusion": "^3.0.0"
+    "yelp-fusion": "^3.0.0",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "dotenv-cli": "^6.0.0",
