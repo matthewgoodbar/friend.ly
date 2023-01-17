@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const debug = require('debug')('backend:server');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Chat = mongoose.model('Chat');
 const Message = mongoose.model('Message');
+const Topic = mongoose.model('Topic');
 const { requireUser } = require('../../config/passport');
 const validateChatInput = require('../../validations/chats');
 
@@ -31,14 +33,40 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+//Gets all chats by specified user
+router.get('/user/:userId', async (req, res) => {
+    let user;
+    try {
+        user = await User.findById(req.params.userId)
+            .populate('chats');
+        debug(user);
+    } catch(err) {
+        const error = new Error('User does not exist');
+        error.statusCode = 404;
+        error.errors = { message: "No user found with that id" };
+        return next(error);
+    }
+    try {
+        const chats = user.chats;
+        return res.json(chats);
+    } catch(err) {
+        return res.json([]);
+    }
+});
+
 //Post new chat
 router.post('/', requireUser, validateChatInput, async (req, res, next) => {
     try {
         const newChat = new Chat({
-            users: req.users,
-            messages: []
+            users: req.body.users,
+            messages: [],
+            topic: Topic.where({ name: req.body.topic })._id
         });
         let chat = await newChat.save();
+        req.body.users.forEach((userId) => {
+            User.updateOne({ _id: userId },
+                { $push: { chats: chat._id } });
+        })
         return res.json(chat);
     } catch(err) {
         next(err);
