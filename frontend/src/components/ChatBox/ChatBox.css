@@ -1,0 +1,72 @@
+.chatbox-wrapper{
+    width: 800px;
+    height: 800px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.chatbox-wrapper form{
+    display: flex;
+}
+
+.chatbox-header{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    border: 1px solid yellow;
+}
+
+.chatbox-messages-wrapper{
+
+height: 500px;
+overflow-y: scroll;
+border: 1px solid red;
+margin: 20px;
+}
+
+
+.chatbox-messages-details-right-side{
+    display: flex;
+    justify-content: flex-end;
+    min-height: 20px;
+    /* border: 1px solid green; */
+    margin: 20px;
+}
+
+.chatbox-messages-details-left-side{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    min-height: 20px;
+    /* border: 1px solid green; */
+    margin: 20px;
+}
+
+.sender-info{
+    width: 66px;
+
+}
+
+.sender-message{
+    width: 300px;
+    min-height:20px;
+    border: 1px solid purple;
+    margin-left: 20px;
+    text-align: center;
+
+}
+
+
+.chatbox-wrapper form{
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    border: 1px solid red;
+}
+
+.chatbox-wrapper form button{
+    width: 50px;
+    height: 20px;
+}

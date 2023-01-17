@@ -45,6 +45,41 @@ app.use('/api/chats', chatsRouter);
 app.use('/api/messages', messagesRouter);
 app.use('/api/csrf', csrfRouter);
 
+
+//SOCKET IO MANAGER
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3001"
+    }
+});
+
+io.on("connection", (socket) => {
+
+    socket.on("setup", (userData) => {
+        socket.join("chat");
+        socket.emit("connected");
+    });
+
+
+    socket.on("new message", (msgObj) => {
+        console.log("message arrived")
+        socket.to("chat").emit("message recieved", msgObj);
+    });
+
+    socket.off("setup", () => {
+        console.log("USER DISCONNECTED");
+        socket.leave(userData._id);
+    });
+});
+
+server.listen(3000, () => {
+    console.log('listening on *:3000');
+});
+
+
 //ERROR LOGGING
 app.use((req, res, next) => {
     const err = new Error('Not Found');
