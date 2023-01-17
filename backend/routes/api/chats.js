@@ -5,6 +5,7 @@ const User = mongoose.model('User');
 const Chat = mongoose.model('Chat');
 const Message = mongoose.model('Message');
 const { requireUser } = require('../../config/passport');
+const validateChatInput = require('../../validations/chats');
 
 //Gets all chats
 router.get('/', async (req, res) => {
@@ -31,7 +32,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //Post new chat
-router.post('/', requireUser, async (req, res, next) => {
+router.post('/', requireUser, validateChatInput, async (req, res, next) => {
     try {
         const newChat = new Chat({
             users: req.users,
