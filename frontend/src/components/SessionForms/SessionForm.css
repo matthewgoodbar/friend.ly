@@ -92,6 +92,10 @@ line-height: 21px;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+#signup-offer{
+    margin-bottom: 30px;
+}
+
 #signup-offer p{
     margin-top: 60px;
     font-family: 'Roboto';
@@ -186,4 +190,44 @@ line-height: 21px;
     position: absolute;
     bottom: -66px;
     left: -61px;
+}
+
+@media(max-width: 1190px){
+    #session-right-side h1{
+        font-size: 32px;
+        width: 400px;
+        line-height: 40px;
+    }
+    #session-right-side p{
+        font-size: 18px;
+        margin-top: -10px;
+        width: 400px;
+        margin: 0 auto;
+    }
+    #big-rec{
+        width: 400px;
+        height: 200px;
+        background-color: #ffffff;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+    }
+    
+    #small-rec{
+        width: 240px;
+        height: 140px;
+        background-color: #ffffff;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+        border-radius: 4px; 
+        position: absolute;
+        bottom: -66px;
+        left: -40px;
+    }
+}
+
+@media(max-height: 920px){
+    #session-right-side{
+        height: 1000px;
+    }
 }
