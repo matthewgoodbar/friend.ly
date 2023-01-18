@@ -8,7 +8,7 @@ import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../sto
 
 const ChatBox = () => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState("");
+  const [text, setText] = useState("");
   const [currentUser, setCurrentUser] = useState("");
   const user = useSelector(state => state.session.user)
   const activeChatRoom = useSelector(getActiveChatroom)
@@ -18,13 +18,18 @@ const ChatBox = () => {
   const [socket] = useState(io("http://localhost:3000", {
     transports: ['websocket']
   }))
-  
+
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
 
+  // room is hard coded for demo. Buttons to enter chat rooms need to know the chat room code
+  // and clicking on them needs to dispatch changeChatRoom and fetchChatMessages()
+  // we will use the "active" chatroom in state (the chatroom ID) to correctly map the messages 
+  // into that chatroom component. 
+
   useEffect(() => {
-    dispatch(fetchUserChatrooms(user._id)).then(() => dispatch(changeChatroom("000000012792ed64ba9393af")));
+    dispatch(fetchUserChatrooms(user._id)).then(() => dispatch(changeChatroom("000000012792ed64ba9393af"))); 
     socket.emit("setup", user);
     socket.on("connected", () => console.log("socket connected"));
 
@@ -38,36 +43,18 @@ const ChatBox = () => {
 
   }, []);
 
-
-
-  // get socket.emit from this
-  
-    // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   // dispatch(composeMessage({ text, chat: activeChatRoom }));
-  //   socket.emit("new message", { text, author: { username: user.username }, chat: activeChatRoom, id: user._id });
-  //   setText('');
-  // };
-
-
-  ///////
-
-//   const messageTime = `${new Date().getHours()}:${new Date().getMinutes()}`
-
-
   // Keep - convert to timestamps once messages are in state
-  // const messageTimeOptions = {hour: 'numeric', minute: 'numeric', hour12: true}
-
-
+  const messageTimeOptions = {hour: 'numeric', minute: 'numeric', hour12: true}
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(composeMessage({ body: inputValue, chat: activeChatRoom, author: user._id }));
-    setInputValue("");
+    socket.emit("new message", { body: text, author: { username: user.username, _id: user._id }, chat: "000000012792ed64ba9393af", createdAt: new Date()});
+    dispatch(composeMessage({ body: text, chat: activeChatRoom, author: user._id }));
+    setText("");
   };
 
   const handleInputChange = event => {
-    setInputValue(event.target.value);
+    setText(event.target.value);
   };
 
 
@@ -92,7 +79,7 @@ const ChatBox = () => {
                 <div className="sender-info">
                     <strong>{message.author.username}</strong>
                     <img src={logo} alt="" width="50px" />
-                    {/* <p>{message.timestamp}</p> */}
+                    {/* <p>{message.createdAt}</p> */}
                 </div>
                 
           </div>
@@ -108,7 +95,7 @@ const ChatBox = () => {
           Message:
           <input
             type="text"
-            value={inputValue}
+            value={text}
             onChange={handleInputChange}
             placeholder="Enter your message"
           />

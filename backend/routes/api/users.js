@@ -10,32 +10,9 @@ const validateRegisterInput = require('../../validations/register');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-//Gets all users
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.find()
-      .sort({ createdAt: -1 });
-    return res.json(users);
-  } catch(err) {
-    return res.json([]);
-  }
-});
-
-//Gets user by id
-router.get('/:id', async (req, res, next) => {
-  try {
-    // console.log(req.params)
-    const user = await User.findById(req.params.id)
-    debug(user)
-    return res.json(user);
-  } catch (err) {
-    return res.json([]);
-  }
-});
-
 //Get current user
 router.get('/current', restoreUser, (req, res) => {
-  if (isProduction) {
+  if (!isProduction) {
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
@@ -101,6 +78,27 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
     }
     return res.json(await loginUser(user));
   })(req, res, next);
+});
+
+//Gets all users
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.find()
+      .sort({ createdAt: -1 });
+    return res.json(users);
+  } catch (err) {
+    return res.json([]);
+  }
+});
+
+//Gets user by id
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    return res.json(user);
+  } catch (err) {
+    return res.json([]);
+  }
 });
 
 module.exports = router;

@@ -39,7 +39,7 @@ router.get('/user/:userId', async (req, res) => {
     try {
         user = await User.findById(req.params.userId)
             // .populate('chats','_id');
-        debug(user);
+        // debug(user);
     } catch(err) {
         const error = new Error('User does not exist');
         error.statusCode = 404;

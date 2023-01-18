@@ -15,12 +15,12 @@ const { isProduction } = require('./config/keys');
 
 //USES
 const app = express();
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
+
 
 if (!isProduction) {
     app.use(cors());
@@ -36,6 +36,7 @@ app.use(
     })
 );
 
+
 //ROUTERS
 const usersRouter = require('./routes/api/users');
 const chatsRouter = require('./routes/api/chats');
@@ -47,7 +48,9 @@ app.use('/api/messages', messagesRouter);
 app.use('/api/csrf', csrfRouter);
 
 
-//SOCKET IO MANAGER
+
+
+// SOCKET IO MANAGER
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -66,7 +69,6 @@ io.on("connection", (socket) => {
 
 
     socket.on("new message", (msgObj) => {
-        // console.log("message arrived")
         socket.to("chat").emit("message recieved", msgObj);
     });
 

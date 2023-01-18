@@ -33,9 +33,10 @@ router.get('/chat/:chatId', async (req, res) => {
         // return next(error);
     }
     try {
-        const messages = await Message.find({ chat: chat._id })
+        const messages = await Message.find({ chat: req.params.chatId })
             .sort({ createdAt: -1 })
             .populate("author", "_id, username");
+        debug(chat)
         return res.json(messages);
     } catch(err) {
         return res.json([]);
