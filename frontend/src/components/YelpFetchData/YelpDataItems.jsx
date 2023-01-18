@@ -11,7 +11,6 @@ const YelpDataItems =(props) => {
     const sort_by = props.sortBy // options: rating, review_count,distance
 
     const [restaurants, setRestaurants] = useState([])
-    const [imgUrl, setImgUrl] = useState("https://s3-media3.fl.yelpcdn.com/bphoto/eyYUz3Xl7NtcJeN7x7SQwg/o.jpg")
     const getDataFromYelp = () => {
         fetch('/api/yelp?term=Thaifood&radius=1000&location=94102&limit=6')
         .then(response => response.json())
