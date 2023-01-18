@@ -127,9 +127,11 @@ margin: 20px;
 .bubbles .who {
     grid-area: who;
 }
-.bubbles .message span {
+.bubbles .message p {
     font-weight: 700;
     font-size: 14px;
+    text-align: right;
+    padding-right:10px;
 }
 .bubbles .bubble img {
     border-top-left-radius: var(--base-unit);
