@@ -18,6 +18,7 @@ function NavBar () {
         <div className="links-nav">
           <Link to={'/'}>Main Page</Link>
           <Link to={'/profile'}>Profile</Link>
+          <Link to={'/prototype'}>Prototype</Link>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );

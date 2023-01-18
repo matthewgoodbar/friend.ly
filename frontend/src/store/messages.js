@@ -21,7 +21,7 @@ export const receiveNewMessage = message => ({
 
 export const fetchChatMessages = (chatId) => async dispatch => {
     try {
-      const res = await jwtFetch(`/api/chats/${chatId}`);
+      const res = await jwtFetch(`/api/messages/chat/${chatId}`);
       const messages = await res.json();
       dispatch(receiveChatMessages(messages));
     } catch (err) {

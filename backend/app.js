@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
 
 
     socket.on("new message", (msgObj) => {
-        console.log("message arrived")
+        // console.log("message arrived")
         socket.to("chat").emit("message recieved", msgObj);
     });
 

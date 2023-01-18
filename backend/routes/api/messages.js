@@ -29,7 +29,7 @@ router.get('/chat/:chatId', async (req, res) => {
         const error = new Error('Chat does not exist');
         error.statusCode = 404;
         error.errors = { message: "No chat found with that id" };
-        return next(error);
+        // return next(error);
     }
     try {
         const messages = await Message.find({ chat: chat._id })
@@ -50,7 +50,7 @@ router.get('/user/:userId', async (req, res) => {
         const error = new Error('User does not exist');
         error.statusCode = 404;
         error.errors = { message: "No user found with that id" };
-        return next(error);
+        // return next(error);
     }
     try {
         const messages = await Message.find({ author: user._id })
@@ -84,7 +84,7 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res,
         message = await message.populate('author', '_id, username');
         return res.json(message);
     } catch(err) {
-        next(err);
+        // next(err);
     }
 });
 

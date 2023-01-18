@@ -21,12 +21,25 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+//Gets user by id
+router.get('/:id', async (req, res, next) => {
+  try {
+    // console.log(req.params)
+    const user = await User.findById(req.params.id)
+    debug(user)
+    return res.json(user);
+  } catch (err) {
+    return res.json([]);
+  }
+});
+
 //Get current user
 router.get('/current', restoreUser, (req, res) => {
   if (isProduction) {
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
+  // console.log(req.user)
   if (!req.user) return res.json(null);
   res.json({
     _id: req.user._id,

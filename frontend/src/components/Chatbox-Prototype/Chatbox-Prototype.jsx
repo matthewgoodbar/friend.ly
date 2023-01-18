@@ -4,7 +4,7 @@ import TweetBox from "./Message-Prototype";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveNewMessage, fetchChatMessages, composeMessage } from '../../store/messages';
-import { changeChatroom, getActiveChatroom } from "../../store/chats";
+import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 
 function ChatboxPrototype() {
     const user = useSelector(state => state.session.user)
@@ -20,8 +20,15 @@ function ChatboxPrototype() {
 
     const messages = useSelector(state => Object.values(state.messages.all));
 
+    useEffect(()=>{
+        console.log(activeChatRoom)
+        dispatch(fetchChatMessages(activeChatRoom))
+    }, [activeChatRoom])
+
+
     useEffect(() => {
-        // dispatch(fetchChatMessages(activeChatRoom));
+        // console.log(user._id)
+        dispatch(fetchUserChatrooms(user._id)).then(() => dispatch(changeChatroom("000000012792ed64ba9393af")) );
         socket.emit("setup", user);
         socket.on("connected", () => console.log("socket connected"));
 
@@ -30,14 +37,14 @@ function ChatboxPrototype() {
         });
 
         socket.on("message recieved", (msgObj) => {
-            dispatch(receiveNewMessage(msgObj))
+            // dispatch(receiveNewMessage(msgObj))
         });
 
     }, []);
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(composeMessage({ text, chat: activeChatRoom }));
+        // dispatch(composeMessage({ text, chat: activeChatRoom }));
         socket.emit("new message", { text, author: { username: user.username }, chat: activeChatRoom, id: user._id });
         setText('');
     };
@@ -48,7 +55,7 @@ function ChatboxPrototype() {
 
     const chatRoomChangeHandler = (e, chatNum) => {
         e.stopPropagation()
-        dispatch(changeChatroom(chatNum))
+        // dispatch(changeChatroom(chatNum))
     }
 
 
