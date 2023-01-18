@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const debug = require('debug')('backend:server');
 const mongoose = require('mongoose');
-const debug = require('debug')('backend:server');
 const User = mongoose.model('User');
 const Chat = mongoose.model('Chat');
 const Message = mongoose.model('Message');
