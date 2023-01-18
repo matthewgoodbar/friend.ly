@@ -27,7 +27,7 @@ export const getActiveChatroom = (state) => {
 
 export const fetchUserChatrooms = (userId) => async dispatch => {
     try {
-        const res = await jwtFetch(`/api/chats/${userId}`);
+        const res = await jwtFetch(`/api/chats/user/${userId}`);
         const chatrooms = await res.json();
         dispatch(receiveUserChatrooms(chatrooms));
     } catch (err) {

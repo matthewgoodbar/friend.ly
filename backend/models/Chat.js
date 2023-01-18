@@ -9,7 +9,15 @@ const chatSchema = Schema({
     messages: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Message'
-    }]
+    }],
+    daily: {
+        type: Boolean,
+        default: true
+    },
+    topic: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Topic'
+    }
 }, {
     timestamps: true
 });

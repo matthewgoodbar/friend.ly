@@ -21,7 +21,7 @@ export const receiveNewMessage = message => ({
 
 export const fetchChatMessages = (chatId) => async dispatch => {
     try {
-      const res = await jwtFetch(`/api/chats/${chatId}`);
+      const res = await jwtFetch(`/api/messages/chat/${chatId}`);
       const messages = await res.json();
       dispatch(receiveChatMessages(messages));
     } catch (err) {
@@ -35,7 +35,7 @@ export const fetchChatMessages = (chatId) => async dispatch => {
   
   export const composeMessage = data => async dispatch => {
     try {
-      const res = await jwtFetch('/api/tweets/', {
+      const res = await jwtFetch(`/api/messages/chat/${data.chat}`, {
         method: 'POST',
         body: JSON.stringify(data)
       });

@@ -8,18 +8,19 @@ const csurf = require('csurf');
 require('./models/User');
 require('./models/Chat');
 require('./models/Message');
+require('./models/Topic');
 require('./config/passport');
 const passport = require('passport');
 const { isProduction } = require('./config/keys');
 
 //USES
 const app = express();
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
+
 
 if (!isProduction) {
     app.use(cors());
@@ -35,6 +36,7 @@ app.use(
     })
 );
 
+
 //ROUTERS
 const usersRouter = require('./routes/api/users');
 const chatsRouter = require('./routes/api/chats');
@@ -48,13 +50,15 @@ app.use('/api/csrf', csrfRouter);
 app.use('/api/yelp', yelpRouter);
 
 
-//SOCKET IO MANAGER
+
+
+// SOCKET IO MANAGER
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3001"
+        origin: "http://localhost:3000"
     }
 });
 
@@ -67,7 +71,6 @@ io.on("connection", (socket) => {
 
 
     socket.on("new message", (msgObj) => {
-        console.log("message arrived")
         socket.to("chat").emit("message recieved", msgObj);
     });
 
@@ -77,8 +80,8 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+server.listen(3001, () => {
+    console.log('listening on *:3001');
 });
 
 
