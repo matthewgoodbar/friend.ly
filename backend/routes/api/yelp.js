@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     client.search({
         location: req.query.location,
         term: req.query.term,
-        limit: req.query.limit,
+        limit: '6',
         sort_by: "review_count"
     }).then(response => {
         // console.log(JSON.stringify(response.jsonBody));

@@ -28,7 +28,6 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />
-        <Route path='/yelp' component={YelpDataItems} />
       </Switch>
     </>
   );

@@ -4,15 +4,18 @@ import { getDistance } from 'geolib';
 import './yelp.css'
 import interest from './interest.js'
 
+
 const YelpDataItems =(props) => {
+    props ={term:'Thai food', location:'San Francisco', radius: '5000', sort_by: 'review_count'}
+
     const term = props.term
     const location = props.location
     const radius = props.radius
-    const sort_by = props.sortBy // options: rating, review_count,distance
+    const sort_by = props.sort_by // options: rating, review_count,distance
 
     const [restaurants, setRestaurants] = useState([])
     const getDataFromYelp = () => {
-        fetch('/api/yelp?term=Thaifood&radius=1000&location=94102&limit=6')
+        fetch(`/api/yelp?term=${term}&radius=${radius}&location=${location}&sort_by=${sort_by}`)
         .then(response => response.json())
         .then(data => JSON.stringify(data))
         .then(stringifiedData => JSON.parse(stringifiedData))
@@ -33,11 +36,11 @@ const YelpDataItems =(props) => {
     return (
         <div className='recommendation-container'>
             <div className='recommendation-head'
-            style={{backgroundImage: `url(${interest['Thai food'].imgUrl})`}}>
+            style={{backgroundImage: `url(${interest[term].imgUrl})`}}>
                 <div className='recommendation-interest'>Thai food</div>
                 <div className='recommendation-location'>San Francisco</div>
             </div>
-            <div className='description'>{interest['Thai food'].description}</div>
+            <div className='description'>{interest[term].description}</div>
             <hr className='right-bar-line'/>
             <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
