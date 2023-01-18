@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messages - Friend.ly</title>
+    <title>Interests - Friend.ly</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="root">
-        <div class="container messages">
+        <div class="container interests">
             <header>
                 <div class="innerHeader">
                     <div>
@@ -42,7 +42,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/frontend/src/experiments/messages.html" class="active">
+                                    <a href="/frontend/src/experiments/messages.html">
                                         <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M21.6 0.399994C23 0.399994 24 1.49997 24 2.79999C24 4.10002 24 17.2 24 17.2C24 18.52 22.92 19.6 21.6 19.6H4.8L0 24.4V2.79999C0 1.47999 1.08 0.399994 2.4 0.399994C6.5 0.399994 20.2 0.399994 21.6 0.399994Z" fill="currentColor"/>
                                         </svg>
@@ -50,7 +50,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/frontend/src/experiments/interests.html">
+                                    <a href="/frontend/src/experiments/interests.html" class="active">
                                         <svg width="26" height="24" viewBox="0 0 26 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5.60099 13.6216C2.73396 13.6216 0.411798 15.9438 0.411798 18.8108C0.411798 21.6778 2.73396 24 5.60099 24C8.46801 24 10.7902 21.6778 10.7902 18.8108C10.7902 15.9438 8.46801 13.6216 5.60099 13.6216ZM13.3588 14.9189V22.7027C13.3588 23.4162 13.9426 24 14.6561 24H22.4399C23.1534 24 23.7372 23.4162 23.7372 22.7027V14.9189C23.7372 14.2054 23.1534 13.6216 22.4399 13.6216H14.6561C13.9426 13.6216 13.3588 14.2054 13.3588 14.9189ZM4.44639 1.38811L0.165312 9.09405C-0.314688 9.96324 0.308014 11.027 1.29396 11.027H9.85612C10.8421 11.027 11.4648 9.96324 10.9848 9.09405L6.70369 1.38811C6.59137 1.18744 6.42759 1.02034 6.2292 0.904028C6.03082 0.787719 5.80501 0.726407 5.57504 0.726407C5.34508 0.726407 5.11927 0.787719 4.92088 0.904028C4.7225 1.02034 4.55871 1.18744 4.44639 1.38811ZM21.4669 0C20.0918 0 19.1188 0.726487 18.548 1.51784C17.9772 0.726487 17.0042 0 15.6291 0C13.6053 0 12.0615 1.66054 12.0615 3.56757C12.0615 5.94162 14.695 7.68 17.7048 10.2876C17.9398 10.4886 18.2388 10.599 18.548 10.599C18.8572 10.599 19.1563 10.4886 19.3913 10.2876C22.401 7.68 25.0345 5.94162 25.0345 3.56757C25.0345 1.66054 23.4907 0 21.4669 0Z" fill="currentColor"/>
                                         </svg>
@@ -86,232 +86,167 @@
                 <aside class="leftSidebar">
                     <div class="innerAside">
                         <div class="title">
-                            <h1>Messages</h1> 
-                            <small>3 new</small>
-                        </div>
-                        <div class="day">
-                            <small class="uppercase">16/365</small>
-                            <h2>Jan 16<sup>th</sup></h2>
-                        </div>
-                        <div class="groupChat">
-                            <h3 class="uppercase">Group Chat</h3>
-                            <button class="active">
-                                <figure>
-                                    <img src="thai.png" alt="Thai Food" />
-                                </figure>
-                                <div>
-                                    <div class="name">Thai Food</div>
-                                    <div class="location">
-                                        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 6.11465C5.34375 6.11465 5.63812 5.9948 5.88313 5.75511C6.12771 5.51582 6.25 5.22803 6.25 4.89172C6.25 4.55541 6.12771 4.26741 5.88313 4.02772C5.63812 3.78843 5.34375 3.66879 5 3.66879C4.65625 3.66879 4.36208 3.78843 4.1175 4.02772C3.8725 4.26741 3.75 4.55541 3.75 4.89172C3.75 5.22803 3.8725 5.51582 4.1175 5.75511C4.36208 5.9948 4.65625 6.11465 5 6.11465ZM5 12C4.91667 12 4.83333 11.9847 4.75 11.9541C4.66667 11.9236 4.59375 11.8828 4.53125 11.8318C3.01042 10.5172 1.875 9.29692 1.125 8.17101C0.375 7.04469 0 5.99236 0 5.01401C0 3.48535 0.502708 2.26752 1.50813 1.36051C2.51313 0.453503 3.67708 0 5 0C6.32292 0 7.48688 0.453503 8.49187 1.36051C9.49729 2.26752 10 3.48535 10 5.01401C10 5.99236 9.625 7.04469 8.875 8.17101C8.125 9.29692 6.98958 10.5172 5.46875 11.8318C5.40625 11.8828 5.33333 11.9236 5.25 11.9541C5.16667 11.9847 5.08333 12 5 12Z" fill="black"/>
-                                        </svg>
-                                        <span>San Francisco</span>
-                                    </div>
-                                    <div class="time">Expires in <span>09:43:20</span></div>
-                                </div>
-                            </button>
-                        </div>
-                        <div class="directMessages">
-                            <h3 class="uppercase">Direct Messages</h3>
-                            <button class="unread">
-                                <figure>
-                                    <div class="online"></div>
-                                    <img src="michael.png" alt="Michael Scott" />
-                                </figure>
-                                <div class="right">
-                                    <div class="name">Michal Scott</div>
-                                    <div class="messagePreview">I can't, I have improv class tonight lorem ipsum</div>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <img src="dwight.png" alt="Dwight S." />
-                                </figure>
-                                <div class="right">
-                                    <div class="name">Dwight S.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <div class="online"></div>
-                                    <img src="pam.png" alt="Pam B." />
-                                </figure>
-                                <div>
-                                    <div class="name">Pam B.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button class="awaiting">
-                                <figure>
-                                    <img src="angela.png" alt="Angela M." />
-                                </figure>
-                                <div>
-                                    <div class="name">Angela M.</div>
-                                    <span>Awaiting response</span>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </aside>
-                <main class="messengerComponent">
-                    <div class="top">
-                        <div class="innerTop">
-                            <h4>Thai Food</h4>
-                            <div>
-                                <button class="participants">
-                                    5 participants 
-                                    <svg width="13" height="7" viewBox="0 0 13 7" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.7427 1.3871L6.98021 6.82258C6.91161 6.8871 6.83729 6.93269 6.75726 6.95935C6.67722 6.98645 6.59147 7 6.5 7C6.40853 7 6.32278 6.98645 6.24274 6.95935C6.16271 6.93269 6.08839 6.8871 6.01979 6.82258L0.240106 1.3871C0.0800352 1.23656 7.09723e-08 1.04839 7.3665e-08 0.82258C7.63577e-08 0.596773 0.0857521 0.403225 0.257256 0.241935C0.42876 0.0806445 0.628848 -7.08141e-07 0.85752 -7.05414e-07C1.08619 -7.02688e-07 1.28628 0.0806445 1.45778 0.241935L6.5 4.98387L11.5422 0.241935C11.7023 0.0913973 11.8994 0.0161282 12.1336 0.0161282C12.3682 0.0161282 12.5712 0.0967734 12.7427 0.258064C12.9142 0.419354 13 0.607526 13 0.82258C13 1.03763 12.9142 1.22581 12.7427 1.3871Z" fill="currentColor"/>
-                                    </svg>
-                                    </button>
-                                <button class="more">...</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bubbles">
-                        <div class="message">
-                            <span>Dwight S.</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="dwight.png" alt="Dwight S." />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message currentUser">
-                            <span>Me</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="ryan.png" alt="Ryan" />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Phasellus sit amet aliquet mi.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <span>Me</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="michael.png" alt="Michael Scott" />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Phasellus sit amet aliquet mi.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <span>Pam B.</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="pam.png" alt="Pam B." />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <span>Angela M.</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="angela.png" alt="Angela M." />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <span>Dwight S.</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="dwight.png" alt="Dwight S." />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message currentUser">
-                            <span>Me</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="ryan.png" alt="Ryan" />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Phasellus sit amet aliquet mi.
-                                </cite>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <span>Pam B.</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src="pam.png" alt="Pam B." />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </cite>
-                            </div>
-                        </div>
-                    </div>
-                    <form>
-                        <input type="text" placeholder="Type message..." />
-                        <button>
-                            <svg width="25" height="20" viewBox="0 0 25 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.90739 19.5045C6.52691 19.7892 6.11202 19.8602 5.66272 19.7175C5.21364 19.5756 4.9263 19.2703 4.8007 18.8016L3.52467 14.0394C3.44474 13.7411 3.4586 13.4519 3.56626 13.1718C3.67392 12.8918 3.86833 12.6798 4.14951 12.536L12.8016 7.75121L2.9163 7.93356C2.60087 7.94957 2.32652 7.86322 2.09326 7.67451C1.86 7.4858 1.7034 7.2423 1.62347 6.944L0.347444 2.18179C0.221839 1.71303 0.317918 1.30453 0.63568 0.956306C0.95367 0.608929 1.34858 0.463377 1.8204 0.51965L23.7351 3.55414C24.3305 3.64579 24.7025 3.96861 24.851 4.5226C24.9994 5.0766 24.8387 5.54215 24.3688 5.91926L6.90739 19.5045Z" fill="currentColor"/>
-                            </svg>
-                        </button>
-                    </form>
-                </main>
-                <aside class="rightSidebar">
-                    <div class="innerAside">
-                        <div class="top">
-                            <div class="gradient"></div>
-                            <h4>Thai Food</h4>
-                            <h3>
-                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 6.11465C5.34375 6.11465 5.63812 5.9948 5.88313 5.75511C6.12771 5.51582 6.25 5.22803 6.25 4.89172C6.25 4.55541 6.12771 4.26741 5.88313 4.02772C5.63812 3.78843 5.34375 3.66879 5 3.66879C4.65625 3.66879 4.36208 3.78843 4.1175 4.02772C3.8725 4.26741 3.75 4.55541 3.75 4.89172C3.75 5.22803 3.8725 5.51582 4.1175 5.75511C4.36208 5.9948 4.65625 6.11465 5 6.11465ZM5 12C4.91667 12 4.83333 11.9847 4.75 11.9541C4.66667 11.9236 4.59375 11.8828 4.53125 11.8318C3.01042 10.5172 1.875 9.29692 1.125 8.17101C0.375 7.04469 0 5.99236 0 5.01401C0 3.48535 0.502708 2.26752 1.50813 1.36051C2.51313 0.453503 3.67708 0 5 0C6.32292 0 7.48688 0.453503 8.49187 1.36051C9.49729 2.26752 10 3.48535 10 5.01401C10 5.99236 9.625 7.04469 8.875 8.17101C8.125 9.29692 6.98958 10.5172 5.46875 11.8318C5.40625 11.8828 5.33333 11.9236 5.25 11.9541C5.16667 11.9847 5.08333 12 5 12Z" fill="white"/>
-                                </svg> San Francisco</h3>
-                        </div>
-                        <p>Thai food is known for its balance of sweet, sour, salty, and spicy flavors, as well as its emphasis on fresh herbs and vegetables. Popular dishes include pad thai, curry, and tom yum soup.</p>
-                        <div class="places">
+                            <h1>My Interests</h1> 
+                            <p>Based on your interests we'll select people with similar tastes to put you all into the same group chat.</p>
+                            <!-- <ul class="empty">
+                                <li>You don't have any interest in your list yet :(</li>
+                            </ul> -->
                             <ul>
-                                <li><a href="/yelp-or-google-link">Restaurant Name</a></li>
-                                <li><a href="/yelp-or-google-link">Restaurant Name</a></li>
-                                <li><a href="/yelp-or-google-link">Restaurant Name</a></li>
+                                <li title="Indonesian (Food)"><span>Indonesian <small>Food</small></span> <button>... <div class="remove" onclick="alert('handle click to remove interest')">Not interest anymore</div></button></li>
+                                <li title="Malasian (Food)"><span>Malasian <small>Food</small></span> <button>... <div class="remove" onclick="alert('handle click to remove interest')">Not interest anymore</div></button></li>
+                                <li title="Korean (Food)"><span>Korean <small>Food</small></span> <button>... <div class="remove" onclick="alert('handle click to remove interest')">Not interest anymore</div></button></li>
+                                <li title="Mongolian (Food)"><span>Mongolian <small>Food</small></span> <button>... <div class="remove" onclick="alert('handle click to remove interest')">Not interest anymore</div></button></li>
+                                <li title="Surfing (Sports/Activities)"><span>Surfing <small>Sports/Activities</small></span> <button>... <div class="remove" onclick="alert('handle click to remove interest')">Not interest anymore</div></button></li>
                             </ul>
                         </div>
+
                     </div>
                 </aside>
+                <main class="interestsComponent">
+                    <h2>Discover new interests</h2>
+                    <h3>Sports/Activities</h3>
+                    <div class="carousel">
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Hiking" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Hiking</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Rock climbing" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Rock climbing</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Ice skating" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Ice skating</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Cycling" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Cycling</p>
+                        </a>
+                    </div>
+                    <h3>Food</h3>
+                    <div class="carousel">
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Thai Food" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Thai Food</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Italian" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Italian</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Mexican" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Mexican</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Chinese" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Chinese</p>
+                        </a>
+                    </div>
+                    <h3>Art</h3>
+                    <div class="carousel">
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Dancing" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Dancing</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Photography" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Photography</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Painting" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Painting</p>
+                        </a>
+                        <a href="#" class="interest">
+                            <div class="thumbnail">
+                                <img src="interest.png" alt="Music" />
+                            </div>
+                            <button>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14C6.50417 14 6.08825 13.832 5.75225 13.496C5.41742 13.1612 5.25 12.7458 5.25 12.25V8.75H1.75C1.25417 8.75 0.838834 8.582 0.504 8.246C0.168 7.91117 0 7.49583 0 7C0 6.50417 0.168 6.08825 0.504 5.75225C0.838834 5.41742 1.25417 5.25 1.75 5.25H5.25V1.75C5.25 1.25417 5.41742 0.838249 5.75225 0.502249C6.08825 0.167416 6.50417 0 7 0C7.49583 0 7.91175 0.167416 8.24775 0.502249C8.58258 0.838249 8.75 1.25417 8.75 1.75V5.25H12.25C12.7458 5.25 13.1618 5.41742 13.4978 5.75225C13.8326 6.08825 14 6.50417 14 7C14 7.49583 13.8326 7.91117 13.4978 8.246C13.1618 8.582 12.7458 8.75 12.25 8.75H8.75V12.25C8.75 12.7458 8.58258 13.1612 8.24775 13.496C7.91175 13.832 7.49583 14 7 14Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <p>Music</p>
+                        </a>
+                    </div>
+                </main>
+                
             </div>
         </div>
     </div>
