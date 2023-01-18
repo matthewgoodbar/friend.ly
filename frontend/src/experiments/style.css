@@ -11,7 +11,7 @@
     --color-transparent-black-light:rgba(0,0,0,0.05);
     --color-transparent-black-dark:rgba(0,0,0,0.5);
     --color-transparent-black-darker:rgba(0,0,0,0.75);
-    --color-transparent-white:rgba(255,255,255,0.5);
+    --color-transparent-white:rgba(255,255,255,0.25);
     --gradient-purple: linear-gradient(90deg, #4B0591 0%, #621EA7 100%);
 }
 ::selection {
@@ -633,4 +633,23 @@ aside.rightSidebar .innerAside .top h3 {
 .interests .interestsComponent .interest:hover button svg {
     color: var(--color-purple-light);
     fill: var(--color-purple-light);
+}
+
+/* WELCOME */
+
+.welcome .content {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+.welcome .leftSidebar {
+    color: white;
+    background: var(--color-transparent-white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-shadow: 1px 1px 0 var(--color-transparent-black);
+}
+.welcome .uppercase {
+    color: white;
 }
