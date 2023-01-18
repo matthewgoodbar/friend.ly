@@ -1,0 +1,233 @@
+.session{
+    display: grid;
+    grid-template-columns: 400px 1fr ;
+}
+
+.session-left-side{
+    margin: 0 auto;
+}
+
+.session-left-side #logo{
+margin-top: 70px;
+}
+
+.session-left-side h2{
+    margin-top: 64px;
+    /* text-align: center; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #333333;
+}
+
+.session-form{
+margin-top: 30px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.session-form label{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+}
+
+
+.session-form input{
+    width: 340px;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#submit-btn{
+    background: #AD00FF;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0px;
+    cursor: pointer;
+}
+#submit-btn:hover{
+    background: #8904c6;
+}
+
+#submit-btn-demo{
+    width: 340px;
+    height: 50px;
+    background: #FFFFFF;
+    padding: 0px;
+    cursor: pointer;
+    border: 1px solid #AD00FF;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #AD00FF;
+}
+#submit-btn-demo:hover{
+    background: #AD00FF;
+    color: white;
+}
+
+#bottom-line{
+    margin-top: 60px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#signup-offer{
+    margin-bottom: 30px;
+}
+
+#signup-offer p{
+    margin-top: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    color: #757575;
+}
+
+#link-to-signup {
+    color: #AD00FF;
+    text-decoration: underline;
+}
+
+#link-to-signup:hover{
+    color: #8904c6;
+}
+
+
+
+
+/* Right side */
+
+
+#session-right-side{
+    background: linear-gradient(90deg, #4B0591 0%, #621EA7 100%);
+
+    color: #ffffff;
+    height: 100vh;
+    /* width: 100vw; */
+    display: flex;
+    justify-content: center;
+    /* margin: 0 auto; */
+
+    /* transform: matrix(-1, 0, 0, 1, 0, 0); */
+}
+
+#session-right-side h1{
+    margin-top: 73px;
+    width: 600px;
+    height: 112px;
+    font-family: "Roboto";
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 56px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+#session-right-side p{
+    width: 650px;
+    height: 56px;
+    margin-top: 20px;
+
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.rectangles{
+    position: relative;
+    margin-top: 44px;
+    display: flex;
+    justify-content: center;
+
+    
+}
+
+#big-rec{
+    width: 600px;
+    height: 400px;
+    background-color: #ffffff;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+#small-rec{
+    width: 440px;
+    height: 240px;
+    background-color: #ffffff;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 4px; 
+    position: absolute;
+    bottom: -66px;
+    left: -61px;
+}
+
+@media(max-width: 1190px){
+    #session-right-side h1{
+        font-size: 32px;
+        width: 400px;
+        line-height: 40px;
+    }
+    #session-right-side p{
+        font-size: 18px;
+        margin-top: -10px;
+        width: 400px;
+        margin: 0 auto;
+    }
+    #big-rec{
+        width: 400px;
+        height: 200px;
+        background-color: #ffffff;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+    }
+    
+    #small-rec{
+        width: 240px;
+        height: 140px;
+        background-color: #ffffff;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+        border-radius: 4px; 
+        position: absolute;
+        bottom: -66px;
+        left: -40px;
+    }
+}
+
+@media(max-height: 920px){
+    #session-right-side{
+        height: 1000px;
+    }
+}
