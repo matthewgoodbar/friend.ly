@@ -32,10 +32,10 @@ function NavBar () {
   }
 
   return (
-    <>
+    <div id='navbar'>
       <h1>Friend.ly</h1>
       { getLinks() }
-    </>
+    </div>
   );
 }
 
