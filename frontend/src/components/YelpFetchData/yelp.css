@@ -1,0 +1,11 @@
+.restaurants-cards {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.restaurants-cards img {
+    width:150px;
+    height: 150px;
+    margin-right: 10px;
+    border-radius: 10px;
+}

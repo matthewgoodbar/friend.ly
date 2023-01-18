@@ -11,7 +11,7 @@ import SignupForm from './components/SessionForms/SignupForm';
 import ChatboxPrototype from './components/Chatbox-Prototype/Chatbox-Prototype';
 
 import { getCurrentUser } from './store/session';
-import YelpDataItems from './components/Yelp';
+import YelpDataItems from './components/YelpFetchData/YelpDataItems';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +28,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <Route path="/prototype" component={ChatboxPrototype} />
-        <Route path='/yelp' component={YelpDataItems} ></Route>
+        <Route path='/yelp' component={YelpDataItems} />
       </Switch>
     </>
   );
