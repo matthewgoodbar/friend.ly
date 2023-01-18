@@ -5,12 +5,17 @@ const topicSchema = Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     category: {
         type: String,
         required: true,
         trim: true
+    },
+    description: {
+        type: String,
+        required: true
     },
     users: [{
         type: mongoose.Schema.Types.ObjectId,
