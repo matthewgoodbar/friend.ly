@@ -12,6 +12,7 @@ import ChatBox from './components/ChatBox/ChatBox';
 import MessagesPage from './components/MessagesPage/MessagesPage'
 
 import { getCurrentUser } from './store/session';
+import YelpDataItems from './components/YelpFetchData/YelpDataItems';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

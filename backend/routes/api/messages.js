@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const debug = require('debug')('backend:server');
+const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Chat = mongoose.model('Chat');
 const Message = mongoose.model('Message');
@@ -85,10 +85,14 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res,
         });
         // debug(newMessage)
         let message = await newMessage.save();
-        message = await message.populate('author', '_id, username');
+        message = await message
+            .populate('author', '_id, username')
+            .populate('chat', '_id');
+        Chat.updateOne({ _id: message.chat._id },
+            { $push: { messages: message._id } });
         return res.json(message);
     } catch(err) {
-        // next(err);
+        debug(err);
     }
 });
 
