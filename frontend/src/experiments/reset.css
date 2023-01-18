@@ -1,7 +1,7 @@
-/* TODO Add site wide styles */
-
-
-/*RESET CSS  start*/
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -46,40 +47,3 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
-/*RESET CSS  start*/
-
-/*CUSTOM STYLES*/
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html{
-    height: 100%;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-li {
-    text-decoration: none;
-    /*list-style-type: none;*/
-}
-
-/*LOGIN SIGNUP ERRORS*/
-.errors {
-    color: red;
-    font-size: 0.875em;
-    height: 15px;
-    display: flex;
-    align-items: flex-start;
-    margin-top: -15px;
-    margin-left: 10px;
-    margin-bottom: 15px;
-  }
-/*LOGIN SIGNUP ERRORS*/

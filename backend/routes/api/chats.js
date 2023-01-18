@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
         const error = new Error('Chat not found');
         error.statusCode = 404;
         error.errors = { message: "No chat found with that id" };
-        return next(error);
+        debug(error);
     }
 });
 
@@ -38,13 +38,13 @@ router.get('/user/:userId', async (req, res) => {
     let user;
     try {
         user = await User.findById(req.params.userId)
-            .populate('chats');
-        debug(user);
+            // .populate('chats','_id');
+        // debug(user);
     } catch(err) {
         const error = new Error('User does not exist');
         error.statusCode = 404;
         error.errors = { message: "No user found with that id" };
-        return next(error);
+        // return next(error);
     }
     try {
         const chats = user.chats;
@@ -69,7 +69,7 @@ router.post('/', requireUser, validateChatInput, async (req, res, next) => {
         })
         return res.json(chat);
     } catch(err) {
-        next(err);
+        // next(err);
     }
 });
 

@@ -15,12 +15,12 @@ const { isProduction } = require('./config/keys');
 
 //USES
 const app = express();
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
+
 
 if (!isProduction) {
     app.use(cors());
@@ -36,6 +36,7 @@ app.use(
     })
 );
 
+
 //ROUTERS
 const usersRouter = require('./routes/api/users');
 const chatsRouter = require('./routes/api/chats');
@@ -46,14 +47,37 @@ app.use('/api/chats', chatsRouter);
 app.use('/api/messages', messagesRouter);
 app.use('/api/csrf', csrfRouter);
 
+// Serve static React build files statically in production
+if (isProduction) {
+    const path = require('path');
+    // Serve the frontend's index.html file at the root route
+    app.get('/', (req, res) => {
+        res.cookie('CSRF-TOKEN', req.csrfToken());
+        res.sendFile(
+            path.resolve(__dirname, '../frontend', 'build', 'index.html')
+        );
+    });
 
-//SOCKET IO MANAGER
+    // Serve the static assets in the frontend's build folder
+    app.use(express.static(path.resolve("../frontend/build")));
+
+    // Serve the frontend's index.html file at all other routes NOT starting with /api
+    app.get(/^(?!\/?api).*/, (req, res) => {
+        res.cookie('CSRF-TOKEN', req.csrfToken());
+        res.sendFile(
+            path.resolve(__dirname, '../frontend', 'build', 'index.html')
+        );
+    });
+}
+
+
+// SOCKET IO MANAGER
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3001"
+        origin: "http://localhost:3000"
     }
 });
 
@@ -66,7 +90,6 @@ io.on("connection", (socket) => {
 
 
     socket.on("new message", (msgObj) => {
-        console.log("message arrived")
         socket.to("chat").emit("message recieved", msgObj);
     });
 
@@ -76,8 +99,8 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+server.listen(3001, () => {
+    console.log('listening on *:3001');
 });
 
 
