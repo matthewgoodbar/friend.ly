@@ -15,7 +15,7 @@ const ChatBox = () => {
 
   const messages = useSelector(state => Object.values(state.messages.all));
   
-  const [socket] = useState(io("http://localhost:3000", {
+  const [socket] = useState(io("http://localhost:3001", {
     transports: ['websocket']
   }))
 
