@@ -5,12 +5,14 @@ const userSchema = Schema({
     username: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     email: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     hashedPassword: {
         type: String,

@@ -11,6 +11,7 @@ import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
 
 import { getCurrentUser } from './store/session';
+import YelpDataItems from './components/YelpFetchData/YelpDataItems';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

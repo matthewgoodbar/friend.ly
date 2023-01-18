@@ -95,6 +95,7 @@ topics.push(
         _id: mongoose.Types.ObjectId(1),
         name: "hiking",
         category: "outdoors",
+        description: "Description for hiking",
         users: []
     })
 )
@@ -104,6 +105,7 @@ topics.push(
         _id: mongoose.Types.ObjectId(2),
         name: "cycling",
         category: "outdoors",
+        description: "Description for cycling",
         users: []
     })
 )
@@ -113,6 +115,7 @@ topics.push(
         _id: mongoose.Types.ObjectId(3),
         name: "rock climbing",
         category: "outdoors",
+        description: "Description for rock climbing",
         users: []
     })
 )
