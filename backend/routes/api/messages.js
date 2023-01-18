@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const debug = require('debug')('backend:server');
 const User = mongoose.model('User');
 const Chat = mongoose.model('Chat');
 const Message = mongoose.model('Message');
@@ -75,11 +76,13 @@ router.get('/:id', async (req, res) => {
 //Posts message to specified chat
 router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res, next) => {
     try {
+        // debug(req.author)
         const newMessage = new Message({
-            body: req.body.text,
-            author: req.user._id,
-            chat: req.params.chatId
+            body: req.body.body,
+            author: mongoose.Types.ObjectId(req.body.author),
+            chat: mongoose.Types.ObjectId(req.params.chatId) 
         });
+        // debug(newMessage)
         let message = await newMessage.save();
         message = await message.populate('author', '_id, username');
         return res.json(message);

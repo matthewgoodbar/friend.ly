@@ -35,7 +35,7 @@ export const fetchChatMessages = (chatId) => async dispatch => {
   
   export const composeMessage = data => async dispatch => {
     try {
-      const res = await jwtFetch('/api/tweets/', {
+      const res = await jwtFetch(`/api/messages/chat/${data.chat}`, {
         method: 'POST',
         body: JSON.stringify(data)
       });
