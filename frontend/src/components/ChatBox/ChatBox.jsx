@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"; import './ChatBox.css';
+import { useEffect, useState, useRef } from "react"; 
+import './ChatBox.css';
 import logo from "../../assets/logo-test.png";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,7 @@ import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../sto
 
 
 const ChatBox = () => {
+  const chatHistory = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [currentUser, setCurrentUser] = useState("");
@@ -25,9 +27,20 @@ const ChatBox = () => {
     transports: ['websocket']
   }))
 
+  // const handleNewMessage = () => {
+  //   chatHistory.current.scrollIntoView({ behavior: "smooth" });
+  //   // chatHistory.scrollTop = chatHistory.scrollHeight;
+  // };
+
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
+    // console.log("new message")
+    // chatHistory.scrollTop = chatHistory.scrollHeight;
   }, [activeChatRoom])
+
+  useEffect(()=>{
+        chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
+  },[messages])
 
   // room is hard coded for demo. Buttons to enter chat rooms need to know the chat room code
   // and clicking on them needs to dispatch changeChatRoom and fetchChatMessages()
@@ -96,7 +109,7 @@ const ChatBox = () => {
 
                     {/* actual message section */}
                     
-                    <div class="bubbles">
+                    <div class="bubbles" ref={chatHistory}>
 
                     {messages.map((message, index) => (
 
