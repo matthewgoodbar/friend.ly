@@ -8,8 +8,8 @@ function NavBar () {
   const dispatch = useDispatch();
   
   const logoutUser = e => {
-      e.preventDefault();
-      dispatch(logout());
+    e.preventDefault();
+    dispatch(logout());
   }
 
   const getLinks = () => {
@@ -18,6 +18,7 @@ function NavBar () {
         <div className="links-nav">
           <Link to={'/'}>Main Page</Link>
           <Link to={'/profile'}>Profile</Link>
+          <Link to={'/chatbox'}>Chatbox</Link>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
