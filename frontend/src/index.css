@@ -72,11 +72,14 @@ li {
 }
 
 /*LOGIN SIGNUP ERRORS*/
-form > .errors {
+.errors {
     color: red;
     font-size: 0.875em;
     height: 15px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    margin-top: -15px;
+    margin-left: 10px;
+    margin-bottom: 15px;
   }
 /*LOGIN SIGNUP ERRORS*/

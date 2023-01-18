@@ -61,8 +61,8 @@ function LoginForm () {
               placeholder="Email"
             />
           </label>
-          <div className="errors">{errors?.email}</div>
 
+          <div className="errors">{errors?.email}</div>
         </div>
         
         <div>
@@ -79,7 +79,7 @@ function LoginForm () {
 
         <input id="submit-btn"
           type="submit"
-          value="LOGIN"
+          value="LOG IN"
           disabled={!email || !password}
         />
 
