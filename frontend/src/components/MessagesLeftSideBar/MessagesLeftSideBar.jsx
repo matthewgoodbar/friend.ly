@@ -1,4 +1,7 @@
 import React from 'react'
+import Countdown from '../Counters/Countdown'
+import DayCounter from '../Counters/DayCounter'
+import CurrentDate from '../Counters/CurrentDate'
 import './MessagesLeftSideBar.css'
 
 
@@ -10,6 +13,28 @@ import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
 const MessagesLeftSideBar = () => {
+
+    // const end = new Date();
+    // end.setHours(23, 59, 59, 999);
+
+    // const timer = setInterval(() => {
+    // const now = new Date();
+    // const distance = end - now;
+  
+    // if (distance < 0) {
+    //     clearInterval(timer);
+    //     console.log("The day has ended!");
+    //     return;
+    // }
+  
+    // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    // const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    // const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // return (`${hours}:${minutes}:${seconds}`)
+    // // console.log(`Time left until end of day: ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
+    // }, 1000);
+
+
   return (
     <aside class="leftSidebar">
                     <div class="innerAside">
@@ -18,8 +43,8 @@ const MessagesLeftSideBar = () => {
                             <small>3 new</small>
                         </div>
                         <div class="day">
-                            <small class="uppercase">16/365</small>
-                            <h2>Jan 16<sup>th</sup></h2>
+                            <small class="uppercase"><DayCounter /></small>
+                            <h2><CurrentDate /></h2>
                         </div>
                         <div class="groupChat">
                             <h3 class="uppercase">Group Chat</h3>
@@ -35,7 +60,7 @@ const MessagesLeftSideBar = () => {
                                         </svg>
                                         <span>San Francisco</span>
                                     </div>
-                                    <div class="time">Expires in <span>09:43:20</span></div>
+                                    <div class="time"><span><Countdown /></span></div>
                                 </div>
                             </button>
                         </div>

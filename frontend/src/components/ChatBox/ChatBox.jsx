@@ -6,11 +6,11 @@ import { receiveNewMessage, fetchChatMessages, composeMessage } from '../../stor
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 
 //logos
-import michael from '../../assets/michael.png'
-import dwight from '../../assets/dwight.png'
-import pam from '../../assets/pam.png'
-import angela from '../../assets/angela.png'
-import ryan from '../../assets/ryan.png'
+// import michael from '../../assets/michael.png'
+// import dwight from '../../assets/dwight.png'
+// import pam from '../../assets/pam.png'
+// import angela from '../../assets/angela.png'
+// import ryan from '../../assets/ryan.png'
 
 
 const ChatBox = () => {
@@ -19,8 +19,7 @@ const ChatBox = () => {
   const [currentUser, setCurrentUser] = useState("");
   const user = useSelector(state => state.session.user)
   const activeChatRoom = useSelector(getActiveChatroom)
-
-  const messages = useSelector(state => Object.values(state.messages.all));
+  const messages = useSelector(state => Object.values(state.messages.all).reverse());
   
   const [socket] = useState(io("http://localhost:3001", {
     transports: ['websocket']
@@ -64,6 +63,27 @@ const ChatBox = () => {
     setText(event.target.value);
   };
 
+  const timeFormat = date=>{
+    const dateObject = new Date(date);
+    let hours = dateObject.getHours();
+    let minutes = dateObject.getMinutes();
+    let ampm = 'AM';
+    if (hours >= 12) {
+        ampm = 'PM';
+        hours = hours % 12;
+    }
+    if (hours === 0) {
+        hours = 12;
+    }
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    return `${hours}:${minutes} ${ampm}`;
+  }
+
 
   return (
             <main class="messengerComponent">
@@ -80,16 +100,16 @@ const ChatBox = () => {
 
                     {messages.map((message, index) => (
 
-                        <div key={index}  className={message.author.username === user ? "message" : "message currentUser"}>
+                        <div key={index}  className={message.author.username === user.username ? "message currentUser" : "message"}>
 
                           <p><strong>{message.author.username}</strong></p>
-
+                          
                           <div class="bubble">
                                 <div class="who">
                                     <figure>
                                         <img src={logo} alt="" width="50px"  />
                                     </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
+                                    <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
                                 </div>
 
                                 <cite>
