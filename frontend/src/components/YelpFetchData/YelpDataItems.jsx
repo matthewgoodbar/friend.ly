@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
 import { Rating } from 'react-simple-star-rating'
+import { getDistance } from 'geolib';
 import './yelp.css'
+import interest from './interest.js'
 
 const YelpDataItems =(props) => {
     const term = props.term
@@ -11,7 +13,7 @@ const YelpDataItems =(props) => {
     const [restaurants, setRestaurants] = useState([])
     const [imgUrl, setImgUrl] = useState("https://s3-media3.fl.yelpcdn.com/bphoto/eyYUz3Xl7NtcJeN7x7SQwg/o.jpg")
     const getDataFromYelp = () => {
-        fetch('/api/yelp?term=Dancing&radius=50000&location=94102&limit=3')
+        fetch('/api/yelp?term=Thaifood&radius=1000&location=94102&limit=6')
         .then(response => response.json())
         .then(data => JSON.stringify(data))
         .then(stringifiedData => JSON.parse(stringifiedData))
@@ -30,14 +32,28 @@ const YelpDataItems =(props) => {
     }, [])
     console.log(restaurants)
     return (
-        <div>
+        <div className='recommendation-container'>
+            <div className='recommendation-head'
+            style={{backgroundImage: `url(${interest['Thai food'].imgUrl})`}}>
+                <div className='recommendation-interest'>Thai food</div>
+                <div className='recommendation-location'>San Francisco</div>
+            </div>
+            <div className='description'>{interest['Thai food'].description}</div>
+            <hr className='right-bar-line'/>
+            <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
             <div className="restaurants-cards" key={i}>
                 <img  src={data.image_url}  ></img>
                 <div className='single-restaurant'>
-                <Rating  initialValue={data.rating} />
-                    <p>address</p>
-                    <p>Phone number</p>
+                <p>{data.name}</p>
+                <Rating className='rating' initialValue={data.rating} />
+                <div className='miles-address'>
+                    <div>
+                        {Math.round((data.distance) * 0.00062 * 100) / 100} miles
+                    </div>
+                    <div> - </div>
+                    <div>{data.location.address1}</div>
+                </div>
                 </div>
             </div>
             )}

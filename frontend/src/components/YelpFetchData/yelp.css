@@ -1,11 +1,76 @@
+.recommendation-container{
+    width:320px;
+    height:984px;
+    margin-top: 20px;
+    border:2px solid #757575;
+
+}
+
+.recommendation-head{
+    width:320px;
+    height:200px;
+    border-radius: 4px;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.recommendation-interest{
+    font-size: 24px;
+    font-weight: 700;
+}
+.recommendation-location{
+    margin-bottom: 20px;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 700;
+}
+div .description{
+    font-size: 18px;
+    font-weight: 700;
+    width: 260px;
+    height:152px;
+    margin: 30px;
+}
+
+.right-bar-line{
+    margin:30px
+}
+
+div .uppercase {
+    margin-bottom: 10px;
+    margin-left: 30px;
+    color: rgb(114, 113, 113);
+}
 .restaurants-cards {
     display: flex;
-    margin-bottom: 40px;
+    width:200px;
+    margin-bottom: 20px;
+    margin-left: 30px;
 }
 
 .restaurants-cards img {
-    width:150px;
-    height: 150px;
+    width:60px;
+    height: 60px;
     margin-right: 10px;
-    border-radius: 10px;
+    border-radius: 4px;
+    background-size: cover;
+}
+
+.star-svg{
+    width:12px;
+    height: 12px;
+}
+.single-restaurant p{
+    margin-top:0px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 700;
+
+}
+
+.miles-address{
+    display: flex;
+    font-size: 10px;
 }
