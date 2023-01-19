@@ -25,6 +25,7 @@
 }
 body {
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 strong {
     font-weight: bold;
@@ -129,6 +130,7 @@ aside.leftSidebar h1 {
     font-weight: 700;
     font-size: 32px;
     letter-spacing: -0.05em;
+    display: inline;
 }
 aside.leftSidebar .title small {
     font-weight: 700;
@@ -183,6 +185,10 @@ aside.leftSidebar .groupChat button figure img {
 aside.leftSidebar .groupChat button .name {
     font-weight: 700;
     font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 160px;
 }
 aside.leftSidebar .groupChat button .location {
     margin: calc(var(--base-unit)) 0;
@@ -634,13 +640,15 @@ aside.rightSidebar .innerAside .top h3 {
     grid-template-columns: 1fr 1fr;
     height: 100vh;
     overflow: hidden;
+    position: relative;
+}
+.welcome header {
+    z-index: 11;
 }
 .welcome .leftSidebar {
     color: white;
-    background: var(--color-transparent-white);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     text-shadow: 1px 1px 0 var(--color-transparent-black);
+    z-index: 10;
 }
 .welcome .leftSidebar .innerAside {
     display: flex;
@@ -657,14 +665,12 @@ aside.rightSidebar .innerAside .top h3 {
     font-size: 120px;
     letter-spacing: -0.03em;
 }
-.welcome h3.uppercase {
-    color: white;
+.welcome .leftSidebar h5 {
     font-weight: 700;
-    text-transform: uppercase;
-    font-size: 14px;
+    font-size: 32px;
 }
 .welcome .leftSidebar .groupChat {
-    margin-top: calc(var(--base-unit)*8);
+    margin-right: calc(var(--base-unit)*8);
 }
 .welcome .leftSidebar .groupChat button {
     width: auto;
@@ -682,4 +688,48 @@ aside.rightSidebar .innerAside .top h3 {
     border-radius: var(--base-unit);
     padding: calc(var(--base-unit)*4) calc(var(--base-unit)*8);
     margin-left: calc(var(--base-unit)*8);
+    border:1px solid transparent;
+}
+.welcome .leftSidebar .groupChat button:hover  {
+    background-color: white;
+}
+.welcome .leftSidebar .groupChat button:hover .cta {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+    background-color: transparent;
+}
+.welcome .leftSidebar .uppercase {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.welcome .actions {
+    margin-top: calc(var(--base-unit)*8);
+    display: flex;
+    align-items: flex-start;
+}
+.welcome .blur {
+    position: absolute;
+    width: 60vw;
+    height: 150vh;
+    top: -20vh;
+    left: -10vw;
+    display: block;
+    background: var(--color-transparent-white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2;
+    transform: rotate(-15deg);
+}
+.welcome .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    z-index: 1;
 }
