@@ -9,12 +9,40 @@ const Topic = mongoose.model('Topic');
 const { requireUser } = require('../../config/passport');
 const validateChatInput = require('../../validations/chats');
 
-//Gets all chats
-router.get('/', async (req, res) => {
+//Gets all chats by specified user
+router.get('/user/:userId', async (req, res) => {
+    let user;
     try {
-        const chats = await Chat.find()
-            .sort({ createdAt: -1 });
-        return res.json(chats);
+        user = await User.findById(req.params.userId)
+        .populate({
+            path: 'daily',
+            select: 'users',
+            populate: {
+                path: 'users',
+                select: '_id username'
+            }
+        })
+        .populate({
+            path: 'chats',
+            select: 'users',
+            populate: {
+                path: 'users',
+                select: '_id username'
+            }
+        })
+        debug(req.params.userId);
+    } catch(err) {
+        const error = new Error('User does not exist');
+        error.statusCode = 404;
+        error.errors = { message: "No user found with that id" };
+        // return next(error);
+    }
+    try {
+        const chats = user.chats;
+        const daily = user.daily;
+        return res.json({
+            chats, daily
+        });
     } catch(err) {
         return res.json([]);
     }
@@ -33,39 +61,12 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-//Gets all chats by specified user
-router.get('/user/:userId', async (req, res) => {
-    let user;
+//Gets all chats
+router.get('/', async (req, res) => {
     try {
-        user = await User.findById(req.params.userId)
-            .populate({
-                path: 'chats',
-                populate: {
-                    path: 'users',
-                    select: '_id username'
-                }
-            })
-            .populate({
-                path: 'daily',
-                populate: {
-                    path: 'users',
-                    select: '_id username'
-                }
-            })
-            // .populate('chats','_id');
-        // debug(user);
-    } catch(err) {
-        const error = new Error('User does not exist');
-        error.statusCode = 404;
-        error.errors = { message: "No user found with that id" };
-        // return next(error);
-    }
-    try {
-        const chats = user.chats;
-        const daily = user.daily;
-        return res.json({
-            chats, daily
-        });
+        const chats = await Chat.find()
+            .sort({ createdAt: -1 });
+        return res.json(chats);
     } catch(err) {
         return res.json([]);
     }
