@@ -283,17 +283,15 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
 
 .messengerComponent {
     background-color: var(--color-pink-light);
-    overflow-y: scroll;
-    position: relative;
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 100px 1fr 100px;
 }
 .messengerComponent .top {
-    position: fixed;
     padding: calc(var(--base-unit)*5);
-    width: calc(100% - 770px);
-    /* background-color: var(--color-pink-light); */
+    width: 100%;
 }
 .messengerComponent .innerTop {
-    position: fixed;
     border-radius: var(--base-unit);
     color: white;
     height: calc(var(--base-unit)*15);
@@ -302,7 +300,6 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: calc(100% - 770px);
 }
 .messengerComponent .top h4 {
     font-weight: 700;
@@ -319,8 +316,8 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     cursor: pointer;
 }
 .messengerComponent .bubbles {
-    margin: calc(var(--base-unit)*20) 0;
     padding: calc(var(--base-unit)*5);
+    overflow-y: scroll;
 }
 .bubbles .message {
     max-width: 45%;
@@ -381,11 +378,6 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     margin: 0 auto;
 }
 .messengerComponent form {
-    position: fixed;
-    bottom: 0;
-    left: calc(120px + 290px);
-    z-index: 999;
-    width: calc(100% - 730px);
     background-color: var(--color-pink-light);
     display: flex;
     padding: calc(var(--base-unit)*5);
@@ -639,7 +631,7 @@ aside.rightSidebar .innerAside .top h3 {
 
 .welcome .content {
     display: grid;
-    grid-template-columns: 290px 1fr;
+    grid-template-columns: 1fr 1fr;
     height: 100vh;
     overflow: hidden;
 }
@@ -650,6 +642,44 @@ aside.rightSidebar .innerAside .top h3 {
     -webkit-backdrop-filter: blur(8px);
     text-shadow: 1px 1px 0 var(--color-transparent-black);
 }
-.welcome .uppercase {
+.welcome .leftSidebar .innerAside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.welcome .leftSidebar h3 {
+    font-weight: 900;
+    font-size: 48px;
+}
+.welcome .leftSidebar h4 {
+    font-weight: 900;
+    font-size: 120px;
+    letter-spacing: -0.03em;
+}
+.welcome h3.uppercase {
     color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.welcome .leftSidebar .groupChat {
+    margin-top: calc(var(--base-unit)*8);
+}
+.welcome .leftSidebar .groupChat button {
+    width: auto;
+    padding-right: calc(var(--base-unit)*5);
+    border-radius: var(--base-unit);
+    align-items: center;
+    margin-bottom: 0;
+}
+.welcome .leftSidebar .groupChat .cta {
+    background-color: var(--color-pink);
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*4) calc(var(--base-unit)*8);
+    margin-left: calc(var(--base-unit)*8);
 }
