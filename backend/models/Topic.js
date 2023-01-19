@@ -17,10 +17,10 @@ const topicSchema = Schema({
         type: String,
         required: true
     },
-    image: {
+    background: {
         type: String
     },
-    apiString: {
+    thumbnail: {
         type: String
     },
     users: [{
