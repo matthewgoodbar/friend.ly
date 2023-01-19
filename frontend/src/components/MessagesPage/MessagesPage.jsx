@@ -12,7 +12,6 @@ import io from "socket.io-client";
 import "./MessagesPage.css"
 
 const MessagesPage = () => {
-  // const activeChatRoom = useSelector(getActiveChatroom)
   const dispatch = useDispatch();
   const chats = useSelector(state => state.chats)
   const user = useSelector(state => state.session.user)
@@ -28,8 +27,6 @@ const MessagesPage = () => {
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
-
-
 
   useEffect(()=>{
     dispatch(fetchUserChatrooms(user._id)).then( async (res)=>{
@@ -51,14 +48,12 @@ const MessagesPage = () => {
 
   return (
       <div className='container messages'> 
-            {/* <div>MessagesPage</div> */}
             <NavBarSide />
 
             <div className="content">
-                { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
-        <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
-                {/* <MessagesRightSideBar /> */}
-                <YelpDataItems/>
+              { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
+              <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
+              <YelpDataItems/>
             </div>
 
       </div>
