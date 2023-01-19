@@ -17,6 +17,12 @@ const topicSchema = Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String
+    },
+    apiString: {
+        type: String
+    },
     users: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
