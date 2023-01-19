@@ -22,6 +22,10 @@ const userSchema = Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Topic'
     }],
+    daily: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chat'
+    },
     chats: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Chat'
