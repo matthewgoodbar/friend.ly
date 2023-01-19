@@ -9,6 +9,7 @@ import MainPage from './components/MainPage/MainPage';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
+import MessagesPage from './components/MessagesPage/MessagesPage'
 
 import { getCurrentUser } from './store/session';
 import InterestPage from './components/InterestPage';
@@ -29,6 +30,7 @@ function App() {
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />
         <Route path='/interest' component={InterestPage} />
+        <ProtectedRoute path="/messages-page" component={MessagesPage} />
       </Switch>
     </>
   );

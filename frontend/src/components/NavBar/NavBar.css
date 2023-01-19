@@ -1,3 +1,8 @@
 #navbar{
     background-color: bisque;
 }
+
+.links-nav{
+    display: flex;
+    justify-content: space-around;
+}

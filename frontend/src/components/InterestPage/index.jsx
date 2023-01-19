@@ -1,10 +1,12 @@
 import { useState,useEffect } from "react";
+import { useDispatch } from "react-redux";
 import NavBar from '../NavBar/NavBar.js'
 import './interest.css'
 import interestImg from './interest.png'
 
 const InterestPage = (user) => {
-
+    const dispatch = useDispatch();
+    
 
 
 
@@ -18,10 +20,7 @@ const InterestPage = (user) => {
 
 
     return (
-        <>
-        <header>
-            <NavBar />
-        </header>
+    
         <div className="container interests">
             <header>
                 <div className="innerHeader">
@@ -117,7 +116,7 @@ const InterestPage = (user) => {
                     <div className="carousel">
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Hiking" />
+                                <img src={interestImg} alt="Hiking" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +127,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Rock climbing" />
+                                <img src={interestImg} alt="Rock climbing" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +138,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Ice skating" />
+                                <img src={interestImg} alt="Ice skating" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +149,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Cycling" />
+                                <img src={interestImg} alt="Cycling" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +163,7 @@ const InterestPage = (user) => {
                     <div className="carousel">
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Thai Food" />
+                                <img src={interestImg} alt="Thai Food" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -175,7 +174,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Italian" />
+                                <img src={interestImg} alt="Italian" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -186,7 +185,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Mexican" />
+                                <img src={interestImg} alt="Mexican" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -197,7 +196,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Chinese" />
+                                <img src={interestImg} alt="Chinese" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -211,7 +210,7 @@ const InterestPage = (user) => {
                     <div className="carousel">
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Dancing" />
+                                <img src={interestImg} alt="Dancing" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +221,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Photography" />
+                                <img src={interestImg} alt="Photography" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -233,7 +232,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Painting" />
+                                <img src={interestImg} alt="Painting" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -244,7 +243,7 @@ const InterestPage = (user) => {
                         </a>
                         <a href="#" className="interest">
                             <div className="thumbnail">
-                                <img src="interest.png" alt="Music" />
+                                <img src={interestImg} alt="Music" />
                             </div>
                             <button>
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -258,8 +257,6 @@ const InterestPage = (user) => {
                 
             </div>
         </div>
-        
-        </>
     )
 }
 
