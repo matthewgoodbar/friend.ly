@@ -85,9 +85,8 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
 
-    socket.on("setup", (userData) => {
-        socket.join("chat");
-        socket.emit("connected");
+    socket.on("setup", (room) => {
+        socket.join(room);
     });
 
 

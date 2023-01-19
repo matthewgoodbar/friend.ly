@@ -16,48 +16,34 @@ const MessagesPage = () => {
   const dispatch = useDispatch();
   const chats = useSelector(state => state.chats)
   const user = useSelector(state => state.session.user)
-  // const [activeChatRoom, setActiveChatRoom] = useState(chats.daily)
   const [activeChatRoom, setActiveChatRoom] = useState("")
+  const [setupCounter, setSetupCounter] = useState(0)
 
   const [socket] = useState(io("http://localhost:3001", {
     transports: ['websocket']
   }))
 
   useEffect(() => {
-    // socket.emit("setup", activeChatRoom);
-
-    socket.on("message recieved", (msgObj) => {
-      dispatch(receiveNewMessage(msgObj))
-    });
-  }, []);
-
-
-  useEffect(() => {
-    // socket.emit("setup", activeChatRoom);
-    console.log("in socket connector")
-    console.log(chats)
-
-    // socket.on("message recieved", (msgObj) => {
-    //   dispatch(receiveNewMessage(msgObj))
-    // });
-  }, []);
-
-
-
-
-  useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
 
+
+
   useEffect(()=>{
-    // dispatch(fetchUserChatrooms(user._id)) 
-    dispatch(fetchUserChatrooms(user._id)).then(()=>{
+    dispatch(fetchUserChatrooms(user._id)).then( async (res)=>{
+      const chatrooms = await res.json()
+      setActiveChatRoom(chatrooms.daily._id)
 
+      socket.emit("setup", chatrooms.daily._id)
+
+      chatrooms.chats.forEach((chatroom)=>{
+        socket.emit("setup", chatroom._id)
+      })
+
+      socket.on("message recieved", (msgObj) => {
+        dispatch(receiveNewMessage(msgObj))
+      });
     })
-      // console.log("in fetch UC then");
-      // console.log(chats)
-      //iterate through chats and connect all of the sockets to the ID's
-
   },[])
 
 

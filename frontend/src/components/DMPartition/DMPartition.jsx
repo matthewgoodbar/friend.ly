@@ -27,6 +27,7 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
         </figure>
         <div className="right">
         <div className="name">{contact.username}</div>
+        {!chatId && (<span>request chat</span>)}
         </div>
     </button>
   )
