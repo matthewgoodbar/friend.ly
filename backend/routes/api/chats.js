@@ -38,6 +38,20 @@ router.get('/user/:userId', async (req, res) => {
     let user;
     try {
         user = await User.findById(req.params.userId)
+            .populate({
+                path: 'chats',
+                populate: {
+                    path: 'users',
+                    select: '_id username'
+                }
+            })
+            .populate({
+                path: 'daily',
+                populate: {
+                    path: 'users',
+                    select: '_id username'
+                }
+            })
             // .populate('chats','_id');
         // debug(user);
     } catch(err) {
