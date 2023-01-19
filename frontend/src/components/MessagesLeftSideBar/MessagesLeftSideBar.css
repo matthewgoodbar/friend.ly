@@ -1,0 +1,176 @@
+aside.leftSidebar {
+    padding: calc(var(--base-unit)*5);
+    padding-right: 0;
+    overflow-y: auto;
+}
+.uppercase {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    color: #000000;
+    opacity: 0.5;
+    margin-bottom: calc(var(--base-unit)*2);
+}
+
+aside.leftSidebar .title {
+    margin-bottom: calc(var(--base-unit)*5);
+}
+aside.leftSidebar h1 {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.05em;
+    color: #000000;
+    display: inline;
+}
+aside.leftSidebar .title small {
+    font-weight: 700;
+    font-size: 14px;
+    color: #E40B32;
+    display: inline;
+    margin-left: calc(var(--base-unit)*3);
+}
+aside.leftSidebar h2 {
+    margin-bottom: calc(var(--base-unit)*8);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.03em;
+}
+aside.leftSidebar h2 sup {
+    font-size: 60%;
+    vertical-align: super;
+}
+aside.leftSidebar .groupChat button {
+    padding: 0;
+    width: 100%;
+    border: 0;
+    text-align: left;
+    background-color: transparent;
+    display: flex;
+    margin-bottom: calc(var(--base-unit)*8);
+    padding: calc(var(--base-unit)*5) 0;
+    border-bottom: 1px solid var(--color-transparent-black);
+}
+aside.leftSidebar .groupChat button:hover {
+    cursor: pointer;
+}
+aside.leftSidebar .groupChat button.active {
+    background-color: var(--color-pink-light);
+    padding-left: calc(var(--base-unit)*5);
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: var(--base-unit);
+    border-bottom-left-radius: var(--base-unit);
+}
+aside.leftSidebar .groupChat button figure {
+    width: calc(var(--base-unit)*20);
+    height: calc(var(--base-unit)*20);
+    margin-right: calc(var(--base-unit)*3);
+}
+aside.leftSidebar .groupChat button figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--base-unit);
+}
+aside.leftSidebar .groupChat button .name {
+    font-weight: 700;
+    font-size: 24px;
+}
+aside.leftSidebar .groupChat button .location {
+    margin: calc(var(--base-unit)) 0;
+}
+aside.leftSidebar .groupChat button .location span {
+    font-weight: 700;
+    font-size: 14px;
+}
+aside.leftSidebar .groupChat button .time {
+    font-size: 14px;
+    color: var(--color-transparent-black-dark);
+}
+aside.leftSidebar .directMessages button {
+    display: flex;
+    padding: 0;
+    width: 100%;
+    border: 0;
+    text-align: left;
+    background-color: transparent;
+    margin-bottom: calc(var(--base-unit)*3);
+    border-top-left-radius: calc(var(--base-unit)*6);
+    border-bottom-left-radius: calc(var(--base-unit)*6);
+}
+aside.leftSidebar .directMessages button:hover {
+    cursor: pointer;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(248,238,255,1) 100%);
+}
+aside.leftSidebar .directMessages button.active {
+    background-color: var(--color-pink-light);
+}
+aside.leftSidebar .directMessages button>div {
+    display: flex;
+    width: 170px;
+    flex-direction: column;
+    align-self: center;
+}
+aside.leftSidebar .directMessages button figure {
+    width: calc(var(--base-unit)*20);
+    height: calc(var(--base-unit)*20);
+    margin-right: calc(var(--base-unit)*3);
+    position: relative;
+}
+aside.leftSidebar .directMessages button figure .online {
+    background-color: #C1F72A;
+    width: calc(var(--base-unit)*3);
+    height: calc(var(--base-unit)*3);
+    border-radius: var(--base-unit);
+    border: 2px solid var(--color-transparent-black);
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+aside.leftSidebar .directMessages button figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--base-unit)*6);
+    border: 2px solid var(--color-transparent-black);
+    border-collapse: separate;
+}
+aside.leftSidebar .directMessages button .messagePreview {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 170px;
+    font-size: 14px;
+    color: var(--color-transparent-black-dark);
+}
+
+aside.leftSidebar .directMessages button.unread .messagePreview {
+    font-style: italic;
+    font-weight: 700;
+}
+aside.leftSidebar .directMessages button .name {
+    font-size: 18px;
+}
+aside.leftSidebar .directMessages button.unread .name {
+    font-weight: bold;
+}
+aside.leftSidebar .directMessages button span {
+    background-color: var(--color-purple-dark);
+    color: white;
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*1) calc(var(--base-unit)*2);
+    display: inline;
+    width: fit-content;
+}
+aside.leftSidebar .directMessages button.awaiting span {
+    background-color: var(--color-pink-light);
+    color: var(--color-transparent-black-dark);
+}
+aside.leftSidebar .directMessages button.awaiting  {
+    cursor: default;
+}
+aside.leftSidebar .directMessages button.awaiting:hover  {
+    background-color: transparent;
+}

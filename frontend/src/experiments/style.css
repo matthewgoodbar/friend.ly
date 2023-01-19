@@ -287,6 +287,9 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     background-color: transparent;
 }
 
+
+
+
 .messengerComponent {
     background-color: var(--color-pink-light);
     display: grid;
@@ -411,6 +414,10 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     color: white;
     fill: white;
 }
+
+
+
+
 aside.rightSidebar {
     background-color: var(--color-pink-light);
     padding: calc(var(--base-unit)*5);
