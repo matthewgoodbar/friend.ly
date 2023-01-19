@@ -86,9 +86,11 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res,
         // debug(newMessage)
         let message = await newMessage.save();
         message = await message
-            .populate('author', '_id, username')
-            .populate('chat', '_id');
-        Chat.updateOne({ _id: message.chat._id },
+            .populate({
+                path: 'author',
+                select: '_id username'
+            });
+        Chat.updateOne({ _id: message.chat },
             { $push: { messages: message._id } });
         return res.json(message);
     } catch(err) {

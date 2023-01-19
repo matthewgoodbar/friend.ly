@@ -6,83 +6,67 @@ const Chat = require('../models/Chat');
 const Message = require("../models/Message.js");
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
+const topics = require('./topicSeeds');
 
 const NUM_SEED_USERS = 10;
 
 // Create users
 const users = [];
 
-users.push(
-    new User ({
-        _id: mongoose.Types.ObjectId(1),
-        username: 'matthew',
-        email: 'matthew@friend.ly',
-        hashedPassword: bcrypt.hashSync('password', 10),
-        topics: [],
-        daily: mongoose.Types.ObjectId(1),
-        chats: [],
-        friends: []
-    })
-)
+const matthew = new User ({
+    username: 'matthew',
+    email: 'matthew@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [],
+    daily: null,
+    chats: [],
+    friends: []
+});
+users.push(matthew);
 
-users.push(
-    new User ({
-        _id: mongoose.Types.ObjectId(2),
-        username: 'marcos',
-        email: 'marcos@friend.ly',
-        hashedPassword: bcrypt.hashSync('password', 10),
-        topics: [],
-        daily: mongoose.Types.ObjectId(1),
-        chats: [
-            mongoose.Types.ObjectId(2),
-            mongoose.Types.ObjectId(3)
-        ],
-        friends: []
-    })
-)
+const marcos = new User ({
+    username: 'marcos',
+    email: 'marcos@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [],
+    daily: null,
+    chats: [],
+    friends: []
+});
+users.push(marcos);
 
-users.push(
-    new User ({
-        _id: mongoose.Types.ObjectId(3),
-        username: 'vivian',
-        email: 'vivian@friend.ly',
-        hashedPassword: bcrypt.hashSync('password', 10),
-        topics: [],
-        daily: mongoose.Types.ObjectId(1),
-        chats: [],
-        friends: []
-    })
-)
+const vivian = new User ({
+    username: 'vivian',
+    email: 'vivian@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [],
+    daily: null,
+    chats: [],
+    friends: []
+});
+users.push(vivian);
 
-users.push(
-    new User ({
-        _id: mongoose.Types.ObjectId(4),
-        username: 'evgenii',
-        email: 'evgenii@friend.ly',
-        hashedPassword: bcrypt.hashSync('password', 10),
-        topics: [],
-        daily: mongoose.Types.ObjectId(1),
-        chats: [
-            mongoose.Types.ObjectId(2)
-        ],
-        friends: []
-    })
-)
+const evgenii = new User ({
+    username: 'evgenii',
+    email: 'evgenii@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [],
+    daily: null,
+    chats: [],
+    friends: []
+});
+users.push(evgenii);
 
-users.push(
-    new User ({
-        _id: mongoose.Types.ObjectId(5),
-        username: 'diego',
-        email: 'diego@friend.ly',
-        hashedPassword: bcrypt.hashSync('password', 10),
-        topics: [],
-        daily: mongoose.Types.ObjectId(1),
-        chats: [
-            mongoose.Types.ObjectId(3)
-        ],
-        friends: []
-    })
-)
+const diego = new User ({
+    username: 'diego',
+    email: 'diego@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [],
+    daily: null,
+    chats: [],
+    friends: []
+});
+users.push(diego);
 
 for (let i = 1; i < NUM_SEED_USERS; i++) {
   const firstName = faker.name.firstName();
@@ -99,82 +83,50 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
         })
     )
 }
-  
-// Create topics
-const topics = [];
-
-topics.push(
-    new Topic ({
-        _id: mongoose.Types.ObjectId(1),
-        name: "hiking",
-        category: "outdoors",
-        description: "Description for hiking",
-        users: []
-    })
-)
-
-topics.push(
-    new Topic ({
-        _id: mongoose.Types.ObjectId(2),
-        name: "cycling",
-        category: "outdoors",
-        description: "Description for cycling",
-        users: []
-    })
-)
-
-topics.push(
-    new Topic ({
-        _id: mongoose.Types.ObjectId(3),
-        name: "rock climbing",
-        category: "outdoors",
-        description: "Description for rock climbing",
-        users: []
-    })
-)
 
 //Create Chatrooms
 const chats = [];
 
-chats.push(
-    new Chat({
-        _id: mongoose.Types.ObjectId(1),
-        users: [
-            mongoose.Types.ObjectId(1),
-            mongoose.Types.ObjectId(2),
-            mongoose.Types.ObjectId(3),
-            mongoose.Types.ObjectId(4),
-            mongoose.Types.ObjectId(5)
-        ],
-        messages: [],
-        daily: true,
-        topic: mongoose.Types.ObjectId(1)
-    })
-)
+const dailyGroup = new Chat({
+    users: [
+        matthew._id,
+        marcos._id,
+        vivian._id,
+        evgenii._id,
+        diego._id
+    ],
+    messages: [],
+    daily: true,
+    topic: topics[1]._id
+});
+chats.push(dailyGroup);
+[matthew, marcos, vivian, evgenii, diego].forEach((user) => {
+    user.daily = dailyGroup._id;
+});
 
-chats.push(
-    new Chat({
-        _id: mongoose.Types.ObjectId(2),
-        users: [
-            mongoose.Types.ObjectId(2),
-            mongoose.Types.ObjectId(4)
-        ],
-        messages: [],
-        daily: false
-    })
-)
+const marcosEvgeniiChat = new Chat({
+    users: [
+        marcos._id,
+        evgenii._id
+    ],
+    messages: [],
+    daily: false
+});
+chats.push(marcosEvgeniiChat);
+marcos.chats.push(marcosEvgeniiChat._id);
+evgenii.chats.push(marcosEvgeniiChat._id);
 
-chats.push(
-    new Chat({
-        _id: mongoose.Types.ObjectId(3),
-        users: [
-            mongoose.Types.ObjectId(2),
-            mongoose.Types.ObjectId(5)
-        ],
-        messages: [],
-        daily: false
-    })
-)
+const marcosDiegoChat = new Chat({
+    users: [
+        marcos._id,
+        diego._id
+    ],
+    messages: [],
+    daily: false
+});
+chats.push(marcosDiegoChat);
+marcos.chats.push(marcosDiegoChat._id);
+diego.chats.push(marcosDiegoChat._id);
     
 // Connect to database
 mongoose

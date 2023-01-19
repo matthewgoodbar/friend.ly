@@ -3,6 +3,8 @@ import Countdown from '../Counters/Countdown'
 import DayCounter from '../Counters/DayCounter'
 import CurrentDate from '../Counters/CurrentDate'
 import './MessagesLeftSideBar.css'
+import DMPartition from '../DMPartition/DMPartition'
+import { useDispatch, useSelector } from "react-redux";
 
 
 //logos
@@ -12,7 +14,8 @@ import dwight from '../../assets/dwight.png'
 import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
-const MessagesLeftSideBar = () => {
+const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
+    const user = useSelector(state => state.session.user)
 
     // const end = new Date();
     // end.setHours(23, 59, 59, 999);
@@ -34,6 +37,50 @@ const MessagesLeftSideBar = () => {
     // // console.log(`Time left until end of day: ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
     // }, 1000);
 
+    const chatSidebarAggregator = () => {
+        // look in chats.chats and identify the names of the users that have active dm chats with main user
+        // look in chats.dailys and make an array object that contains the chatId
+
+        const dmContacts = {}
+        chats.chats.forEach((dmChat)=> {
+            dmChat.users.forEach((dmChatUser)=> {
+                if (dmChatUser.username !== user.username) {
+                    dmContacts[dmChatUser.username] = { ...dmChatUser, chatId: dmChat._id}
+                    }
+            })
+        })
+
+        const dailyContactsNoDM = {}
+        chats.daily.users.forEach((dailyChatUser) => {
+            if (dailyChatUser.username !== user.username && !dmContacts[dailyChatUser.username] ) {
+                dailyContactsNoDM[dailyChatUser.username] = { ...dailyChatUser, chatId: null}
+            }
+        })
+
+        const allContacts = []
+        for (let key in dmContacts) {
+            allContacts.push(dmContacts[key])
+        }
+        for (let key in dailyContactsNoDM) {
+            allContacts.push(dailyContactsNoDM[key])
+        }
+
+        
+        return allContacts.map((contact, i) => {
+            if (user._id !== contact._id) {
+                return <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom} />
+            }
+        })
+        
+    }
+
+
+
+    const chatClickHandler = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        setActiveChatRoom(chats.daily._id)
+    }
 
   return (
     <aside className="leftSidebar">
@@ -48,7 +95,7 @@ const MessagesLeftSideBar = () => {
                         </div>
                         <div className="groupChat">
                             <h3 className="uppercase">Group Chat</h3>
-                            <button className="">
+                  <button className="" onClick={e => { chatClickHandler(e) }}>
                                 <figure>
                                     <img src={thai} alt="Thai Food" />
                                 </figure>
@@ -65,45 +112,7 @@ const MessagesLeftSideBar = () => {
                             </button>
                         </div>
                         <div className="directMessages">
-                            <h3 className="uppercase">Direct Messages</h3>
-                            <button className="active unread">
-                                <figure>
-                                    <div className="online"></div>
-                                    <img src={michael} alt="Michael Scott" />
-                                </figure>
-                                <div className="right">
-                                    <div className="name">Michal Scott</div>
-                                    <div className="messagePreview">I can't, I have improv class tonight lorem ipsum</div>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <img src={dwight} alt="Dwight S." />
-                                </figure>
-                                <div className="right">
-                                    <div className="name">Dwight S.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <div className="online"></div>
-                                    <img src={pam} alt="Pam B." />
-                                </figure>
-                                <div>
-                                    <div className="name">Pam B.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button className="awaiting">
-                                <figure>
-                                    <img src={angela} alt="Angela M." />
-                                </figure>
-                                <div>
-                                    <div className="name">Angela M.</div>
-                                    <span>Awaiting response</span>
-                                </div>
-                            </button>
+                            {chatSidebarAggregator()}
                         </div>
                     </div>
                 </aside>
