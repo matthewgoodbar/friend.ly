@@ -88,7 +88,7 @@ const ChatBox = ({ activeChatRoom, socket }) => {
 
                     <div className="top">
                         <div className="innerTop">
-                            <h4>Thai Food</h4>
+                        <h4>{activeChatRoom}</h4>
                         </div>
                     </div>
 

@@ -30,7 +30,7 @@ router.get('/user/:userId', async (req, res) => {
                 select: '_id username'
             }
         })
-        debug(user);
+        debug(req.params.userId);
     } catch(err) {
         const error = new Error('User does not exist');
         error.statusCode = 404;

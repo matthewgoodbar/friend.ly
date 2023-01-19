@@ -9,10 +9,6 @@ import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 import { fetchChatMessages, receiveNewMessage } from '../../store/messages';
 import io from "socket.io-client";
-
-
-
-
 import "./MessagesPage.css"
 
 const MessagesPage = () => {
@@ -27,29 +23,25 @@ const MessagesPage = () => {
     transports: ['websocket']
   }))
 
-
   useEffect(() => {
-    socket.emit("setup", activeChatRoom);
-    socket.on("connected", () => console.log("socket connected"));
-
-    socket.on("connect_error", (err) => {
-      console.log(`connect_error due to ${err.message}`);
-    });
+    // socket.emit("setup", activeChatRoom);
 
     socket.on("message recieved", (msgObj) => {
       dispatch(receiveNewMessage(msgObj))
     });
-
   }, []);
-
-
 
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
 
   useEffect(()=>{
-    dispatch(fetchUserChatrooms(user._id)) 
+    // dispatch(fetchUserChatrooms(user._id)) 
+    dispatch(fetchUserChatrooms(user._id))
+      // console.log("in fetch UC then");
+      // console.log(chats)
+      //iterate through chats and connect all of the sockets to the ID's
+
   },[])
 
 
@@ -59,8 +51,8 @@ const MessagesPage = () => {
             <NavBarSide />
 
             <div className="content">
-        <MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} usersInChat={"send chats.daily.users array"} />
-        <ChatBox activeChatRoom={activeChatRoom} socket={socket}/>
+                { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
+                <ChatBox activeChatRoom={activeChatRoom} socket={socket}/>
                 {/* <MessagesRightSideBar /> */}
                 <YelpDataItems/>
             </div>
