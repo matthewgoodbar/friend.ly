@@ -13,6 +13,7 @@ import MessagesPage from './components/MessagesPage/MessagesPage'
 
 import { getCurrentUser } from './store/session';
 import InterestPage from './components/InterestPage';
+import YelpDataItems from './components/YelpFetchData/YelpDataItems';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,7 @@ function App() {
         <ProtectedRoute path="/chatbox" component={ChatBox} />
         <Route path='/interest' component={InterestPage} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
+        <Route path="/yelp" component={YelpDataItems} />
       </Switch>
     </>
   );

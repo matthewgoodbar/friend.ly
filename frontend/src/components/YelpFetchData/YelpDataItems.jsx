@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { Rating } from 'react-simple-star-rating'
+import { Link } from 'react-router-dom';
 import { getDistance } from 'geolib';
 import './yelp.css'
 import interest from './interest.js'
@@ -45,6 +46,7 @@ const YelpDataItems =(props) => {
             <hr className='right-bar-line'/>
             <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
+            <Link to={{ pathname: `${data.url}` }} target="_blank">
             <div className="restaurants-cards" key={i}>
                 <img  src={data.image_url} alt=""  ></img>
                 <div className='single-restaurant'>
@@ -59,6 +61,7 @@ const YelpDataItems =(props) => {
                 </div>
                 </div>
             </div>
+            </Link>
             )}
         </div>
     )
