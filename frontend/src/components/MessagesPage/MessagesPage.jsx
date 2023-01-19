@@ -3,6 +3,7 @@ import NavBarSide from '../NavBarSide/NavBarSide'
 import MessagesLeftSideBar from '../MessagesLeftSideBar/MessagesLeftSideBar'
 import ChatBox from '../ChatBox/ChatBox'
 import MessagesRightSideBar from '../MessagesRightSideBar/MessagesRightSideBar'
+import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import "./MessagesPage.css"
 
 const MessagesPage = () => {
@@ -14,7 +15,8 @@ const MessagesPage = () => {
             <div className="content">
                 <MessagesLeftSideBar />
                 <ChatBox />
-                <MessagesRightSideBar />
+                {/* <MessagesRightSideBar /> */}
+                <YelpDataItems/>
             </div>
 
       </div>

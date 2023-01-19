@@ -30,6 +30,7 @@ const YelpDataItems =(props) => {
 
     // use react hook to get all the data 
     useEffect(() => {
+        console.log("i'm in useeffect YELP")
         getDataFromYelp()
     }, [])
     console.log(restaurants)
@@ -45,7 +46,7 @@ const YelpDataItems =(props) => {
             <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
             <div className="restaurants-cards" key={i}>
-                <img  src={data.image_url}  ></img>
+                <img  src={data.image_url} alt=""  ></img>
                 <div className='single-restaurant'>
                 <p>{data.name}</p>
                 <Rating className='rating' initialValue={data.rating} />
