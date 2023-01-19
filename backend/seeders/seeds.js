@@ -6,6 +6,7 @@ const Chat = require('../models/Chat');
 const Message = require("../models/Message.js");
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
+const topics = require('./topicSeeds');
 
 const NUM_SEED_USERS = 10;
 
@@ -82,35 +83,6 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
         })
     )
 }
-  
-// Create topics
-const topics = [];
-
-const hiking = new Topic ({
-    name: "hiking",
-    category: "outdoors",
-    description: "Description for hiking",
-    users: []
-})
-topics.push(hiking);
-
-topics.push(
-    new Topic ({
-        name: "cycling",
-        category: "outdoors",
-        description: "Description for cycling",
-        users: []
-    })
-)
-
-topics.push(
-    new Topic ({
-        name: "rock climbing",
-        category: "outdoors",
-        description: "Description for rock climbing",
-        users: []
-    })
-)
 
 //Create Chatrooms
 const chats = [];
@@ -125,7 +97,7 @@ const dailyGroup = new Chat({
     ],
     messages: [],
     daily: true,
-    topic: hiking._id
+    topic: topics[1]._id
 });
 chats.push(dailyGroup);
 [matthew, marcos, vivian, evgenii, diego].forEach((user) => {
