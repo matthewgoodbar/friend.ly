@@ -14,9 +14,22 @@ router.get('/user/:userId', async (req, res) => {
     let user;
     try {
         user = await User.findById(req.params.userId)
-        // .populate('daily', '_id')
-            // .populate('daily', '_id, users')
-            // .populate('chats','_id');
+        .populate({
+            path: 'daily',
+            select: 'users',
+            populate: {
+                path: 'users',
+                select: '_id username'
+            }
+        })
+        .populate({
+            path: 'chats',
+            select: 'users',
+            populate: {
+                path: 'users',
+                select: '_id username'
+            }
+        })
         debug(user);
     } catch(err) {
         const error = new Error('User does not exist');
