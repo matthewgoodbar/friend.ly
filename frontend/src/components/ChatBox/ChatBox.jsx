@@ -3,8 +3,8 @@ import './ChatBox.css';
 import logo from "../../assets/logo-test.png";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveNewMessage, fetchChatMessages, composeMessage } from '../../store/messages';
-import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
+import { receiveNewMessage, composeMessage } from '../../store/messages';
+
 
 //logos
 // import michael from '../../assets/michael.png'
@@ -14,23 +14,16 @@ import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../sto
 // import ryan from '../../assets/ryan.png'
 
 
-const ChatBox = () => {
+const ChatBox = ({ activeChatRoom }) => {
   const chatHistory = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const [currentUser, setCurrentUser] = useState("");
   const user = useSelector(state => state.session.user)
-  const activeChatRoom = useSelector(getActiveChatroom)
   const messages = useSelector(state => Object.values(state.messages.all).reverse());
   
   const [socket] = useState(io("http://localhost:3001", {
     transports: ['websocket']
   }))
-
-
-  useEffect(() => {
-    dispatch(fetchChatMessages(activeChatRoom))
-  }, [activeChatRoom])
 
 //code for scrolling new messages down
 
@@ -38,13 +31,7 @@ const ChatBox = () => {
   //       chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
   // },[messages])
 
-  // room is hard coded for demo. Buttons to enter chat rooms need to know the chat room code
-  // and clicking on them needs to dispatch changeChatRoom and fetchChatMessages()
-  // we will use the "active" chatroom in state (the chatroom ID) to correctly map the messages 
-  // into that chatroom component. 
-
   useEffect(() => {
-    dispatch(fetchUserChatrooms(user._id)).then(() => dispatch(changeChatroom("000000012792ed64ba9393af"))); 
     socket.emit("setup", user);
     socket.on("connected", () => console.log("socket connected"));
 
@@ -58,12 +45,10 @@ const ChatBox = () => {
 
   }, []);
 
-  // Keep - convert to timestamps once messages are in state
-  const messageTimeOptions = {hour: 'numeric', minute: 'numeric', hour12: true}
-
   const handleSubmit = event => {
     event.preventDefault();
-    socket.emit("new message", { body: text, author: { username: user.username, _id: user._id }, chat: "000000012792ed64ba9393af", createdAt: new Date()});
+    event.stopPropagation();
+    socket.emit("new message", { body: text, author: { username: user.username, _id: user._id }, chat: activeChatRoom, createdAt: new Date()});
     dispatch(composeMessage({ body: text, chat: activeChatRoom, author: user._id }));
     setText("");
   };
@@ -94,6 +79,33 @@ const ChatBox = () => {
   }
 
 
+  const populateMessages = () => {
+    
+
+
+    messages.map((message, index) => (
+      <div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
+        <p><strong>{message.author.username}</strong></p>
+        <div className="bubble">
+          <div className="who">
+            <figure>
+              <img src={logo} alt="" width="50px" />
+            </figure>
+            <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
+          </div>
+          <cite>
+            {message.body}
+          </cite>
+        </div>
+      </div>
+
+    ))
+
+
+
+  }
+
+
   return (
             <main className="messengerComponent">
 
@@ -106,23 +118,7 @@ const ChatBox = () => {
                     {/* actual message section */}
                     
                     <div className="bubbles" ref={chatHistory}>
-                    {messages.map((message, index) => (
-                        <div key={index}  className={message.author.username === user.username ? "message currentUser" : "message"}>
-                          <p><strong>{message.author.username}</strong></p>
-                          <div className="bubble">
-                                <div className="who">
-                                    <figure>
-                                        <img src={logo} alt="" width="50px"  />
-                                    </figure>
-                                    <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
-                                </div>
-                                <cite>
-                                    {message.body}
-                                </cite>
-                            </div>
-                        </div>
-
-                        ))}
+                    {populateMessages()}
 
                         {/* actual message section */}
 

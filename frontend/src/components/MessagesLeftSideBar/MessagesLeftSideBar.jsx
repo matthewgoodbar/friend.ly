@@ -3,7 +3,7 @@ import Countdown from '../Counters/Countdown'
 import DayCounter from '../Counters/DayCounter'
 import CurrentDate from '../Counters/CurrentDate'
 import './MessagesLeftSideBar.css'
-
+import DMPartition from '../DMPartition/DMPartition'
 
 //logos
 import thai from '../../assets/thai.png'
@@ -12,7 +12,7 @@ import dwight from '../../assets/dwight.png'
 import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
-const MessagesLeftSideBar = () => {
+const MessagesLeftSideBar = ({ setActiveChatRoom }) => {
 
     // const end = new Date();
     // end.setHours(23, 59, 59, 999);
