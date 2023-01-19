@@ -5,7 +5,11 @@ const Topic = mongoose.model('Topic');
 
 exports.addUserToQueue = (user) => {
     const userObj = User.findById(user._id);
-    userObj.topics.forEach((topicId) => {
-        Topic.updateMany()
-    })
+    Topic.updateMany({ _id: userObj.topics },
+        { $push: { users: userObj._id } });
+    checkQueue();
+};
+
+const checkQueue = () => {
+    const topics = Topic.find();
 };
