@@ -11,7 +11,7 @@
     --color-transparent-black-light:rgba(0,0,0,0.05);
     --color-transparent-black-dark:rgba(0,0,0,0.5);
     --color-transparent-black-darker:rgba(0,0,0,0.75);
-    --color-transparent-white:rgba(255,255,255,0.5);
+    --color-transparent-white:rgba(255,255,255,0.25);
     --gradient-purple: linear-gradient(90deg, #4B0591 0%, #621EA7 100%);
 }
 ::selection {
@@ -25,6 +25,7 @@
 }
 body {
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 strong {
     font-weight: bold;
@@ -129,6 +130,7 @@ aside.leftSidebar h1 {
     font-weight: 700;
     font-size: 32px;
     letter-spacing: -0.05em;
+    display: inline;
 }
 aside.leftSidebar .title small {
     font-weight: 700;
@@ -183,6 +185,10 @@ aside.leftSidebar .groupChat button figure img {
 aside.leftSidebar .groupChat button .name {
     font-weight: 700;
     font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 160px;
 }
 aside.leftSidebar .groupChat button .location {
     margin: calc(var(--base-unit)) 0;
@@ -286,17 +292,15 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
 
 .messengerComponent {
     background-color: var(--color-pink-light);
-    overflow-y: scroll;
-    position: relative;
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 100px 1fr 100px;
 }
 .messengerComponent .top {
-    position: fixed;
     padding: calc(var(--base-unit)*5);
-    width: calc(100% - 770px);
-    /* background-color: var(--color-pink-light); */
+    width: 100%;
 }
 .messengerComponent .innerTop {
-    position: fixed;
     border-radius: var(--base-unit);
     color: white;
     height: calc(var(--base-unit)*15);
@@ -305,7 +309,6 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: calc(100% - 770px);
 }
 .messengerComponent .top h4 {
     font-weight: 700;
@@ -322,8 +325,8 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     cursor: pointer;
 }
 .messengerComponent .bubbles {
-    margin: calc(var(--base-unit)*20) 0;
     padding: calc(var(--base-unit)*5);
+    overflow-y: scroll;
 }
 .bubbles .message {
     max-width: 45%;
@@ -384,11 +387,6 @@ aside.leftSidebar .directMessages button.awaiting:hover  {
     margin: 0 auto;
 }
 .messengerComponent form {
-    position: fixed;
-    bottom: 0;
-    left: calc(120px + 290px);
-    z-index: 999;
-    width: calc(100% - 730px);
     background-color: var(--color-pink-light);
     display: flex;
     padding: calc(var(--base-unit)*5);
@@ -640,4 +638,105 @@ aside.rightSidebar .innerAside .top h3 {
 .interests .interestsComponent .interest:hover button svg {
     color: var(--color-purple-light);
     fill: var(--color-purple-light);
+}
+
+/* WELCOME */
+
+.welcome .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+.welcome header {
+    z-index: 11;
+}
+.welcome .leftSidebar {
+    color: white;
+    text-shadow: 1px 1px 0 var(--color-transparent-black);
+    z-index: 10;
+}
+.welcome .leftSidebar .innerAside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.welcome .leftSidebar h3 {
+    font-weight: 900;
+    font-size: 48px;
+}
+.welcome .leftSidebar h4 {
+    font-weight: 900;
+    font-size: 120px;
+    letter-spacing: -0.03em;
+}
+.welcome .leftSidebar h5 {
+    font-weight: 700;
+    font-size: 32px;
+}
+.welcome .leftSidebar .groupChat {
+    margin-right: calc(var(--base-unit)*8);
+}
+.welcome .leftSidebar .groupChat button {
+    width: auto;
+    padding-right: calc(var(--base-unit)*5);
+    border-radius: var(--base-unit);
+    align-items: center;
+    margin-bottom: 0;
+}
+.welcome .leftSidebar .groupChat .cta {
+    background-color: var(--color-pink);
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*4) calc(var(--base-unit)*8);
+    margin-left: calc(var(--base-unit)*8);
+    border:1px solid transparent;
+}
+.welcome .leftSidebar .groupChat button:hover  {
+    background-color: white;
+}
+.welcome .leftSidebar .groupChat button:hover .cta {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+    background-color: transparent;
+}
+.welcome .leftSidebar .uppercase {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.welcome .actions {
+    margin-top: calc(var(--base-unit)*8);
+    display: flex;
+    align-items: flex-start;
+}
+.welcome .blur {
+    position: absolute;
+    width: 60vw;
+    height: 150vh;
+    top: -20vh;
+    left: -10vw;
+    display: block;
+    background: var(--color-transparent-white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2;
+    transform: rotate(-15deg);
+}
+.welcome .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    z-index: 1;
 }
