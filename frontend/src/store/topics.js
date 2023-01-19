@@ -13,7 +13,7 @@ export const receiveUserTopics = (topics) => ({
 
 export const fetchUserTopics = (userId) => async dispatch => {
     try {
-        const res = await jwtFetch(`/api/topics/`);
+        const res = await jwtFetch(`/api/topics/user/${userId}`);
         const topics = await res.json();
         console.log(res)
         dispatch(receiveUserTopics(topics));
