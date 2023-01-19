@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from '../NavBar/NavBar.js'
 import './interest.css'
 import interestImg from './interest.png'
-import { fetchUserTopics } from "../../store/topics.js";
+import {fetchAllTopics, fetchUserTopics, getTopics} from "../../store/topics.js";
 const InterestPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
+    const allTopics = useSelector(getTopics)
+    console.log(allTopics)
     useEffect( () => {
+        dispatch(fetchAllTopics())
         dispatch(fetchUserTopics(user._id))
     }, [])
 
