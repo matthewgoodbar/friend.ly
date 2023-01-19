@@ -47,7 +47,6 @@ const chatsReducer = (state = { all: {}, active: "" }, action) => {
             return { all: { ...state.all }, active: action.chatroomId  };
 
         case RECIEVE_USER_CHATROOMS:
-            console.log(action.chatrooms)
             return { all: { ...action.chatrooms }, active: state.active };
 
         default:

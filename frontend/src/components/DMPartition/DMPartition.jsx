@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import './ChatBox.css';
 import logo from "../../assets/logo-test.png";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +8,19 @@ import dwight from '../../assets/dwight.png'
 
 
 
-const DMPartition = () => {
+const DMPartition = ({ contact, setActiveChatRoom }) => {
 
+   // contact is the user's info that is passed in from the chats slice of state
+
+
+    const chatClickHandler = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        setActiveChatRoom("banana")
+    }
 
   return (
-    <button>
+    <button onClick={e => { chatClickHandler(e) }}>
         <figure>
             <img src={dwight} alt="Dwight S." />
         </figure>

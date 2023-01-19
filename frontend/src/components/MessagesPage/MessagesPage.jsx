@@ -18,11 +18,11 @@ const MessagesPage = () => {
   const user = useSelector(state => state.session.user)
   const chats = useSelector(state => state.chats)
   // const [activeChatRoom, setActiveChatRoom] = useState(chats.daily)
-  const [activeChatRoom, setActiveChatRoom] = useState("00000001d795bd1c96d4c596")
+  const [activeChatRoom, setActiveChatRoom] = useState("00000001d795bd1c96d4c590")
 
-  // useEffect(() => {
-  //   dispatch(fetchChatMessages(activeChatRoom))
-  // }, [activeChatRoom])
+  useEffect(() => {
+    dispatch(fetchChatMessages(activeChatRoom))
+  }, [activeChatRoom])
 
   useEffect(()=>{
     dispatch(fetchUserChatrooms(user._id)) 
@@ -35,7 +35,7 @@ const MessagesPage = () => {
             <NavBarSide />
 
             <div className="content">
-                <MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} />
+        <MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} usersInChat={"send chats.daily.users array"} />
                 <ChatBox activeChatRoom={activeChatRoom}/>
                 {/* <MessagesRightSideBar /> */}
                 <YelpDataItems/>

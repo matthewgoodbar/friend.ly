@@ -12,7 +12,7 @@ import dwight from '../../assets/dwight.png'
 import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
-const MessagesLeftSideBar = ({ setActiveChatRoom }) => {
+const MessagesLeftSideBar = ({ setActiveChatRoom, usersInChat }) => {
 
     // const end = new Date();
     // end.setHours(23, 59, 59, 999);
@@ -34,6 +34,12 @@ const MessagesLeftSideBar = ({ setActiveChatRoom }) => {
     // // console.log(`Time left until end of day: ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
     // }, 1000);
 
+
+    const populateUsers = () => {
+        usersInChat.map((contact,i)=>{ 
+            <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom}/>
+        })
+    }
 
   return (
     <aside className="leftSidebar">
@@ -65,45 +71,7 @@ const MessagesLeftSideBar = ({ setActiveChatRoom }) => {
                             </button>
                         </div>
                         <div className="directMessages">
-                            <h3 className="uppercase">Direct Messages</h3>
-                            <button className="active unread">
-                                <figure>
-                                    <div className="online"></div>
-                                    <img src={michael} alt="Michael Scott" />
-                                </figure>
-                                <div className="right">
-                                    <div className="name">Michal Scott</div>
-                                    <div className="messagePreview">I can't, I have improv class tonight lorem ipsum</div>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <img src={dwight} alt="Dwight S." />
-                                </figure>
-                                <div className="right">
-                                    <div className="name">Dwight S.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <div className="online"></div>
-                                    <img src={pam} alt="Pam B." />
-                                </figure>
-                                <div>
-                                    <div className="name">Pam B.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button className="awaiting">
-                                <figure>
-                                    <img src={angela} alt="Angela M." />
-                                </figure>
-                                <div>
-                                    <div className="name">Angela M.</div>
-                                    <span>Awaiting response</span>
-                                </div>
-                            </button>
+                         <DMPartition setActiveChatRoom={setActiveChatRoom} />
                         </div>
                     </div>
                 </aside>
