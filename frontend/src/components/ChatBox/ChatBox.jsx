@@ -32,7 +32,7 @@ const ChatBox = ({ activeChatRoom }) => {
   // },[messages])
 
   useEffect(() => {
-    socket.emit("setup", user);
+    socket.emit("setup", activeChatRoom);
     socket.on("connected", () => console.log("socket connected"));
 
     socket.on("connect_error", (err) => {
@@ -48,7 +48,8 @@ const ChatBox = ({ activeChatRoom }) => {
   const handleSubmit = event => {
     event.preventDefault();
     event.stopPropagation();
-    socket.emit("new message", { body: text, author: { username: user.username, _id: user._id }, chat: activeChatRoom, createdAt: new Date()});
+    let msgObj = { body: text, author: { username: user.username, _id: user._id }, chat: activeChatRoom, createdAt: new Date() }
+    socket.emit("new message", { msgObj, activeChatRoom });
     dispatch(composeMessage({ body: text, chat: activeChatRoom, author: user._id }));
     setText("");
   };
@@ -79,31 +80,26 @@ const ChatBox = ({ activeChatRoom }) => {
   }
 
 
-  const populateMessages = () => {
+  // const populateMessages = () => {
     
-
-
-    messages.map((message, index) => (
-      <div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
-        <p><strong>{message.author.username}</strong></p>
-        <div className="bubble">
-          <div className="who">
-            <figure>
-              <img src={logo} alt="" width="50px" />
-            </figure>
-            <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
-          </div>
-          <cite>
-            {message.body}
-          </cite>
-        </div>
-      </div>
-
-    ))
-
-
-
-  }
+  //   messages.map((message, index) =>  {
+  //     return (<div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
+  //       <p><strong>{message.author.username}</strong></p>
+  //       <div className="bubble">
+  //         <div className="who">
+  //           <figure>
+  //             <img src={logo} alt="" width="50px" />
+  //           </figure>
+  //           <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
+  //         </div>
+  //         <cite>
+  //           {message.body}
+  //         </cite>
+  //       </div>
+  //     </div>)
+  //   })
+  // }
+    
 
 
   return (
@@ -118,7 +114,26 @@ const ChatBox = ({ activeChatRoom }) => {
                     {/* actual message section */}
                     
                     <div className="bubbles" ref={chatHistory}>
-                    {populateMessages()}
+                    {/* { messages.length > 0 && populateMessages()} */}
+
+                      { messages.map((message, index) =>  {
+                        if (message.chat === activeChatRoom) {
+                          return (<div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
+                              <p><strong>{message.author.username}</strong></p>
+                              <div className="bubble">
+                                <div className="who">
+                                  <figure>
+                                    <img src={logo} alt="" width="50px" />
+                                  </figure>
+                                  <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
+                                </div>
+                                <cite>
+                                  {message.body}
+                                </cite>
+                              </div>
+                            </div>)
+                        }
+                        })}
 
                         {/* actual message section */}
 

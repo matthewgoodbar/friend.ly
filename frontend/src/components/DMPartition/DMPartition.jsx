@@ -16,7 +16,7 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
     const chatClickHandler = (e) => {
         e.stopPropagation()
         e.preventDefault()
-        setActiveChatRoom("banana")
+        // setActiveChatRoom("banana")
     }
 
   return (

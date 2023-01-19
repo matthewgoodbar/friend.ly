@@ -85,14 +85,14 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
 
-    socket.on("setup", (userData) => {
-        socket.join("chat");
+    socket.on("setup", (activeChatRoom) => {
+        socket.join(activeChatRoom);
         socket.emit("connected");
     });
 
 
-    socket.on("new message", (msgObj) => {
-        socket.to("chat").emit("message recieved", msgObj);
+    socket.on("new message", ({msgObj, activeChatRoom}) => {
+        socket.to(activeChatRoom).emit("message recieved", msgObj);
     });
 
     socket.off("setup", () => {
