@@ -90,8 +90,8 @@ io.on("connection", (socket) => {
     });
 
 
-    socket.on("new message", (msgObj) => {
-        socket.to("chat").emit("message recieved", msgObj);
+    socket.on("new message", ({ msgObj, activeChatRoom }) => {
+        socket.to(activeChatRoom).emit("message recieved", msgObj);
     });
 
     socket.off("setup", () => {

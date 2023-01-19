@@ -13,20 +13,19 @@ import { receiveNewMessage, composeMessage } from '../../store/messages';
 // import ryan from '../../assets/ryan.png'
 
 
-const ChatBox = ({ activeChatRoom, socket }) => {
+const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const chatHistory = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const user = useSelector(state => state.session.user)
-  const messages = useSelector(state => Object.values(state.messages.all).reverse());
   
 //code for scrolling new messages down
 
-  useEffect(()=>{
-      chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
-      console.log("in scroller")
-      console.log(messages)
-  }, [messages])
+  // useEffect(()=>{
+  //     chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
+  //     console.log("in scroller")
+  //     console.log(messages)
+  // }, [messages])
 
   const handleSubmit = event => {
     event.preventDefault();

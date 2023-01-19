@@ -16,6 +16,8 @@ const MessagesPage = () => {
   const dispatch = useDispatch();
   const chats = useSelector(state => state.chats)
   const user = useSelector(state => state.session.user)
+  const messages = useSelector(state => Object.values(state.messages.all).reverse());
+
   const [activeChatRoom, setActiveChatRoom] = useState("")
   const [setupCounter, setSetupCounter] = useState(0)
 
@@ -54,7 +56,7 @@ const MessagesPage = () => {
 
             <div className="content">
                 { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
-                <ChatBox activeChatRoom={activeChatRoom} socket={socket}/>
+        <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
                 {/* <MessagesRightSideBar /> */}
                 <YelpDataItems/>
             </div>
