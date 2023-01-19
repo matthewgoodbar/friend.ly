@@ -14,8 +14,8 @@ import "./MessagesPage.css"
 const MessagesPage = () => {
   // const activeChatRoom = useSelector(getActiveChatroom)
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user)
   const chats = useSelector(state => state.chats)
+  const user = useSelector(state => state.session.user)
   // const [activeChatRoom, setActiveChatRoom] = useState(chats.daily)
   const [activeChatRoom, setActiveChatRoom] = useState("")
 
@@ -31,13 +31,29 @@ const MessagesPage = () => {
     });
   }, []);
 
+
+  useEffect(() => {
+    // socket.emit("setup", activeChatRoom);
+    console.log("in socket connector")
+    console.log(chats)
+
+    // socket.on("message recieved", (msgObj) => {
+    //   dispatch(receiveNewMessage(msgObj))
+    // });
+  }, []);
+
+
+
+
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
 
   useEffect(()=>{
     // dispatch(fetchUserChatrooms(user._id)) 
-    dispatch(fetchUserChatrooms(user._id))
+    dispatch(fetchUserChatrooms(user._id)).then(()=>{
+
+    })
       // console.log("in fetch UC then");
       // console.log(chats)
       //iterate through chats and connect all of the sockets to the ID's

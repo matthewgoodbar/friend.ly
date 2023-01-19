@@ -59,27 +59,6 @@ const ChatBox = ({ activeChatRoom, socket }) => {
     }
     return `${hours}:${minutes} ${ampm}`;
   }
-
-
-  // const populateMessages = () => {
-    
-  //   messages.map((message, index) =>  {
-  //     return (<div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
-  //       <p><strong>{message.author.username}</strong></p>
-  //       <div className="bubble">
-  //         <div className="who">
-  //           <figure>
-  //             <img src={logo} alt="" width="50px" />
-  //           </figure>
-  //           <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
-  //         </div>
-  //         <cite>
-  //           {message.body}
-  //         </cite>
-  //       </div>
-  //     </div>)
-  //   })
-  // }
     
 
 

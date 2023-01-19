@@ -79,7 +79,7 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
     const chatClickHandler = (e) => {
         e.stopPropagation()
         e.preventDefault()
-        setActiveChatRoom("banana")
+        setActiveChatRoom(chats.daily._id)
     }
 
   return (
