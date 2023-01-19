@@ -8,19 +8,6 @@ const Message = mongoose.model('Message');
 const { requireUser } = require('../../config/passport');
 const validateMessageInput = require('../../validations/messages');
 
-//Gets all messages
-router.get('/', async (req, res) => {
-    try {
-        const messages = await Message.find()
-            .populate("author", "_id, username")
-            .sort({ createdAt: -1 });
-        return res.json(messages);
-    }
-    catch(err) {
-        return res.json([]);
-    }
-});
-
 //Gets all messages from specified chat
 router.get('/chat/:chatId', async (req, res) => {
     let chat;
@@ -42,6 +29,7 @@ router.get('/chat/:chatId', async (req, res) => {
         return res.json([]);
     }
 });
+
 
 //Gets all messages from specified user
 router.get('/user/:userId', async (req, res) => {
@@ -70,6 +58,19 @@ router.get('/:id', async (req, res) => {
         const message = Message.findById(req.params.id);
         return res.json(message);
     } catch(err) {
+        return res.json([]);
+    }
+});
+
+//Gets all messages
+router.get('/', async (req, res) => {
+    try {
+        const messages = await Message.find()
+            .populate("author", "_id, username")
+            .sort({ createdAt: -1 });
+        return res.json(messages);
+    }
+    catch (err) {
         return res.json([]);
     }
 });
