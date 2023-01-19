@@ -27,20 +27,16 @@ const ChatBox = () => {
     transports: ['websocket']
   }))
 
-  // const handleNewMessage = () => {
-  //   chatHistory.current.scrollIntoView({ behavior: "smooth" });
-  //   // chatHistory.scrollTop = chatHistory.scrollHeight;
-  // };
 
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
-    // console.log("new message")
-    // chatHistory.scrollTop = chatHistory.scrollHeight;
   }, [activeChatRoom])
 
-  useEffect(()=>{
-        chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
-  },[messages])
+//code for scrolling new messages down
+
+  // useEffect(()=>{
+  //       chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
+  // },[messages])
 
   // room is hard coded for demo. Buttons to enter chat rooms need to know the chat room code
   // and clicking on them needs to dispatch changeChatRoom and fetchChatMessages()
@@ -110,13 +106,9 @@ const ChatBox = () => {
                     {/* actual message section */}
                     
                     <div className="bubbles" ref={chatHistory}>
-
                     {messages.map((message, index) => (
-
                         <div key={index}  className={message.author.username === user.username ? "message currentUser" : "message"}>
-
                           <p><strong>{message.author.username}</strong></p>
-                          
                           <div className="bubble">
                                 <div className="who">
                                     <figure>
@@ -124,13 +116,10 @@ const ChatBox = () => {
                                     </figure>
                                     <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
                                 </div>
-
                                 <cite>
                                     {message.body}
                                 </cite>
                             </div>
-
-                              
                         </div>
 
                         ))}
