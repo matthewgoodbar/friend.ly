@@ -3,7 +3,7 @@ import Countdown from '../Counters/Countdown'
 import DayCounter from '../Counters/DayCounter'
 import CurrentDate from '../Counters/CurrentDate'
 import './MessagesLeftSideBar.css'
-
+import DMPartition from '../DMPartition/DMPartition'
 
 //logos
 import thai from '../../assets/thai.png'
@@ -12,7 +12,7 @@ import dwight from '../../assets/dwight.png'
 import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
-const MessagesLeftSideBar = () => {
+const MessagesLeftSideBar = ({ setActiveChatRoom, usersInChat }) => {
 
     // const end = new Date();
     // end.setHours(23, 59, 59, 999);
@@ -35,6 +35,18 @@ const MessagesLeftSideBar = () => {
     // }, 1000);
 
 
+    const populateUsers = () => {
+        usersInChat.map((contact,i)=>{ 
+            <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom}/>
+        })
+    }
+
+    const chatClickHandler = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        setActiveChatRoom("banana")
+    }
+
   return (
     <aside className="leftSidebar">
                     <div className="innerAside">
@@ -48,7 +60,7 @@ const MessagesLeftSideBar = () => {
                         </div>
                         <div className="groupChat">
                             <h3 className="uppercase">Group Chat</h3>
-                            <button className="">
+                  <button className="" onClick={e => { chatClickHandler(e) }}>
                                 <figure>
                                     <img src={thai} alt="Thai Food" />
                                 </figure>
@@ -65,45 +77,7 @@ const MessagesLeftSideBar = () => {
                             </button>
                         </div>
                         <div className="directMessages">
-                            <h3 className="uppercase">Direct Messages</h3>
-                            <button className="active unread">
-                                <figure>
-                                    <div className="online"></div>
-                                    <img src={michael} alt="Michael Scott" />
-                                </figure>
-                                <div className="right">
-                                    <div className="name">Michal Scott</div>
-                                    <div className="messagePreview">I can't, I have improv class tonight lorem ipsum</div>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <img src={dwight} alt="Dwight S." />
-                                </figure>
-                                <div className="right">
-                                    <div className="name">Dwight S.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button>
-                                <figure>
-                                    <div className="online"></div>
-                                    <img src={pam} alt="Pam B." />
-                                </figure>
-                                <div>
-                                    <div className="name">Pam B.</div>
-                                    <span>Request to chat</span>
-                                </div>
-                            </button>
-                            <button className="awaiting">
-                                <figure>
-                                    <img src={angela} alt="Angela M." />
-                                </figure>
-                                <div>
-                                    <div className="name">Angela M.</div>
-                                    <span>Awaiting response</span>
-                                </div>
-                            </button>
+                         <DMPartition setActiveChatRoom={setActiveChatRoom} />
                         </div>
                     </div>
                 </aside>
