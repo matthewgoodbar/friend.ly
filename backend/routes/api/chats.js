@@ -14,22 +14,10 @@ router.get('/user/:userId', async (req, res) => {
     let user;
     try {
         user = await User.findById(req.params.userId)
-            .populate({
-                path: 'chats',
-                populate: {
-                    path: 'users',
-                    select: '_id username'
-                }
-            })
-            .populate({
-                path: 'daily',
-                populate: {
-                    path: 'users',
-                    select: '_id username'
-                }
-            })
+        // .populate('daily', '_id')
+            // .populate('daily', '_id, users')
             // .populate('chats','_id');
-        // debug(user);
+        debug(user);
     } catch(err) {
         const error = new Error('User does not exist');
         error.statusCode = 404;
