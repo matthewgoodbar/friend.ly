@@ -23,8 +23,6 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
 
   // useEffect(()=>{
   //     chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
-  //     console.log("in scroller")
-  //     console.log(messages)
   // }, [messages])
 
   const handleSubmit = event => {

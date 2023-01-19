@@ -59,7 +59,6 @@ const messagesReducer = (state = { all: {}, user: {} }, action) => {
 
       case RECEIVE_MESSAGE:
         state.all.unshift(action.message)
-        console.log("in message reducer")
         return { ...state };
 
       default:
