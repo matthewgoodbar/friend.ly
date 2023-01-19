@@ -130,51 +130,10 @@ const ChatBox = () => {
                                 </cite>
                             </div>
 
-                              {/* <div className="sender-message">
-                                  {message.body}
-                              </div> */}
-
-                              {/* <div className="sender-info">
-                                  <strong>{message.author.username}</strong>
-                                  <img src={logo} alt="" width="50px" /> */}
-                                  {/* <p>{message.createdAt}</p> */}
-                              {/* </div> */}
                               
                         </div>
 
                         ))}
-
-
-
-                        {/* <div class="message">
-                            <span>Dwight S.</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src={dwight} alt="Dwight S." />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </cite>
-                            </div>
-                        </div> */}
-
-                        {/* <div class="message currentUser">
-                            <span>Me</span>
-                            <div class="bubble">
-                                <div class="who">
-                                    <figure>
-                                        <img src={ryan} alt="Ryan" />
-                                    </figure>
-                                    <time datetime="2008-02-14 20:00">10:45</time>
-                                </div>
-                                <cite>
-                                    Phasellus sit amet aliquet mi.
-                                </cite>
-                            </div>
-                        </div> */}
 
                         {/* actual message section */}
 
