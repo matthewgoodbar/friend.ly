@@ -44,24 +44,41 @@ export const fetchUserTopics = (userId) => async dispatch => {
         console.log("error in fetchUserTopics")
     }
 };
+
+
+
+export const createUserTopic =(userId) => async dispatch => {
+    try {
+        const res = await jwtFetch(`/api/topics//user/${userId}`, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+        const data = await res.json();
+        dispatch(addUserTopic(data));
+    } catch(err) {
+        console.log("error in createUserTopic")
+}
+}
 //store selector
 export const getTopics = (state) => {
     if(state && state.topics){
-        return Object.values(state.topics)
+        return Object.values(state.topics.all)
     }
 }
 
 // reducer
-const topicsReducer = (state={}, action) => {
+const topicsReducer = (state={all:[], userTopics:[]}, action) => {
     switch(action.type) {
         case RECEIVE_ALL_TOPICS:
-            return {all:action.payload}
+            return {all:action.payload,userTopics:[]}
         case RECEIVE_USER_TOPICS:
             // console.log(action.payload)
             return {...state,userTopics:action.payload}
         case ADD_USER_TOPIC:
-            const topId = action.payload._id
-            return {}
+            const newState = {...state}
+            console.log(newState)
+            // newState[userTopics].push(action.payload)
+            // return {...newState}
         default:
                 return state;
     }
