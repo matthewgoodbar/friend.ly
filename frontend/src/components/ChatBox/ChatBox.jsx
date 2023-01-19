@@ -13,18 +13,19 @@ import { receiveNewMessage, composeMessage } from '../../store/messages';
 // import ryan from '../../assets/ryan.png'
 
 
-const ChatBox = ({ activeChatRoom, socket }) => {
+const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const chatHistory = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const user = useSelector(state => state.session.user)
-  const messages = useSelector(state => Object.values(state.messages.all).reverse());
   
 //code for scrolling new messages down
 
   // useEffect(()=>{
-  //       chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
-  // },[messages])
+  //     chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
+  //     console.log("in scroller")
+  //     console.log(messages)
+  // }, [messages])
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -59,27 +60,6 @@ const ChatBox = ({ activeChatRoom, socket }) => {
     }
     return `${hours}:${minutes} ${ampm}`;
   }
-
-
-  // const populateMessages = () => {
-    
-  //   messages.map((message, index) =>  {
-  //     return (<div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
-  //       <p><strong>{message.author.username}</strong></p>
-  //       <div className="bubble">
-  //         <div className="who">
-  //           <figure>
-  //             <img src={logo} alt="" width="50px" />
-  //           </figure>
-  //           <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
-  //         </div>
-  //         <cite>
-  //           {message.body}
-  //         </cite>
-  //       </div>
-  //     </div>)
-  //   })
-  // }
     
 
 
@@ -88,7 +68,7 @@ const ChatBox = ({ activeChatRoom, socket }) => {
 
                     <div className="top">
                         <div className="innerTop">
-                            <h4>Thai Food</h4>
+                        <h4>{activeChatRoom}</h4>
                         </div>
                     </div>
 

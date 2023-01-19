@@ -9,47 +9,43 @@ import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 import { fetchChatMessages, receiveNewMessage } from '../../store/messages';
 import io from "socket.io-client";
-
-
-
-
 import "./MessagesPage.css"
 
 const MessagesPage = () => {
   // const activeChatRoom = useSelector(getActiveChatroom)
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user)
   const chats = useSelector(state => state.chats)
-  // const [activeChatRoom, setActiveChatRoom] = useState(chats.daily)
+  const user = useSelector(state => state.session.user)
+  const messages = useSelector(state => Object.values(state.messages.all).reverse());
+
   const [activeChatRoom, setActiveChatRoom] = useState("")
+  const [setupCounter, setSetupCounter] = useState(0)
 
   const [socket] = useState(io("http://localhost:3001", {
     transports: ['websocket']
   }))
 
-
-  useEffect(() => {
-    socket.emit("setup", activeChatRoom);
-    socket.on("connected", () => console.log("socket connected"));
-
-    socket.on("connect_error", (err) => {
-      console.log(`connect_error due to ${err.message}`);
-    });
-
-    socket.on("message recieved", (msgObj) => {
-      dispatch(receiveNewMessage(msgObj))
-    });
-
-  }, []);
-
-
-
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
 
+
+
   useEffect(()=>{
-    dispatch(fetchUserChatrooms(user._id)) 
+    dispatch(fetchUserChatrooms(user._id)).then( async (res)=>{
+      const chatrooms = await res.json()
+      setActiveChatRoom(chatrooms.daily._id)
+
+      socket.emit("setup", chatrooms.daily._id)
+
+      chatrooms.chats.forEach((chatroom)=>{
+        socket.emit("setup", chatroom._id)
+      })
+
+      socket.on("message recieved", (msgObj) => {
+        dispatch(receiveNewMessage(msgObj))
+      });
+    })
   },[])
 
 
@@ -59,8 +55,8 @@ const MessagesPage = () => {
             <NavBarSide />
 
             <div className="content">
-        <MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} usersInChat={"send chats.daily.users array"} />
-        <ChatBox activeChatRoom={activeChatRoom} socket={socket}/>
+                { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
+        <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
                 {/* <MessagesRightSideBar /> */}
                 <YelpDataItems/>
             </div>

@@ -10,13 +10,14 @@ import dwight from '../../assets/dwight.png'
 
 const DMPartition = ({ contact, setActiveChatRoom }) => {
 
-   // contact is the user's info that is passed in from the chats slice of state
-
+  const chatId = contact.chatId
 
     const chatClickHandler = (e) => {
         e.stopPropagation()
         e.preventDefault()
-        // setActiveChatRoom("banana")
+        if (chatId) {
+          setActiveChatRoom(chatId)
+        }
     }
 
   return (
@@ -25,7 +26,8 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
             <img src={dwight} alt="Dwight S." />
         </figure>
         <div className="right">
-            <div className="name">Dwight S.</div>
+        <div className="name">{contact.username}</div>
+        {!chatId && (<span>request chat</span>)}
         </div>
     </button>
   )

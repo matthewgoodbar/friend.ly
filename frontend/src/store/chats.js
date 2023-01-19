@@ -28,8 +28,10 @@ export const getActiveChatroom = (state) => {
 export const fetchUserChatrooms = (userId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/chats/user/${userId}`);
+        const resClone = res.clone()
         const chatrooms = await res.json();
         dispatch(receiveUserChatrooms(chatrooms));
+        return resClone
     } catch (err) {
         console.log("error in fetchUserChatrooms")
         // const resBody = await err.json();
@@ -41,14 +43,11 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
 
 //Regular Reducer
 
-const chatsReducer = (state = { all: {}, active: "" }, action) => {
+const chatsReducer = (state = {}, action) => {
     switch (action.type) {
-        case CHANGE_CHATROOM:
-            return { all: { ...state.all }, active: action.chatroomId  };
 
         case RECIEVE_USER_CHATROOMS:
-            console.log(action.chatrooms)
-            return { all: { ...action.chatrooms }, active: state.active };
+            return { ...action.chatrooms };
 
         default:
             return state;
