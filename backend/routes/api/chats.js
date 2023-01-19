@@ -48,7 +48,10 @@ router.get('/user/:userId', async (req, res) => {
     }
     try {
         const chats = user.chats;
-        return res.json(chats);
+        const daily = user.daily;
+        return res.json({
+            chats, daily
+        });
     } catch(err) {
         return res.json([]);
     }
