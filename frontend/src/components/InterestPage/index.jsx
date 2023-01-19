@@ -3,28 +3,30 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from '../NavBar/NavBar.js'
 import './interest.css'
 import interestImg from './interest.png'
-import {fetchAllTopics, fetchUserTopics, getTopics} from "../../store/topics.js";
+import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 import SingleInterest from "./SingleInterest.jsx";
 const InterestPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
+
+    // get all topics from state
     const allTopics = useSelector(getTopics)
-    // const outdoorArr = allTopics.filter(topic => topic.category==='outdoors')
-    // console.log(allTopics,outdoorArr)
+
+    //get current user's himself topics
+    const userTopics = useSelector(getUserTopics)
+    console.log(allTopics,userTopics)
+
     useEffect( () => {
         dispatch(fetchAllTopics())
         dispatch(fetchUserTopics(user._id))
     }, [])
 
-    const addInterest =() => {
-
-    }
+    
 
 
     const removeInterest=() => {
 
     }
-
 
     return (
     
@@ -121,7 +123,9 @@ const InterestPage = () => {
                     <h2>Discover new interests</h2>
                     <h3>Outdoors/Activities</h3>
                     <div className="carousel">
-                    {allTopics.map( (topic, i) => (topic.category ==='outdoors'?
+                    {allTopics.map( (topic, i) => 
+                    // if topic's category is falling in the <h3></h3> and user's topics not includes this topic
+                    (topic.category ==='outdoors' && !userTopics.includes(topic.name) ?
                             <SingleInterest interest={topic} key={i}/> :null)  
                     )}
                     </div>

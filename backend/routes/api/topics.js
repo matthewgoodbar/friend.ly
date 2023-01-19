@@ -32,7 +32,8 @@ router.get('/', async (req, res) => {
 router.post('/user/:userId', requireUser, async (req, res) => {
     let topic;
     try {
-        topic =await Topic.findById(req.body.topic._id);
+        topic =await Topic.findById(req.body._id);
+        return res.json(topic);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to find topic" });

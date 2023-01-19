@@ -47,11 +47,11 @@ export const fetchUserTopics = (userId) => async dispatch => {
 
 
 
-export const createUserTopic =(userId) => async dispatch => {
+export const createUserTopic =(userId,topic) => async dispatch => {
     try {
-        const res = await jwtFetch(`/api/topics//user/${userId}`, {
+        const res = await jwtFetch(`/api/topics/user/${userId}`, {
             method: 'POST',
-            body: JSON.stringify(data)
+            body: JSON.stringify(topic)
         });
         const data = await res.json();
         dispatch(addUserTopic(data));
@@ -66,19 +66,23 @@ export const getTopics = (state) => {
     }
 }
 
+export const getUserTopics = (state) => {
+    if(state && state.topics){
+        return Object.values(state.topics.userTopics)
+    }
+}
+
 // reducer
 const topicsReducer = (state={all:[], userTopics:[]}, action) => {
+    const newState = {...state};
     switch(action.type) {
         case RECEIVE_ALL_TOPICS:
-            return {all:action.payload,userTopics:[]}
+            return {...state, all:action.payload}
         case RECEIVE_USER_TOPICS:
-            // console.log(action.payload)
             return {...state,userTopics:action.payload}
         case ADD_USER_TOPIC:
-            const newState = {...state}
-            console.log(newState)
-            // newState[userTopics].push(action.payload)
-            // return {...newState}
+            newState.userTopics.push(action.payload)
+            return newState
         default:
                 return state;
     }
