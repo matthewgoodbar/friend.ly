@@ -3,10 +3,10 @@ import './MessagesRightSideBar.css'
 
 const MessagesRightSideBar = () => {
   return (
-    <aside class="rightSidebar">
-                    <div class="innerAside">
-                        <div class="top">
-                            <div class="gradient"></div>
+    <aside className="rightSidebar">
+                    <div className="innerAside">
+                        <div className="top">
+                            <div className="gradient"></div>
                             <h4>Thai Food</h4>
                             <h3>
                                 <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,7 @@ const MessagesRightSideBar = () => {
                                 </svg> San Francisco</h3>
                         </div>
                         <p>Thai food is known for its balance of sweet, sour, salty, and spicy flavors, as well as its emphasis on fresh herbs and vegetables. Popular dishes include pad thai, curry, and tom yum soup.</p>
-                        <div class="places">
+                        <div className="places">
                             <ul>
                                 <li><a href="/yelp-or-google-link">Restaurant Name</a></li>
                                 <li><a href="/yelp-or-google-link">Restaurant Name</a></li>

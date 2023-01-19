@@ -99,17 +99,17 @@ const ChatBox = () => {
 
 
   return (
-            <main class="messengerComponent">
+            <main className="messengerComponent">
 
-                    <div class="top">
-                        <div class="innerTop">
+                    <div className="top">
+                        <div className="innerTop">
                             <h4>Thai Food</h4>
                         </div>
                     </div>
 
                     {/* actual message section */}
                     
-                    <div class="bubbles" ref={chatHistory}>
+                    <div className="bubbles" ref={chatHistory}>
 
                     {messages.map((message, index) => (
 
@@ -117,8 +117,8 @@ const ChatBox = () => {
 
                           <p><strong>{message.author.username}</strong></p>
                           
-                          <div class="bubble">
-                                <div class="who">
+                          <div className="bubble">
+                                <div className="who">
                                     <figure>
                                         <img src={logo} alt="" width="50px"  />
                                     </figure>
