@@ -11,7 +11,7 @@ import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
 
 import { getCurrentUser } from './store/session';
-import YelpDataItems from './components/YelpFetchData/YelpDataItems';
+import InterestPage from './components/InterestPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +28,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />
+        <Route path='/interest' component={InterestPage} />
       </Switch>
     </>
   );

@@ -1,0 +1,161 @@
+/* INTERESTS */
+
+
+.interests .content {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+.interestsComponent {
+    background-color: var(--color-pink-light);
+    overflow-y: scroll;
+    position: relative;
+}
+.interests .leftSidebar {
+    padding-right: calc(var(--base-unit)*5);
+}
+.interests .leftSidebar p {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    margin: calc(var(--base-unit)*8) 0;
+}
+.interests .leftSidebar ul {
+    border-radius: var(--base-unit);
+    border: 1px solid var(--color-transparent-black);
+}
+.interests .leftSidebar ul.empty li {
+    text-align: center;
+}
+.interests .leftSidebar ul li {
+    padding: calc(var(--base-unit)*5);
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-transparent-black);
+    position: relative;
+}
+.interests .leftSidebar ul li:last-child {
+    border-bottom: 0;
+}
+.interests .leftSidebar ul li span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 170px;
+}
+.interests  .leftSidebar ul li small {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--color-transparent-black-dark);
+}
+.interests .leftSidebar ul li button {
+    border: none;
+    background-color: transparent;
+    color: var(--color-transparent-black-dark);
+    font-weight: bold;
+}
+.interests .leftSidebar ul li button:hover {
+    cursor: pointer;
+}
+.interests .leftSidebar ul li button:hover .remove {
+    display: block;
+}
+.interests .leftSidebar ul li button .remove {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 calc(var(--base-unit)*2);
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*3);
+    z-index: 100;
+    right: calc(var(--base-unit)*8);
+    bottom: calc(var(--base-unit)*8);
+}
+.interests .leftSidebar ul li button .remove:hover {
+    background-color: var(--color-aa);
+    color: white;
+}
+.interests .interestsComponent {
+    padding: calc(var(--base-unit)*5);
+    padding-right: 0;
+}
+.interests .interestsComponent .carousel {
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    margin-bottom: calc(var(--base-unit)*8);
+}
+.interests .interestsComponent h2 {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.05em;
+    margin-bottom: calc(var(--base-unit)*8);
+}
+.interests .interestsComponent h3 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: calc(var(--base-unit)*4);
+}
+.interests .interestsComponent .interest {
+    background: white;
+    /* box-shadow: 0px 0px calc(var(--base-unit)*2) var(--color-transparent-black); */
+    border-radius: var(--base-unit);
+    width: 260px;
+    margin-right: calc(var(--base-unit)*8);
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+.interests .interestsComponent .interest .thumbnail {
+    width: 260px;
+    height: 160px;
+}
+.interests .interestsComponent .interest .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-top-left-radius: var(--base-unit);
+    border-top-right-radius: var(--base-unit);
+}
+.interests .interestsComponent .interest button {
+    border-radius: 50%;
+    width: calc(var(--base-unit)*10);
+    height: calc(var(--base-unit)*10);
+    background-color: var(--color-pink);
+    border: 0;
+    position: absolute;
+    right:calc(var(--base-unit)*5);
+    bottom:calc(var(--base-unit)*5);
+    transition: 0.25s scale;
+}
+.interests .interestsComponent .interest button svg {
+    color: white;
+    fill: white;
+}
+.interests .interestsComponent .interest p {
+    color: black;
+    margin: calc(var(--base-unit)*4) 0 calc(var(--base-unit)*4) calc(var(--base-unit)*5);
+}
+.interests .interestsComponent .interest:hover {
+    background-color: var(--color-purple-light);
+}
+.interests .interestsComponent .interest:hover p {
+    color: white;
+}
+.interests .interestsComponent .interest:hover button {
+    background-color: white;
+    cursor: pointer;
+    scale: 1.25;
+    transition: 0.25s scale;
+}
+.interests .interestsComponent .interest:hover button svg {
+    color: var(--color-purple-light);
+    fill: var(--color-purple-light);
+}
