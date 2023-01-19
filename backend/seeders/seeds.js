@@ -19,8 +19,8 @@ users.push(
         email: 'matthew@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
         topics: [],
-        daily: null,
-        chats: [mongoose.Types.ObjectId(1)],
+        daily: mongoose.Types.ObjectId(1),
+        chats: [],
         friends: []
     })
 )
@@ -32,8 +32,11 @@ users.push(
         email: 'marcos@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
         topics: [],
-        daily: null,
-        chats: [mongoose.Types.ObjectId(1)],
+        daily: mongoose.Types.ObjectId(1),
+        chats: [
+            mongoose.Types.ObjectId(2),
+            mongoose.Types.ObjectId(3)
+        ],
         friends: []
     })
 )
@@ -45,8 +48,8 @@ users.push(
         email: 'vivian@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
         topics: [],
-        daily: null,
-        chats: [mongoose.Types.ObjectId(1)],
+        daily: mongoose.Types.ObjectId(1),
+        chats: [],
         friends: []
     })
 )
@@ -58,8 +61,10 @@ users.push(
         email: 'evgenii@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
         topics: [],
-        daily: null,
-        chats: [mongoose.Types.ObjectId(1)],
+        daily: mongoose.Types.ObjectId(1),
+        chats: [
+            mongoose.Types.ObjectId(2)
+        ],
         friends: []
     })
 )
@@ -71,8 +76,10 @@ users.push(
         email: 'diego@friend.ly',
         hashedPassword: bcrypt.hashSync('password', 10),
         topics: [],
-        daily: null,
-        chats: [mongoose.Types.ObjectId(1)],
+        daily: mongoose.Types.ObjectId(1),
+        chats: [
+            mongoose.Types.ObjectId(3)
+        ],
         friends: []
     })
 )
@@ -87,7 +94,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
             hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
             topics: [],
             daily: null,
-            chats: [mongoose.Types.ObjectId(1)],
+            chats: [],
             friends: []
         })
     )
