@@ -9,30 +9,6 @@ const Topic = mongoose.model('Topic');
 const { requireUser } = require('../../config/passport');
 const validateChatInput = require('../../validations/chats');
 
-//Gets all chats
-router.get('/', async (req, res) => {
-    try {
-        const chats = await Chat.find()
-            .sort({ createdAt: -1 });
-        return res.json(chats);
-    } catch(err) {
-        return res.json([]);
-    }
-});
-
-//Gets specified chat
-router.get('/:id', async (req, res) => {
-    try {
-        const chat = await Chat.findById(req.params.id);
-        return res.json(chat);
-    } catch(err) {
-        const error = new Error('Chat not found');
-        error.statusCode = 404;
-        error.errors = { message: "No chat found with that id" };
-        debug(error);
-    }
-});
-
 //Gets all chats by specified user
 router.get('/user/:userId', async (req, res) => {
     let user;
@@ -66,6 +42,30 @@ router.get('/user/:userId', async (req, res) => {
         return res.json({
             chats, daily
         });
+    } catch(err) {
+        return res.json([]);
+    }
+});
+
+//Gets specified chat
+router.get('/:id', async (req, res) => {
+    try {
+        const chat = await Chat.findById(req.params.id);
+        return res.json(chat);
+    } catch(err) {
+        const error = new Error('Chat not found');
+        error.statusCode = 404;
+        error.errors = { message: "No chat found with that id" };
+        debug(error);
+    }
+});
+
+//Gets all chats
+router.get('/', async (req, res) => {
+    try {
+        const chats = await Chat.find()
+            .sort({ createdAt: -1 });
+        return res.json(chats);
     } catch(err) {
         return res.json([]);
     }
