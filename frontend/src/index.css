@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    font-family: 'Roboto', sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -83,3 +84,30 @@ li {
     margin-bottom: 15px;
   }
 /*LOGIN SIGNUP ERRORS*/
+
+
+:root {
+    --base-unit: 4px;
+    --color-primary:#333;
+    --color-aa:#d0021b;
+    --color-grey:#666;
+    --color-pink: #AD00FF;
+    --color-pink-light: #F8EEFF;
+    --color-purple-light: #621EA7;
+    --color-purple-dark: #4B0591;
+    --color-transparent-black:rgba(0,0,0,0.15);
+    --color-transparent-black-light:rgba(0,0,0,0.05);
+    --color-transparent-black-dark:rgba(0,0,0,0.5);
+    --color-transparent-black-darker:rgba(0,0,0,0.75);
+    --color-transparent-white:rgba(255,255,255,0.5);
+    --gradient-purple: linear-gradient(90deg, #4B0591 0%, #621EA7 100%);
+}
+::selection {
+    background: var(--color-pink);
+    color: #fff;
+    text-shadow: none;
+}
+
+strong {
+    font-weight: bold;
+}

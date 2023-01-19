@@ -1,0 +1,53 @@
+aside.rightSidebar {
+    background-color: var(--color-pink-light);
+    padding: calc(var(--base-unit)*5);
+    overflow-y: auto;
+}
+aside.rightSidebar .innerAside {
+    border-radius: var(--base-unit);
+    background-color: white;
+}
+
+aside.rightSidebar .innerAside p  {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    margin: calc(var(--base-unit)*8);
+    padding-bottom: calc(var(--base-unit)*8);
+    border-bottom: 1px solid var(--color-transparent-black);
+}
+aside.rightSidebar .innerAside .top {
+    border-top-left-radius: var(--base-unit);
+    border-top-right-radius: var(--base-unit);
+    background: url('../../assets/thai.png') no-repeat;
+    background-size: cover;
+    text-align: center;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 200px;
+    flex-direction: column;
+    padding-bottom: calc(var(--base-unit)*3);
+}
+aside.rightSidebar .innerAside .top .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+    width: 100%;
+    z-index: 100;
+    opacity: 0.75;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+}
+aside.rightSidebar .innerAside .top h4 {
+    font-weight: 700;
+    font-size: 24px;
+    z-index: 1001;
+}
+aside.rightSidebar .innerAside .top h3 {
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 1001;
+}

@@ -1,4 +1,4 @@
-.chatbox-wrapper{
+/* .chatbox-wrapper{
     width: 800px;
     height: 800px;
     border: 1px solid black;
@@ -31,7 +31,7 @@ margin: 20px;
     display: flex;
     justify-content: flex-end;
     min-height: 20px;
-    /* border: 1px solid green; */
+
     margin: 20px;
 }
 
@@ -40,7 +40,7 @@ margin: 20px;
     justify-content: flex-end;
     flex-direction: row-reverse;
     min-height: 20px;
-    /* border: 1px solid green; */
+
     margin: 20px;
 }
 
@@ -69,4 +69,135 @@ margin: 20px;
 .chatbox-wrapper form button{
     width: 50px;
     height: 20px;
+} */
+
+
+.messengerComponent {
+    background-color: var(--color-pink-light);
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 100px 1fr 100px;
+}
+.messengerComponent .top {
+    padding: calc(var(--base-unit)*5);
+    width: 100%;
+}
+.messengerComponent .innerTop {
+    border-radius: var(--base-unit);
+    color: white;
+    height: calc(var(--base-unit)*15);
+    background: linear-gradient(90deg, #4B0591 0%, #621EA7 100%);
+    padding: 0 calc(var(--base-unit)*5) ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.messengerComponent .top h4 {
+    font-weight: 700;
+    font-size: 24px;
+}
+.messengerComponent .top .participants {
+    border: 0;
+    background-color: transparent;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+.messengerComponent .top .participants:hover {
+    cursor: pointer;
+}
+.messengerComponent .bubbles {
+    padding: calc(var(--base-unit)*5);
+    overflow-y: scroll;
+}
+.bubbles .message {
+    max-width: 45%;
+    min-width: 400px;
+    margin-bottom: 15px;
+}
+.bubbles .bubble {
+    display: grid;
+    margin-top: calc(var(--base-unit)*2);
+    grid-template-areas: 'who cite';
+    grid-template-columns: 60px 1fr;
+}
+.bubbles .who {
+    grid-area: who;
+}
+.bubbles .message p {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.bubbles .currentUser p{
+    text-align: right;
+    padding-right: 12px;
+}
+.bubbles .bubble img {
+    border-top-left-radius: var(--base-unit);
+    border-bottom-left-radius: var(--base-unit);
+}
+.bubbles .bubble cite {
+    grid-area: cite;
+    line-height: 1.5;
+    background-color: white;
+    border: 1px solid var(--color-transparent-black);
+    border-radius: calc(var(--base-unit)*2);
+    border-top-left-radius: 0;
+    padding: calc(var(--base-unit)*5);
+}
+.bubbles .currentUser {
+    margin-left: auto;
+}
+.bubbles .currentUser .bubble {
+    grid-template-areas: 'cite who';
+    grid-template-columns: 1fr 60px;
+}
+.bubbles .currentUser .bubble img {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: var(--base-unit);
+    border-bottom-right-radius: var(--base-unit);
+}
+.bubbles .currentUser .bubble cite {
+    text-align: right;
+    background-color: var(--color-purple-light);
+    color: white;
+    border-radius: calc(var(--base-unit)*2);
+    border-top-right-radius: 0;
+}
+.bubbles .bubble time {
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--color-transparent-black-dark);
+    display: table;
+    margin: 0 auto;
+}
+.messengerComponent form {
+    background-color: var(--color-pink-light);
+    display: flex;
+    padding: calc(var(--base-unit)*5);
+    justify-content: space-between;
+}
+.messengerComponent form input {
+    background-color: white;
+    border: 1px solid var(--color-transparent-black);
+    border-radius: var(--base-unit);
+    padding-left: calc(var(--base-unit)*5);
+    width: -webkit-fill-available;
+}
+.messengerComponent form button {
+    background-color: var(--color-pink);
+    border: 0;
+    border-radius: var(--base-unit);
+    width: calc(var(--base-unit)*15);
+    height: calc(var(--base-unit)*15);
+    margin-left: calc(var(--base-unit)*3);
+}
+.messengerComponent form button:hover {
+    cursor: pointer;
+}
+.messengerComponent form button svg {
+    color: white;
+    fill: white;
 }

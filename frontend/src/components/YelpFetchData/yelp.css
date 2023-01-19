@@ -26,19 +26,20 @@
     font-size: 14px;
     font-weight: 700;
 }
-div .description{
+.recommendation-container .description{
+    line-height: 1.25;
     font-size: 18px;
     font-weight: 700;
     width: 260px;
-    height:152px;
+    /* height:152px; */
     margin: 30px;
 }
 
-.right-bar-line{
+.recommendation-container .right-bar-line{
     margin:30px
 }
 
-div .uppercase {
+.recommendation-container .uppercase {
     margin-bottom: 10px;
     margin-left: 30px;
     color: rgb(114, 113, 113);

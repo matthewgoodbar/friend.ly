@@ -1,0 +1,79 @@
+header {
+    padding: calc(var(--base-unit)*5);
+}
+
+header .innerHeader {
+    height: calc(100vh - var(--base-unit)*10);
+    width: calc(var(--base-unit)*20);
+    position: fixed;
+    background: linear-gradient(90deg, #4B0591 0%, #621EA7 100%);
+    border-radius: var(--base-unit);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    padding: calc(var(--base-unit)*7) 0;
+}
+
+header .innerHeader>div {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+}
+header .innerHeader li {
+    text-align: center;
+    padding: calc(var(--base-unit)*5) 0;
+}
+header .logo {
+    display: block;
+    margin-bottom: calc(var(--base-unit)*4);
+}
+header .logo svg {
+    fill: white;
+    color: white;
+}
+header nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+header nav a.active:before {
+    content:"";
+    display: none;
+    background-color: var(--color-pink);
+    height: calc(var(--base-unit)*10);
+    width: calc(var(--base-unit)*2);
+    border-top-right-radius: var(--base-unit);
+    border-bottom-right-radius: var(--base-unit);
+}
+header nav a svg {
+    fill: white;
+    color: white;
+    opacity: 0.5;
+}
+header nav a:hover svg {
+    opacity: 1;
+    fill: var(--color-pink);
+    color: var(--color-pink);
+}
+header nav a:hover span {
+    display: block;
+}
+header nav a.active svg {
+    opacity: 1;
+    fill: white;
+    color: white;
+}
+header nav a span {
+    display: none;
+    position: absolute;
+    color: #fff;
+    background-color: var(--color-transparent-black-darker);
+    padding: calc(var(--base-unit)*2);
+    border-radius: var(--base-unit);
+    top: 0;
+    left: calc(var(--base-unit)*10);
+    z-index: 9;
+}
