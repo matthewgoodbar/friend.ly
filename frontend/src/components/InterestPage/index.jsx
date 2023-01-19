@@ -1,12 +1,15 @@
 import { useState,useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from '../NavBar/NavBar.js'
 import './interest.css'
 import interestImg from './interest.png'
-
-const InterestPage = (user) => {
+import { fetchUserTopics } from "../../store/topics.js";
+const InterestPage = () => {
     const dispatch = useDispatch();
-    
+    const user = useSelector(state => state.session.user)
+    useEffect( () => {
+        dispatch(fetchUserTopics(user._id))
+    }, [])
 
 
 

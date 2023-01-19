@@ -8,9 +8,19 @@ const Message = mongoose.model('Message');
 const Topic = mongoose.model('Topic');
 const { requireUser } = require('../../config/passport');
 
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        debug(user)
+        return res.json(user.topics);
+    } catch(err) {
+        debug(err);
+        return res.json({ error: "Unable to fetch user's topics" });
+    }
+});
 router.get('/', async (req, res) => {
     try {
-        const topics = Topic.find();
+        const topics = await Topic.find();
         return res.json(topics);
     } catch(err) {
         debug(err);
@@ -18,20 +28,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/user/:userId', async (req, res) => {
-    try {
-        const user = User.findById(req.params.userId);
-        return res.json(user.topics);
-    } catch(err) {
-        debug(err);
-        return res.json({ error: "Unable to fetch user's topics" });
-    }
-});
 
 router.post('/user/:userId', requireUser, async (req, res) => {
     let topic;
     try {
-        topic = Topic.findById(req.body.topic._id);
+        topic =await Topic.findById(req.body.topic._id);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to find topic" });

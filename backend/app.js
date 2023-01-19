@@ -43,11 +43,13 @@ const chatsRouter = require('./routes/api/chats');
 const messagesRouter = require('./routes/api/messages');
 const csrfRouter = require('./routes/api/csrf');
 const yelpRouter = require('./routes/api/yelp');
+const topicsRouter = require('./routes/api/topics')
 app.use('/api/users', usersRouter);
 app.use('/api/chats', chatsRouter);
 app.use('/api/messages', messagesRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/yelp', yelpRouter);
+app.use('/api/topics', topicsRouter);
 
 // Serve static React build files statically in production
 if (isProduction) {

@@ -4,12 +4,13 @@ import sessionReducer from './session';
 import chats from './chats';
 import messages from './messages';
 import errors from './errors';
-
+import topics from './topics'
 const rootReducer = combineReducers({
   session: sessionReducer,
   chats,
   messages,
-  errors
+  errors,
+  topics
 });
 
 let enhancer;
