@@ -33,7 +33,6 @@ function App() {
         <ProtectedRoute path="/chatbox" component={ChatBox} />
         <ProtectedRoute path="/settings" component={Settings} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
-        <ProtectedRoute path="/geo-location" component={GeoLocation} />
       </Switch>
     </>
   );

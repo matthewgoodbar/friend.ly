@@ -108,7 +108,7 @@ margin: 20px;
 }
 .messengerComponent .bubbles {
     padding: calc(var(--base-unit)*5);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .bubbles .message {
     max-width: 45%;
@@ -185,6 +185,7 @@ margin: 20px;
     border-radius: var(--base-unit);
     padding-left: calc(var(--base-unit)*5);
     width: -webkit-fill-available;
+    width: -moz-available;
 }
 .messengerComponent form button {
     background-color: var(--color-pink);
