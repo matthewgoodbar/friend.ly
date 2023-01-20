@@ -18,7 +18,7 @@ const matthew = new User ({
     username: 'matthew',
     email: 'matthew@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
-    image: "",
+    image: "https://i.imgur.com/YiWuKeh.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -26,8 +26,7 @@ const matthew = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(matthew);
 
@@ -43,8 +42,7 @@ const marcos = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(marcos);
 
@@ -60,8 +58,7 @@ const vivian = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(vivian);
 
@@ -77,8 +74,7 @@ const evgenii = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(evgenii);
 
@@ -86,7 +82,7 @@ const diego = new User ({
     username: 'diego',
     email: 'diego@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
-    image: "",
+    image: "https://i.imgur.com/sClpoq6.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -94,8 +90,7 @@ const diego = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(diego);
 
