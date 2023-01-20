@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
         limit: '6',
         sort_by: "review_count"
     }).then(response => {
-        // console.log(JSON.stringify(response.jsonBody));
         res.send(response.jsonBody.businesses);
     }).catch(e => {
         console.log(e);
