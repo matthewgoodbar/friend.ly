@@ -38,6 +38,7 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
         // if (resBody.statusCode === 400) {
         //     dispatch(receiveErrors(resBody.errors));
         // }
+        //adding this line just to commit
     }
 };
 
