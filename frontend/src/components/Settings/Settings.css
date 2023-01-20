@@ -1,0 +1,27 @@
+.settings {
+    background-color: var(--color-pink-light);
+    height: 100vh;
+}
+.settings .content {
+    display: flex;
+    overflow: hidden;
+    margin: calc(var(--base-unit)*5);
+    padding: calc(var(--base-unit)*5);
+    border:1px solid var(--color-transparent-black);
+    justify-content: center;
+    border-radius: var(--base-unit);
+    background-color: white;
+}
+.settings .content h1 {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.05em;
+    color: #000000;
+    display: inline;
+}
+.settings form label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+}

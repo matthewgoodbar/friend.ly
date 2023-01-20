@@ -28,7 +28,7 @@ aside.leftSidebar .title small {
     font-weight: 700;
     font-size: 14px;
     color: #E40B32;
-    display: inline;
+    display: none;
     margin-left: calc(var(--base-unit)*3);
 }
 aside.leftSidebar h2 {

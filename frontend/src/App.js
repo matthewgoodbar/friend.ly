@@ -10,8 +10,8 @@ import Welcome from './components/Welcome/Welcome';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
-import MessagesPage from './components/MessagesPage/MessagesPage';
-import GeoLocation from './components/GeoLocation/GeoLocation'
+import MessagesPage from './components/MessagesPage/MessagesPage'
+import Settings from './components/Settings/Settings'
 
 import { getCurrentUser } from './store/session';
 import InterestPage from './components/InterestPage';
@@ -35,7 +35,6 @@ function App() {
         <ProtectedRoute path="/chatbox" component={ChatBox} />
         <Route path='/interests' component={InterestPage} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
-        <ProtectedRoute path="/geo-location" component={GeoLocation} />
       </Switch>
     </>
   );
