@@ -8,31 +8,19 @@ const Message = mongoose.model('Message');
 const { requireUser } = require('../../config/passport');
 const validateMessageInput = require('../../validations/messages');
 
-//Gets all messages
-router.get('/', async (req, res) => {
-    try {
-        const messages = await Message.find()
-            .populate("author", "_id, username")
-            .sort({ createdAt: -1 });
-        return res.json(messages);
-    }
-    catch(err) {
-        return res.json([]);
-    }
-});
 
 //Gets all messages from specified chat
 router.get('/chat/:chatId', async (req, res) => {
     let chat;
     try {
         chat = await Chat.findById(req.params.chatId)
-            .populate({
-                path: 'messages',
-                populate: {
-                    path: 'author',
-                    select: '_id username'
-                }
-            });
+        .populate({
+            path: 'messages',
+            populate: {
+                path: 'author',
+                select: '_id username'
+            }
+        });
         return res.json(chat.messages);
     } catch(err) {
         const error = new Error('Chat does not exist');
@@ -55,8 +43,8 @@ router.get('/user/:userId', async (req, res) => {
     }
     try {
         const messages = await Message.find({ author: user._id })
-            .sort({ createdAt: -1 })
-            .populate("author", "_id, username");
+        .sort({ createdAt: -1 })
+        .populate("author", "_id, username");
         return res.json(messages);
     } catch(err) {
         return res.json([]);
@@ -69,6 +57,19 @@ router.get('/:id', async (req, res) => {
         const message = Message.findById(req.params.id);
         return res.json(message);
     } catch(err) {
+        return res.json([]);
+    }
+});
+
+//Gets all messages
+router.get('/', async (req, res) => {
+    try {
+        const messages = await Message.find()
+            .populate("author", "_id, username")
+            .sort({ createdAt: -1 });
+        return res.json(messages);
+    }
+    catch(err) {
         return res.json([]);
     }
 });
