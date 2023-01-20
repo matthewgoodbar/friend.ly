@@ -34,10 +34,9 @@ const MessagesRightSideBar = (props) => {
 
     // use react hook to get all the data 
     useEffect(() => {
-        console.log("i'm in useeffect YELP")
         getDataFromYelp()
     }, [])
-    console.log(restaurants)
+
   return (
     <aside className="rightSidebar">
         <div className="innerAside">

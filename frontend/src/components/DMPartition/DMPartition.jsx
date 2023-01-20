@@ -23,7 +23,7 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
   return (
     <button onClick={e => { chatClickHandler(e) }}>
         <figure>
-            <img src={dwight} alt="Dwight S." />
+        <img src={contact.image} alt={contact.username} />
         </figure>
         <div className="right">
         <div className="name">{contact.username}</div>
