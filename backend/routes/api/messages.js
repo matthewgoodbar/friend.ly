@@ -25,21 +25,20 @@ router.get('/', async (req, res) => {
 router.get('/chat/:chatId', async (req, res) => {
     let chat;
     try {
-        chat = await Chat.findById(req.params.chatId);
+        chat = await Chat.findById(req.params.chatId)
+            .populate({
+                path: 'messages',
+                populate: {
+                    path: 'author',
+                    select: '_id username'
+                }
+            });
+        return res.json(chat.messages);
     } catch(err) {
         const error = new Error('Chat does not exist');
         error.statusCode = 404;
         error.errors = { message: "No chat found with that id" };
-        // return next(error);
-    }
-    try {
-        const messages = await Message.find({ chat: req.params.chatId })
-            .sort({ createdAt: -1 })
-            .populate("author", "_id, username");
-        debug(chat)
-        return res.json(messages);
-    } catch(err) {
-        return res.json([]);
+        debug(err);
     }
 });
 
@@ -75,13 +74,13 @@ router.get('/:id', async (req, res) => {
 });
 
 //Posts message to specified chat
-router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res, next) => {
+router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res) => {
     try {
         // debug(req.author)
         const newMessage = new Message({
             body: req.body.body,
-            author: mongoose.Types.ObjectId(req.body.author),
-            chat: mongoose.Types.ObjectId(req.params.chatId) 
+            author: req.body.author,
+            chat: req.params.chatId 
         });
         // debug(newMessage)
         let message = await newMessage.save();
@@ -90,7 +89,7 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res,
                 path: 'author',
                 select: '_id username'
             });
-        Chat.updateOne({ _id: message.chat },
+        await Chat.updateOne({ _id: req.params.chatId },
             { $push: { messages: message._id } });
         return res.json(message);
     } catch(err) {

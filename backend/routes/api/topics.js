@@ -10,9 +10,8 @@ const { requireUser } = require('../../config/passport');
 
 router.get('/user/:userId', async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
-        debug(user)
-        return res.json(user.topics);
+        const topics = await Topic.find();
+        return res.json(topics);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to fetch user's topics" });
@@ -20,8 +19,8 @@ router.get('/user/:userId', async (req, res) => {
 });
 router.get('/', async (req, res) => {
     try {
-        const topics = await Topic.find();
-        return res.json(topics);
+        const user = await User.findById(req.params.userId);
+        return res.json(user.topics);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to fetch topics" });
@@ -32,14 +31,13 @@ router.get('/', async (req, res) => {
 router.post('/user/:userId', requireUser, async (req, res) => {
     let topic;
     try {
-        topic =await Topic.findById(req.body._id);
-        return res.json(topic);
+        topic = await Topic.findById(req.body.topic._id);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to find topic" });
     }
     try {
-        User.updateOne({ _id: req.params.userId },
+        await User.updateOne({ _id: req.params.userId },
             { $push: { topics: topic._id } });
     } catch(err) {
         debug(err);
@@ -51,7 +49,7 @@ router.delete('/user/:userId', requireUser, async (req, res) => {
     try {
         debug(req.query)
         const topicId = req.query.topicId;
-        User.updateOne({ _id: req.params.userId },
+        await User.updateOne({ _id: req.params.userId },
             { $pullAll: { topics: topicId } });
         return res.json({ message: "success" });
     } catch(err) {

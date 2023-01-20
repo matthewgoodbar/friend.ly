@@ -5,7 +5,6 @@ const apiKey = process.env.YELP_API_KEY;
 const client = yelp.client(apiKey);
 
 router.get('/', (req, res) => {
-    console.log(req.query)
     client.search({
         location: req.query.location,
         term: req.query.term,
