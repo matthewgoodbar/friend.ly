@@ -19,7 +19,7 @@ aside.rightSidebar .innerAside p  {
 aside.rightSidebar .innerAside .top {
     border-top-left-radius: var(--base-unit);
     border-top-right-radius: var(--base-unit);
-    background: url('../../assets/thai.png') no-repeat;
+    background: no-repeat;
     background-size: cover;
     text-align: center;
     color: white;

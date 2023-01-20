@@ -1,4 +1,3 @@
-import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserTopic } from "../../store/topics";
 import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
@@ -18,7 +17,6 @@ const SingleInterest =({interest}) => {
     const find = findObjectWithId(userTopics, interest._id)
     const addInterest =(e) => {
         e.preventDefault();
-        console.log(interest)
         if (!find) {
             dispatch(createUserTopic(user._id, interest))
         }
@@ -29,7 +27,7 @@ const SingleInterest =({interest}) => {
     return(
         <a href="#" className="interest">
             <div className="thumbnail">
-                <img src={interest.background_url||interestImg}alt="Hiking" />
+                <img src={interest.background||interestImg}alt="Hiking" />
             </div>
             <button onClick={addInterest}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -7,7 +7,7 @@ import interest from './interest.js'
 
 
 const YelpDataItems =(props) => {
-    props ={term:'Thai food', location:'San Francisco', radius: '5000', sort_by: 'review_count'}
+    props ={term:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
 
     const term = props.term
     const location = props.location
@@ -22,7 +22,6 @@ const YelpDataItems =(props) => {
         .then(stringifiedData => JSON.parse(stringifiedData))
         .then(parsedData => {
             setRestaurants(parsedData);
-            // setRestaurantName(parsedData[0].name)
         })
         .catch((error) => {
             console.log(error);

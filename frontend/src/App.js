@@ -2,19 +2,21 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
+
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
 
-import MainPage from './components/MainPage/MainPage';
+import Welcome from './components/Welcome/Welcome';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
-import MessagesPage from './components/MessagesPage/MessagesPage'
+import MessagesPage from './components/MessagesPage/MessagesPage';
+import GeoLocation from './components/GeoLocation/GeoLocation'
 
 import { getCurrentUser } from './store/session';
 import InterestPage from './components/InterestPage';
-import YelpDataItems from './components/YelpFetchData/YelpDataItems';
-import SingleInterest from './components/InterestPage/SingleInterest';
+
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -25,15 +27,15 @@ function App() {
 
   return loaded && (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Switch>
-        <AuthRoute exact path="/" component={MainPage} />
+        <ProtectedRoute exact path="/" component={Welcome} />
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />
         <Route path='/interests' component={InterestPage} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
-        <Route path='/single' component={SingleInterest} />
+        <ProtectedRoute path="/geo-location" component={GeoLocation} />
       </Switch>
     </>
   );
