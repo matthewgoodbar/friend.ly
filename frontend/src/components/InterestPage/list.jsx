@@ -13,7 +13,7 @@ const List = ({topic}) => {
 
 
     return (
-        <li title="Indonesian (Food)">
+        <li title={`${topic.name} - ${topic.category}`}>
             <span>{topic.name}
                 <small>{topic.category}</small>
             </span> 
@@ -21,7 +21,7 @@ const List = ({topic}) => {
                 <div 
                     className="remove" 
                     onClick={removeUserInterest}
-                >Not interest anymore
+                >Not interested anymore
                 </div>    
             </button>
         </li>
