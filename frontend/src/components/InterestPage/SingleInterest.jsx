@@ -1,15 +1,27 @@
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserTopic } from "../../store/topics";
+import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 import interestImg from './interest.png'
 
 const SingleInterest =({interest}) => {
     const user = useSelector(state => state.session.user);
+    const userTopics = useSelector(getUserTopics)
     const dispatch = useDispatch();
+    const findObjectWithId =(arr, id) => {
+        const objWithIdIndex = arr.findIndex((obj) => obj._id === id);
+        if (objWithIdIndex > -1) {
+            return true
+        }
+    }
+    const find = findObjectWithId(userTopics, interest._id)
+    console.log(find)
     const addInterest =(e) => {
         e.preventDefault();
         console.log(interest)
-        dispatch(createUserTopic(user._Id, interest))
+        if (!find) {
+            dispatch(createUserTopic(user._id, interest))
+        }
     }
 
 

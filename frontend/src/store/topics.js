@@ -62,7 +62,7 @@ export const createUserTopic =(userId,topic) => async dispatch => {
 
 export const deleteUserTopic =(userId, topicId) => async dispatch => {
     try {
-        const res = await jwtFetch(`/api/topics/user/${userId}`, {
+        const res = await jwtFetch(`/api/topics/user/${userId}/?topicId=${topicId}`, {
             method: 'DELETE'
         })
         dispatch(removeUserTopic(topicId))
@@ -93,7 +93,7 @@ export const getUserTopics = (state) => {
 
 
 const removeObjectWithId =(arr, id) => {
-    const objWithIdIndex = arr.findIndex((obj) => obj.id === id);
+    const objWithIdIndex = arr.findIndex((obj) => obj._id === id);
     if (objWithIdIndex > -1) {
         arr.splice(objWithIdIndex, 1);
     }

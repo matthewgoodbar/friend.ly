@@ -73,8 +73,8 @@
     border-radius: var(--base-unit);
     padding: calc(var(--base-unit)*3);
     z-index: 100;
-    right: calc(var(--base-unit)*8);
-    bottom: calc(var(--base-unit)*8);
+    right: calc(var(--base-unit)*4);
+    bottom: calc(var(--base-unit)*4);
 }
 .interests .leftSidebar ul li button .remove:hover {
     background-color: var(--color-aa);

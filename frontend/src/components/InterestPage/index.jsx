@@ -23,10 +23,11 @@ const InterestPage = () => {
     }, [])
 
     
-
-
-    const removeInterest=() => {
-
+    const findObjectWithId =(arr, id) => {
+        const objWithIdIndex = arr.findIndex((obj) => obj._id === id);
+        if (objWithIdIndex > -1) {
+            return true
+        }
     }
 
     return (
@@ -129,7 +130,7 @@ const InterestPage = () => {
                     <div className="carousel">
                     {allTopics.map( (topic, i) => 
                     // if topic's category is falling in the <h3></h3> and user's topics not includes this topic
-                    (topic.category ==='outdoors' && !userTopics.includes(topic.name) ?
+                    (topic.category ==='outdoors' && !findObjectWithId(userTopics, topic._id) ?
                             <SingleInterest interest={topic} key={i}/> :null)  
                     )}
                     </div>
