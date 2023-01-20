@@ -5,15 +5,15 @@ const Chat = mongoose.model('Chat');
 const Topic = mongoose.model('Topic');
 const _ = require('underscore');
 
-exports.addUserToQueue = (user) => {
-    const userObj = User.findById(user._id);
-    Topic.updateMany({ _id: userObj.topics },
+exports.addUserToQueue = async (user) => {
+    const userObj = await User.findById(user._id);
+    await Topic.updateMany({ _id: userObj.topics },
         { $push: { users: userObj._id } });
     checkQueue();
 };
 
-const checkQueue = () => {
-    Topic.find({ 'users.3': { $exists: true } }, (err, topics) => {
+const checkQueue = async () => {
+    await Topic.find({ 'users.3': { $exists: true } }, (err, topics) => {
         if (err) debug(err);
         if (topics.length) {
             const topic = _.sample(topics);
@@ -30,5 +30,8 @@ const createChat = (topic, users) => {
         messages: [],
         daily: true
     });
-    
+    users.forEach(async user => {
+        await User.updateOne({ _id: user._id },
+            { daily: newChat });
+    });
 };

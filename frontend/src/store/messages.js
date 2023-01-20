@@ -58,7 +58,7 @@ const messagesReducer = (state = { all: {}, user: {} }, action) => {
         return { ...state, all: action.chatMessages };
 
       case RECEIVE_MESSAGE:
-        state.all.unshift(action.message)
+        state.all.push(action.message)
         return { ...state };
 
       default:
