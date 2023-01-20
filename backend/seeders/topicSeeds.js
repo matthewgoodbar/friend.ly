@@ -157,10 +157,10 @@ const absolute = new Topic({
 })
 topics.push(absolute)
 const absorbed = new Topic({
-    name: "birdwatching",
+    name: "Birdwatching",
     category: "Sports and Hobbies",
     description: "Birdwatching, aka birding, is an activity that involves finding and identifying birds in their natural habitats. It can be done in many different environments, from your backyard to the wilderness.",
-    background: "https://friendly-aa.s3.us-west-1.amazonaws.com/birdwatching.jpg",
+    background: "https://lp-cms-production.imgix.net/2022-06/GettyImages-1060798744.jpg?auto=format&q=75&w=3840",
     thumbnail: "https://friendly-aa.s3.us-west-1.amazonaws.com/thumbnails/birdwatching.jpg",
     users: []
 })
