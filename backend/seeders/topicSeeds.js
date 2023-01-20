@@ -22,6 +22,8 @@ const hiking = new Topic ({
     thumbnail: "",
     users: []
 })
+
+
 topics.push(hiking);
 
 const cycling = new Topic ({

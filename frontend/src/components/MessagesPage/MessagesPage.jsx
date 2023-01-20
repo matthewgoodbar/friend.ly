@@ -24,9 +24,11 @@ const MessagesPage = () => {
   //   transports: ['websocket']
   // }))
 
-  const [socket] = useState(io("friend-ly.onrender.com",{
-    transports: ['websocket']
-  }))
+  const socket = io()
+
+  // const [socket] = useState(io(5001,{
+  //   transports: ['websocket']
+  // }))
 
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))

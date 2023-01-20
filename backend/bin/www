@@ -23,6 +23,41 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+// SOCKET IO MANAGER
+
+const { Server } = require("socket.io");
+
+const io = new Server(server);
+server.listen(5001, () => {
+  console.log('listening on *:5001');
+});
+
+// const io = new Server(server, {
+//     cors: {
+//         origin: "http://localhost:3000"
+//     }
+// });
+
+io.on("connection", (socket) => {
+
+  socket.on("setup", (room) => {
+    socket.join(room);
+  });
+
+
+  socket.on("new message", ({ msgObj, activeChatRoom }) => {
+    socket.to(activeChatRoom).emit("message recieved", msgObj);
+  });
+
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
+  });
+});
+
+
+
+
 /**
  * Listen on provided port, on all network interfaces.
  */
