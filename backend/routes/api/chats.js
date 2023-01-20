@@ -19,7 +19,7 @@ router.get('/user/:userId', async (req, res) => {
             select: 'users topic',
             populate: [{
                 path: 'users',
-                select: '_id username'
+                select: '_id username image'
             },
             {
                 path: 'topic',
@@ -31,7 +31,7 @@ router.get('/user/:userId', async (req, res) => {
             select: 'users',
             populate: {
                 path: 'users',
-                select: '_id username'
+                select: '_id username image'
             }
         })
     } catch(err) {
