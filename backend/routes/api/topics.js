@@ -10,11 +10,12 @@ const { requireUser } = require('../../config/passport');
 
 router.get('/user/:userId', async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId)
+            .populate('topics');
         return res.json(user.topics);
     } catch(err) {
         debug(err);
-        return res.json({ error: "Unable to fetch user's topics" });
+        return res.json({ error: "Unable to fetch topics" });
     }
 });
 
@@ -31,7 +32,7 @@ router.get('/', async (req, res) => {
 router.post('/user/:userId', requireUser, async (req, res) => {
     let topic;
     try {
-        topic = await Topic.findById(req.body.topic._id);
+        topic = await Topic.findById(req.body._id);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to find topic" });
@@ -39,6 +40,7 @@ router.post('/user/:userId', requireUser, async (req, res) => {
     try {
         await User.updateOne({ _id: req.params.userId },
             { $push: { topics: topic._id } });
+        return res.json(topic);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to add topic to user object" })
@@ -47,9 +49,10 @@ router.post('/user/:userId', requireUser, async (req, res) => {
 
 router.delete('/user/:userId', requireUser, async (req, res) => {
     try {
+        debug(req.query)
         const topicId = req.query.topicId;
         await User.updateOne({ _id: req.params.userId },
-            { $pullAll: { topics: topicId } });
+            { $pullAll: { topics: [topicId] } });
         return res.json({ message: "success" });
     } catch(err) {
         debug(err);
