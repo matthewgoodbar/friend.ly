@@ -596,6 +596,7 @@ aside.rightSidebar .innerAside .top h3 {
 .interests .interestsComponent .interest .thumbnail {
     width: 260px;
     height: 160px;
+    overflow: hidden;
 }
 .interests .interestsComponent .interest .thumbnail img {
     width: 100%;
@@ -603,6 +604,7 @@ aside.rightSidebar .innerAside .top h3 {
     object-fit: contain;
     border-top-left-radius: var(--base-unit);
     border-top-right-radius: var(--base-unit);
+    transition: 0.25s scale;
 }
 .interests .interestsComponent .interest button {
     border-radius: 50%;
@@ -629,6 +631,10 @@ aside.rightSidebar .innerAside .top h3 {
 .interests .interestsComponent .interest:hover p {
     color: white;
 }
+.interests .interestsComponent .interest:hover .thumbnail img {
+    scale: 1.05;
+    transition: 0.25s scale;
+}
 .interests .interestsComponent .interest:hover button {
     background-color: white;
     cursor: pointer;
@@ -639,9 +645,19 @@ aside.rightSidebar .innerAside .top h3 {
     color: var(--color-purple-light);
     fill: var(--color-purple-light);
 }
+.interests .interestsComponent .selected {
+    opacity: 0.5;
+}
+.interests .interestsComponent .selected button {
+    background-color: green;
+    content: "hey";
+}
 
 /* WELCOME */
-
+.welcome {
+    background-size: cover;
+    height: 100vh;
+}
 .welcome .content {
     display: grid;
     grid-template-columns: 1fr 1fr;
