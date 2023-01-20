@@ -1,5 +1,6 @@
 import {React, useRef, useState} from 'react';
 import ZipCodeInput from './ZipCodeInput';
+import FindNeighbours from './ZipCodeNeighbours';
 
 
 const GeoLocation = () => {
@@ -81,6 +82,11 @@ const GeoLocation = () => {
         <div>
             <p>Zip Code Input Field</p>
             <ZipCodeInput/>
+        </div>
+
+        <div>
+            <p>output from neighbours component</p>
+            <FindNeighbours zipCode={94103}/>
         </div>
     </>
   )
