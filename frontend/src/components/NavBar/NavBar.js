@@ -20,6 +20,7 @@ function NavBar () {
           <Link to={'/profile'}>Profile</Link>
           <Link to={'/chatbox'}>Chatbox</Link>
           <Link to={'/messages-page'}>Messages Page</Link>
+          <Link to={'/geo-location'}>GeoLocation</Link>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
