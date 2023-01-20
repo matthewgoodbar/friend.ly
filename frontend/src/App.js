@@ -10,6 +10,7 @@ import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
 import MessagesPage from './components/MessagesPage/MessagesPage'
+import Settings from './components/Settings/Settings'
 
 import { getCurrentUser } from './store/session';
 import YelpDataItems from './components/YelpFetchData/YelpDataItems';
@@ -29,6 +30,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />
+        <ProtectedRoute path="/settings" component={Settings} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
       </Switch>
     </>
