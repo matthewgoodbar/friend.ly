@@ -28,6 +28,7 @@ const InterestPage = () => {
         if (objWithIdIndex > -1) {
             return true
         }
+        return false
     }
 
     return (
@@ -130,19 +131,19 @@ const InterestPage = () => {
                     <div className="carousel">
                     {allTopics.map( (topic, i) => 
                     // if topic's category is falling in the <h3></h3> and user's topics not includes this topic
-                    (topic.category ==='outdoors' && !findObjectWithId(userTopics, topic._id) ?
+                    (topic.category ==='Outdoor Activities' && !findObjectWithId(userTopics, topic._id) ?
                             <SingleInterest interest={topic} key={i}/> :null)  
                     )}
                     </div>
                     <h3>Food</h3>
                     <div className="carousel">
-                    {allTopics.map( (topic, i) => ( topic === 'food' ?
+                    {allTopics.map( (topic, i) => (topic.category === 'Food and Cooking' ?
                             <SingleInterest interest={topic} key={i}/> : null)  
                     )}
                     </div>
                     <h3>Art</h3>
                     <div className="carousel">
-                    {allTopics.map( (topic, i) => ( topic === 'art' ?
+                    {allTopics.map( (topic, i) => ( topic.category === 'Art' ?
                             <SingleInterest interest={topic} key={i}/> : null)  
                     )}
                     </div>

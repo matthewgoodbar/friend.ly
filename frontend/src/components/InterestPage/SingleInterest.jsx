@@ -13,9 +13,9 @@ const SingleInterest =({interest}) => {
         if (objWithIdIndex > -1) {
             return true
         }
+        return false
     }
     const find = findObjectWithId(userTopics, interest._id)
-    console.log(find)
     const addInterest =(e) => {
         e.preventDefault();
         console.log(interest)
