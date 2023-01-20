@@ -3,12 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
 import {Link} from "react-router-dom";
+import ZipCodeInput from '../GeoLocation/ZipCodeInput';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+
+  const [zipCode, setZipCode] = useState('');
+  const [city, setCity] = useState("");
+  const [error, setError] = useState('');
+
+
+  // const [password2, setPassword2] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
@@ -31,9 +38,9 @@ function SignupForm () {
       case 'password':
         setState = setPassword;
         break;
-      case 'password2':
-        setState = setPassword2;
-        break;
+      // case 'password2':
+      //   setState = setPassword2;
+      //   break;
       default:
         throw Error('Unknown field in Signup Form');
     }
@@ -43,10 +50,13 @@ function SignupForm () {
 
   const usernameSubmit = e => {
     e.preventDefault();
+    // if(!city )
     const user = {
       email,
       username,
-      password
+      password,
+      city,
+      zipCode
     };
 
     dispatch(signup(user)); 
@@ -71,6 +81,8 @@ function SignupForm () {
         <h2>Hi, Create Account!</h2>
 
           <form className="session-form" onSubmit={usernameSubmit}>
+
+          <ZipCodeInput city={city} setCity={setCity} zipCode={zipCode} setZipCode={setZipCode}  error={error} setError={setError}/>
 
           <div>
               <label>Email <br />
@@ -98,7 +110,7 @@ function SignupForm () {
 
           <div>
             <label>Password <br />
-              <input type="password"
+              <input type="password" 
                 value={password}
                 onChange={update('password')}
                 placeholder="Password"
@@ -108,7 +120,13 @@ function SignupForm () {
             <div className="errors">{errors?.password}</div>
           </div>
 
-          <div>
+          
+
+
+
+
+
+          {/* <div>
             <label>Confirm Password <br />
               <input type="password"
                 value={password2}
@@ -121,12 +139,12 @@ function SignupForm () {
             <div className="errors">
               {password !== password2 && 'Confirm Password field must match'}
             </div>
-          </div>
+          </div> */}
           
             <input id="submit-btn"
               type="submit"
               value="SIGN UP"
-              disabled={!email || !username || !password || password !== password2}
+              disabled={!email || !username || !password /*|| password !== password2*/}
             />
 
           </form>

@@ -16,10 +16,11 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
-          <NavLink to={'/'}>Main Page</NavLink>
-          <NavLink to={'/profile'}>Profile</NavLink>
-          <NavLink to={'/chatbox'}>Chatbox</NavLink>
-          <NavLink to={'/messages-page'}>Messages Page</NavLink>
+          <Link to={'/'}>Main Page</Link>
+          <Link to={'/profile'}>Profile</Link>
+          <Link to={'/chatbox'}>Chatbox</Link>
+          <Link to={'/messages-page'}>Messages Page</Link>
+          <Link to={'/geo-location'}>GeoLocation</Link>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
