@@ -5,6 +5,7 @@ import { signup, clearSessionErrors } from '../../store/session';
 import {Link} from "react-router-dom";
 import ZipCodeInput from '../GeoLocation/ZipCodeInput';
 
+
 function SignupForm () {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -13,6 +14,8 @@ function SignupForm () {
   const [zipCode, setZipCode] = useState('');
   const [city, setCity] = useState("");
   const [error, setError] = useState('');
+
+
 
 
   // const [password2, setPassword2] = useState('');
