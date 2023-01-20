@@ -20,9 +20,11 @@ const MessagesPage = () => {
   const [activeChatRoom, setActiveChatRoom] = useState("")
   const [setupCounter, setSetupCounter] = useState(0)
 
-  const [socket] = useState(io("http://localhost:3001", {
-    transports: ['websocket']
-  }))
+  // const [socket] = useState(io("http://localhost:3001", {
+  //   transports: ['websocket']
+  // }))
+
+  const [socket] = useState(io())
 
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
