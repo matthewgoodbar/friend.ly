@@ -18,7 +18,7 @@ router.get('/chat/:chatId', async (req, res) => {
             path: 'messages',
             populate: {
                 path: 'author',
-                select: '_id username'
+                select: '_id username image'
             }
         });
         return res.json(chat.messages);
@@ -44,7 +44,7 @@ router.get('/user/:userId', async (req, res) => {
     try {
         const messages = await Message.find({ author: user._id })
         .sort({ createdAt: -1 })
-        .populate("author", "_id, username");
+        .populate("author", "_id, username, image");
         return res.json(messages);
     } catch(err) {
         return res.json([]);
@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const messages = await Message.find()
-            .populate("author", "_id, username")
+            .populate("author", "_id, username, image")
             .sort({ createdAt: -1 });
         return res.json(messages);
     }
@@ -88,7 +88,7 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res)
         message = await message
             .populate({
                 path: 'author',
-                select: '_id username'
+                select: '_id username image'
             });
         await Chat.updateOne({ _id: req.params.chatId },
             { $push: { messages: message._id } });
