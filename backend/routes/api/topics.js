@@ -10,15 +10,6 @@ const { requireUser } = require('../../config/passport');
 
 router.get('/user/:userId', async (req, res) => {
     try {
-        const topics = await Topic.find();
-        return res.json(topics);
-    } catch(err) {
-        debug(err);
-        return res.json({ error: "Unable to fetch user's topics" });
-    }
-});
-router.get('/', async (req, res) => {
-    try {
         const user = await User.findById(req.params.userId);
         return res.json(user.topics);
     } catch(err) {
@@ -27,6 +18,15 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/', async (req, res) => {
+    try {
+        const topics = await Topic.find();
+        return res.json(topics);
+    } catch(err) {
+        debug(err);
+        return res.json({ error: "Unable to fetch topics" });
+    }
+});
 
 router.post('/user/:userId', requireUser, async (req, res) => {
     let topic;
