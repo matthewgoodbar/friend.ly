@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
+
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
 
@@ -32,6 +33,7 @@ function App() {
         <ProtectedRoute path="/chatbox" component={ChatBox} />
         <ProtectedRoute path="/settings" component={Settings} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
+        <ProtectedRoute path="/geo-location" component={GeoLocation} />
       </Switch>
     </>
   );
