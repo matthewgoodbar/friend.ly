@@ -16,7 +16,7 @@ router.get('/user/:userId', async (req, res) => {
         user = await User.findById(req.params.userId)
         .populate({
             path: 'daily',
-            select: 'users topic',
+            select: 'users topic daily',
             populate: [{
                 path: 'users',
                 select: '_id username image'
@@ -28,7 +28,7 @@ router.get('/user/:userId', async (req, res) => {
         })
         .populate({
             path: 'chats',
-            select: 'users',
+            select: 'users daily',
             populate: {
                 path: 'users',
                 select: '_id username image'
