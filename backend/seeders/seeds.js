@@ -18,6 +18,7 @@ const matthew = new User ({
     username: 'matthew',
     email: 'matthew@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
+    image: "https://i.imgur.com/YiWuKeh.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -25,8 +26,7 @@ const matthew = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(matthew);
 
@@ -34,6 +34,7 @@ const marcos = new User ({
     username: 'marcos',
     email: 'marcos@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
+    image: "https://i.imgur.com/zxiytKs.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -41,8 +42,7 @@ const marcos = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(marcos);
 
@@ -50,6 +50,7 @@ const vivian = new User ({
     username: 'vivian',
     email: 'vivian@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
+    image: "https://i.imgur.com/DN8158s.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -57,8 +58,7 @@ const vivian = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(vivian);
 
@@ -66,6 +66,7 @@ const evgenii = new User ({
     username: 'evgenii',
     email: 'evgenii@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
+    image: "https://i.imgur.com/XNPUclU.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -73,8 +74,7 @@ const evgenii = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(evgenii);
 
@@ -82,6 +82,7 @@ const diego = new User ({
     username: 'diego',
     email: 'diego@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
+    image: "https://i.imgur.com/sClpoq6.jpg",
     topics: [],
     daily: null,
     chats: [],
@@ -89,8 +90,7 @@ const diego = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    },
-    image: ""
+    }
 });
 users.push(diego);
 

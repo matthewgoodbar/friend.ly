@@ -19,11 +19,11 @@ router.get('/user/:userId', async (req, res) => {
             select: 'users topic',
             populate: [{
                 path: 'users',
-                select: '_id username'
+                select: '_id username image'
             },
             {
                 path: 'topic',
-                select: '_id name background thumbnail'
+                select: '_id name description background thumbnail'
             }]
         })
         .populate({
@@ -31,7 +31,7 @@ router.get('/user/:userId', async (req, res) => {
             select: 'users',
             populate: {
                 path: 'users',
-                select: '_id username'
+                select: '_id username image'
             }
         })
     } catch(err) {

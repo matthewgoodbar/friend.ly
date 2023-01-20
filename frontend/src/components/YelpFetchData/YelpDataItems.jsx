@@ -31,14 +31,9 @@ const YelpDataItems =({props}) => {
 
     // use react hook to get all the data 
     useEffect(() => {
-        console.log("i'm in useeffect YELP")
         getDataFromYelp()
     }, [])
-    console.log(restaurants)
-    const topicBackground = {
-        background:`url(${props.thumbnail}) 0 0 no-repeat`,
-        backgroundSize: "cover"
-     }
+
     return (
         <div className='recommendation-container'>
             <div className='recommendation-head'
