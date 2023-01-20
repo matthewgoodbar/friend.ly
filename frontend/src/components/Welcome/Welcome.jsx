@@ -28,6 +28,7 @@ const Welcome = () => {
         backgroundSize: "cover"
      }
   const history = useHistory();
+  if (chats) {
     return (
         <div className="container welcome" style={topicBackground}>
             <NavBarSide />
@@ -81,6 +82,8 @@ const Welcome = () => {
             <div className="gradient"></div>
         </div>
     )
+  }
+
 }
 
 export default Welcome
