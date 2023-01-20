@@ -79,9 +79,6 @@ const server = http.createServer(app);
 app.set('port', 3001)
 const { Server } = require("socket.io");
 
-server.listen(3001, () => {
-    console.log('listening on *:3001');
-});
 
 const io = new Server(server);
 
@@ -106,6 +103,10 @@ io.on("connection", (socket) => {
         console.log("USER DISCONNECTED");
         socket.leave(userData._id);
     });
+});
+
+server.listen(3001, () => {
+    console.log('listening on *:3001');
 });
 
 

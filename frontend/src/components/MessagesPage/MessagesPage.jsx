@@ -20,13 +20,10 @@ const MessagesPage = () => {
   const [activeChatRoom, setActiveChatRoom] = useState("")
   const [setupCounter, setSetupCounter] = useState(0)
 
-  // const [socket] = useState(io("http://localhost:3001", {
-  //   transports: ['websocket']
-  // }))
-
-  const [socket] = useState(io("friend-ly.onrender.com",{
+  const [socket] = useState(io("http://localhost:3001", {
     transports: ['websocket']
   }))
+
 
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
@@ -47,7 +44,12 @@ const MessagesPage = () => {
         dispatch(receiveNewMessage(msgObj))
       });
     })
-  },[])
+
+    return (()=>{
+      socket.disconnect()
+    })
+
+    },[])
 
 
   return (
