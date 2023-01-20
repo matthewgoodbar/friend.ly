@@ -20,7 +20,7 @@ const FindNeighbours = ({ zipCode }) => {
          fetch(radiusApi)
             .then(res=>res.json())
             .then(dataRadius=>{
-                console.log(dataRadius)
+                // console.log(dataRadius)
                 setNeighbours(dataRadius.results?.map(el=>el.code))
             })
 
