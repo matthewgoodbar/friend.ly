@@ -13,10 +13,11 @@ import { receiveNewMessage, composeMessage } from '../../store/messages';
 // import ryan from '../../assets/ryan.png'
 
 
-const ChatBox = ({ activeChatRoom, messages, socket }) => {
+const ChatBox = ({ chatName,activeChatRoom, messages, socket }) => {
   const chatHistory = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
+  const chats = useSelector(state => state.chats)
   const user = useSelector(state => state.session.user)
   
 //code for scrolling new messages down
@@ -60,13 +61,27 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
   }
     
 
+const bannerName = () => {
+  if (activeChatRoom === chats.daily._id) {
+    return `You are all interested in ${chats.daily.topic.name}`
+  } else {
+    let tempName = ""
+    chats.chats.forEach(dm => {
+      if (dm?._id === activeChatRoom) {
+        tempName = dm.users[0].username
+      }
+    })
+    return tempName
+  }
+}
+
 
   return (
             <main className="messengerComponent">
 
                     <div className="top">
                         <div className="innerTop">
-                        <h4>{activeChatRoom}</h4>
+                        <h4>{bannerName()}</h4>
                         </div>
                     </div>
 
@@ -82,7 +97,7 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
                               <div className="bubble">
                                 <div className="who">
                                   <figure>
-                                    <img src={logo} alt="" width="50px" />
+                                    <img src={message.author.image || logo} alt="" width="50px" />
                                   </figure>
                                   <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
                                 </div>

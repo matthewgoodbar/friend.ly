@@ -51,19 +51,20 @@ const MessagesPage = () => {
 
     },[])
 
+    if (chats.daily) {
+      return (
+          <div className='container messages'> 
+                <NavBarSide />
 
-  return (
-      <div className='container messages'> 
-            <NavBarSide />
+                <div className="content">
+                  { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
+                  <ChatBox activeChatRoom={activeChatRoom} chatName={chats.daily.topic.name} messages={messages} socket={socket}/>
+                  <YelpDataItems props={chats.daily.topic}/>
+                </div>
 
-            <div className="content">
-              { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
-              <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
-              <YelpDataItems props={chats.daily.topic}/>
-            </div>
-
-      </div>
-  )
+          </div>
+      )
+    }
 }
 
 export default MessagesPage

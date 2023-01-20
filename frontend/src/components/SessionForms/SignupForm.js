@@ -163,10 +163,11 @@ function SignupForm () {
         <div id='session-right-side'>
             <div>
               <h1>365 opportunities to make new friends</h1>
-              <p>Lorem ipsum dolor sit amet consectetur. Arcu lorem risus libero cursus mattis nunc at feugiat sit.</p>
+              <p>Meet new locals in your area every day. Talk about what you love, meet up, and make new friends.</p>
               <div className='rectangles'>
                 <div id='big-rec'></div>
                 <div id='small-rec'></div>
+                <div id='topic-rec'></div>
               </div>
             </div>
         </div>

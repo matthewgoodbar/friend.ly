@@ -112,6 +112,7 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
                             </button>
                         </div>
                         <div className="directMessages">
+                            <h3 className="uppercase">Direct Messages</h3>
                             {chatSidebarAggregator()}
                         </div>
                     </div>
