@@ -19,9 +19,9 @@ export const addUserTopic = (topic) => ({
     payload: topic
 })
 
-export const removeUserTopic = (topic) =>({
+export const removeUserTopic = (topicId) =>({
     type: REMOVE_USER_TOPIC,
-    payload: topic
+    payload: topicId
 })
 
 //thunk action
@@ -59,6 +59,21 @@ export const createUserTopic =(userId,topic) => async dispatch => {
         console.log("error in createUserTopic")
 }
 }
+
+export const deleteUserTopic =(userId, topicId) => async dispatch => {
+    try {
+        const res = await jwtFetch(`/api/topics/user/${userId}`, {
+            method: 'DELETE'
+        })
+        dispatch(removeUserTopic(topicId))
+    }catch(err) {
+        console.log("error in deleteUserTopic")
+
+    }
+}
+
+
+
 //store selector
 export const getTopics = (state) => {
     if(state && state.topics){
@@ -73,6 +88,19 @@ export const getUserTopics = (state) => {
 }
 
 // reducer
+
+// helper function
+
+
+const removeObjectWithId =(arr, id) => {
+    const objWithIdIndex = arr.findIndex((obj) => obj.id === id);
+    if (objWithIdIndex > -1) {
+        arr.splice(objWithIdIndex, 1);
+    }
+
+    return arr;
+}
+
 const topicsReducer = (state={all:[], userTopics:[]}, action) => {
     const newState = {...state};
     switch(action.type) {
@@ -83,6 +111,9 @@ const topicsReducer = (state={all:[], userTopics:[]}, action) => {
         case ADD_USER_TOPIC:
             newState.userTopics.push(action.payload)
             return newState
+        case REMOVE_USER_TOPIC:
+            const arr = removeObjectWithId(newState.userTopics, action.payload) 
+            return {...state, userTopics: arr}
         default:
                 return state;
     }

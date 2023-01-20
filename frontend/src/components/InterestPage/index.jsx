@@ -5,6 +5,7 @@ import './interest.css'
 import interestImg from './interest.png'
 import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 import SingleInterest from "./SingleInterest.jsx";
+import List from './list'
 const InterestPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
@@ -105,15 +106,18 @@ const InterestPage = () => {
                         <div className="title">
                             <h1>My Interests</h1> 
                             <p>Based on your interests we'll select people with similar tastes to put you all into the same group chat.</p>
+                            {userTopics.length === 0 && 
                             <ul className="empty">
                                 <li>You don't have any interest in your list yet :(</li>
                             </ul>
+                            }
                             <ul>
-                                <li title="Indonesian (Food)"><span>Indonesian <small>Food</small></span> <button>... <div className="remove" onClick={removeInterest}>Not interest anymore</div></button></li>
-                                <li title="Malasian (Food)"><span>Malasian <small>Food</small></span> <button>... <div className="remove" onClick={removeInterest}>Not interest anymore</div></button></li>
-                                <li title="Korean (Food)"><span>Korean <small>Food</small></span> <button>... <div className="remove" onClick={removeInterest}>Not interest anymore</div></button></li>
-                                <li title="Mongolian (Food)"><span>Mongolian <small>Food</small></span> <button>... <div className="remove" onClick={removeInterest}>Not interest anymore</div></button></li>
-                                <li title="Surfing (Sports/Activities)"><span>Surfing <small>Sports/Activities</small></span> <button>... <div className="remove" onClick={removeInterest}>Not interest anymore</div></button></li>
+                            {userTopics.map(
+                                (topic, i) => (
+                               
+                                    <List topic={topic} key={i}/>
+                                )
+                            )}
                             </ul>
                         </div>
 

@@ -6,7 +6,6 @@ import interestImg from './interest.png'
 const SingleInterest =({interest}) => {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-
     const addInterest =(e) => {
         e.preventDefault();
         console.log(interest)

@@ -49,6 +49,7 @@ router.post('/user/:userId', requireUser, async (req, res) => {
 
 router.delete('/user/:userId', requireUser, async (req, res) => {
     try {
+        debug(req.query)
         const topicId = req.query.topicId;
         User.updateOne({ _id: req.params.userId },
             { $pullAll: { topics: topicId } });
