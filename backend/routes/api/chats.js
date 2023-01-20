@@ -16,11 +16,15 @@ router.get('/user/:userId', async (req, res) => {
         user = await User.findById(req.params.userId)
         .populate({
             path: 'daily',
-            select: 'users',
-            populate: {
+            select: 'users topic',
+            populate: [{
                 path: 'users',
                 select: '_id username'
-            }
+            },
+            {
+                path: 'topic',
+                select: '_id name'
+            }]
         })
         .populate({
             path: 'chats',
