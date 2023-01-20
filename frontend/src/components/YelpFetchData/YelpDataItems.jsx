@@ -3,11 +3,10 @@ import { Rating } from 'react-simple-star-rating'
 import { Link } from 'react-router-dom';
 import { getDistance } from 'geolib';
 import './yelp.css'
-import interest from './interest.js'
+
 
 
 const YelpDataItems =({props}) => {
-    console.log(props)
     // props ={name:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
 
     const term = props.name
@@ -41,7 +40,7 @@ const YelpDataItems =({props}) => {
                 <div className='recommendation-interest'>{term}</div>
                 <div className='recommendation-location'>{location}</div>
             </div>
-            <div className='description'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi architecto quo fugit ducimus sed expedita accusamus cumque deleniti quasi assumenda.</div>
+            <div className='description'>{props.description}</div>
             <hr className='right-bar-line'/>
             <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
