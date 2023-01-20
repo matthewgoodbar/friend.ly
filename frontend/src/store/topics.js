@@ -32,7 +32,7 @@ export const fetchAllTopics = () => async(dispatch) => {
         const topics = await res.json();
         dispatch(receiveAllTopics(topics));
     } catch (err) {
-        console.log("error in fetchUserTopics")
+        console.log("error in fetchAllTopics")
 }}
 
 export const fetchUserTopics = (userId) => async dispatch => {
@@ -68,7 +68,6 @@ export const deleteUserTopic =(userId, topicId) => async dispatch => {
         dispatch(removeUserTopic(topicId))
     }catch(err) {
         console.log("error in deleteUserTopic")
-
     }
 }
 
