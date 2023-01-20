@@ -22,10 +22,10 @@ const GeoLocation = () => {
     const findMyLocation = () => {
 
         const success = async (position) => {
-            console.log(position)
+            // console.log(position)
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-            console.log("Latitude:",latitude, "Longitude:",longitude)
+            // console.log("Latitude:",latitude, "Longitude:",longitude)
     
             const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
     
@@ -33,9 +33,9 @@ const GeoLocation = () => {
             await fetch(geoApiUrl)
                 .then(res => res.json())
                 .then(data=>{
-                    console.log(data)
+                    // console.log(data)
                     postCode = data.postcode
-                    console.log('this is postCode',postCode)
+                    // console.log('this is postCode',postCode)
                     currentZipCode.current.innerText = postCode
                 })
             
@@ -48,7 +48,7 @@ const GeoLocation = () => {
              await fetch(radiusApi)
                 .then(res => res.json())
                 .then(dataRadius=>{
-                    console.log(dataRadius)
+                    // console.log(dataRadius)
                     zipNeighbours = dataRadius.results?.map(el=> el.code)
                     currentZipNeighbours.current.innerText=zipNeighbours;
                 })
@@ -57,7 +57,7 @@ const GeoLocation = () => {
     
         const error = () => {
             // status.textContent = "Unable to retrieve your location"
-            console.log("PROBLEM WITH FETCHING DATA")
+            // console.log("PROBLEM WITH FETCHING DATA")
             currentZipCode.current.innerText = defaultZip;
             currentZipNeighbours.current.innerText= defaultZipNeighbours.map(el=> el.code)
 

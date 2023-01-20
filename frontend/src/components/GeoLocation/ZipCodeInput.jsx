@@ -27,7 +27,7 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
     await fetch(receivedCity)
         .then(res => res.json())
         .then(data=>{
-            console.log(data.results[zipCode][0].city)
+            // console.log(data.results[zipCode][0].city)
             setCity(data.results[zipCode][0].city);
           })
     } 
@@ -39,10 +39,10 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
   
     const success = async (position) => {
       
-        console.log(position)
+        // console.log(position)
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        console.log("Latitude:",latitude, "Longitude:",longitude)
+        // console.log("Latitude:",latitude, "Longitude:",longitude)
 
     // try{
         const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
@@ -52,26 +52,23 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
         await fetch(geoApiUrl)
             .then(res => res.json())
             .then(data=>{
-                console.log('whole API data object',data)
+                // console.log('whole API data object',data)
                 currentCity = data.city
-                console.log("this is city:", currentCity)
+                // console.log("this is city:", currentCity)
                 postCode = data.postcode
-                console.log('this is postCode',postCode)
+                // console.log('this is postCode',postCode)
                 setZipCode(postCode)
                 setCity(currentCity)
                 setLoading(false)
         })
       }
-          // } catch(e){
-            // console.log(e)
           const error = () => {
-            console.log("PROBLEM WITH FETCHING DATA")
+            // console.log("PROBLEM WITH FETCHING DATA")
             setZipCode(defaultZip)
             setCity(defaultCity)
             setError("")
             setLoading(false)
-        
-    // } finally{
+    
     }
       
     
