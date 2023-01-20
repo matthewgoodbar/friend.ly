@@ -23,12 +23,15 @@ const Welcome = () => {
         dispatch(fetchUserChatrooms(user._id))
     },[])
     
-    const topicBackground = {
-        background:`url(${chats.daily.topic.background}) 0 0 no-repeat`,
-        backgroundSize: "cover"
-     }
-  const history = useHistory();
-  if (chats) {
+    const history = useHistory();
+
+    if (chats.daily) {
+
+      const topicBackground = {
+          background:`url(${chats.daily.topic.background}) 0 0 no-repeat`,
+          backgroundSize: "cover"
+       }
+
     return (
         <div className="container welcome" style={topicBackground}>
             <NavBarSide />
