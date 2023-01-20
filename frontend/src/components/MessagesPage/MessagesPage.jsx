@@ -59,7 +59,7 @@ const MessagesPage = () => {
             <div className="content">
               { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
               <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
-              <YelpDataItems/>
+              <YelpDataItems props={chats.daily.topic}/>
             </div>
 
       </div>

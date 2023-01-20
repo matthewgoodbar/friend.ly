@@ -6,13 +6,14 @@ import './yelp.css'
 import interest from './interest.js'
 
 
-const YelpDataItems =(props) => {
-    props ={term:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
+const YelpDataItems =({props}) => {
+    console.log(props)
+    // props ={name:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
 
-    const term = props.term
-    const location = props.location
-    const radius = props.radius
-    const sort_by = props.sort_by // options: rating, review_count,distance
+    const term = props.name
+    const location = 'San Francisco'
+    const radius = 5000
+    const sort_by = 'review_count' // options: rating, review_count,distance
 
     const [restaurants, setRestaurants] = useState([])
     const getDataFromYelp = () => {
@@ -34,19 +35,23 @@ const YelpDataItems =(props) => {
         getDataFromYelp()
     }, [])
     console.log(restaurants)
+    const topicBackground = {
+        background:`url(${props.thumbnail}) 0 0 no-repeat`,
+        backgroundSize: "cover"
+     }
     return (
         <div className='recommendation-container'>
             <div className='recommendation-head'
-            style={{backgroundImage: `url(${interest[term].imgUrl})`}}>
-                <div className='recommendation-interest'>Thai food</div>
-                <div className='recommendation-location'>San Francisco</div>
+            style={{background: `url(${props.thumbnail}) 0 0 no-repeat`, backgroundSize: "cover"}}>
+                <div className='recommendation-interest'>{term}</div>
+                <div className='recommendation-location'>{location}</div>
             </div>
-            <div className='description'>{interest[term].description}</div>
+            <div className='description'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi architecto quo fugit ducimus sed expedita accusamus cumque deleniti quasi assumenda.</div>
             <hr className='right-bar-line'/>
             <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
-            <Link to={{ pathname: `${data.url}` }} target="_blank">
-            <div className="restaurants-cards" key={i}>
+            <Link to={{ pathname: `${data.url}` }} target="_blank" key={i}>
+            <div className="restaurants-cards">
                 <img  src={data.image_url} alt=""  ></img>
                 <div className='single-restaurant'>
                 <p>{data.name}</p>

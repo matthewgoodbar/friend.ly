@@ -51,11 +51,12 @@
 }
 
 .restaurants-cards img {
-    width:60px;
+    min-width:60px;
+    max-width:60px;
     height: 60px;
     margin-right: 10px;
     border-radius: 4px;
-    background-size: cover;
+    background-size:cover;
 }
 
 .star-svg{
