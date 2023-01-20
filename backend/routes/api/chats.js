@@ -23,7 +23,7 @@ router.get('/user/:userId', async (req, res) => {
             },
             {
                 path: 'topic',
-                select: '_id name background thumbnail'
+                select: '_id name description background thumbnail'
             }]
         })
         .populate({
