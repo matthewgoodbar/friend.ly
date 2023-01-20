@@ -1,0 +1,105 @@
+.welcome {
+    background-size: cover !important;
+    height: 100vh;
+}
+.welcome .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+.welcome header {
+    z-index: 11;
+}
+.welcome .leftSidebar {
+    color: white;
+    text-shadow: 1px 1px 0 var(--color-transparent-black);
+    z-index: 10;
+}
+.welcome .leftSidebar h1 {
+    color: white;
+}
+.welcome .leftSidebar .innerAside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.welcome .leftSidebar h3 {
+    font-weight: 900;
+    font-size: 48px;
+}
+.welcome .leftSidebar h4 {
+    font-weight: 900;
+    font-size: 120px;
+    letter-spacing: -0.03em;
+}
+.welcome .leftSidebar h5 {
+    font-weight: 700;
+    font-size: 32px;
+}
+.welcome .leftSidebar .groupChat {
+    margin-right: calc(var(--base-unit)*8);
+}
+.welcome .leftSidebar .groupChat button {
+    width: auto;
+    padding-right: calc(var(--base-unit)*5);
+    border-radius: var(--base-unit);
+    align-items: center;
+    margin-bottom: 0;
+}
+.welcome .leftSidebar .groupChat .cta {
+    background-color: var(--color-pink);
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*4) calc(var(--base-unit)*8);
+    margin-left: calc(var(--base-unit)*8);
+    border:1px solid transparent;
+}
+.welcome .leftSidebar .groupChat button:hover  {
+    background-color: white;
+}
+.welcome .leftSidebar .groupChat button:hover .cta {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+    background-color: transparent;
+}
+.welcome .leftSidebar .uppercase {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.welcome .actions {
+    margin-top: calc(var(--base-unit)*8);
+    display: flex;
+    align-items: flex-start;
+}
+.welcome .blur {
+    position: absolute;
+    width: 60vw;
+    height: 150vh;
+    top: -20vh;
+    left: -10vw;
+    display: block;
+    background: var(--color-transparent-white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2;
+    transform: rotate(-15deg);
+}
+.welcome .gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50vh;
+    width: 100vw;
+    z-index: 100;
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    z-index: 1;
+}

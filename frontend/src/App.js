@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
 
-import MainPage from './components/MainPage/MainPage';
+import Welcome from './components/Welcome/Welcome';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
@@ -23,9 +23,9 @@ function App() {
 
   return loaded && (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Switch>
-        <AuthRoute exact path="/" component={MainPage} />
+        <ProtectedRoute exact path="/" component={Welcome} />
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />

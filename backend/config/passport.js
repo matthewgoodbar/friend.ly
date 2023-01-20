@@ -3,9 +3,10 @@ const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
-const { secretOrKey } = require('./keys');
+const { secretOrKey, isProduction } = require('./keys');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const { addUserToQueue } = require('./chatGeneration');
 
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -51,6 +52,7 @@ exports.loginUser = async (user) => {
         secretOrKey,
         { expiresIn: 3600 }
     );
+    if (isProduction) await addUserToQueue(user);
     return {
         user: userInfo,
         token

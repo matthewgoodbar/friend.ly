@@ -7,6 +7,7 @@ const Message = require("../models/Message.js");
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const topics = require('./topicSeeds');
+const _ = require('underscore');
 
 const NUM_SEED_USERS = 10;
 
@@ -76,7 +77,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
             username: faker.internet.userName(firstName, lastName),
             email: faker.internet.email(firstName, lastName),
             hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
-            topics: [],
+            topics: _.sample(topics, 4),
             daily: null,
             chats: [],
             friends: []

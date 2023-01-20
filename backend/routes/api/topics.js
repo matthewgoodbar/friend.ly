@@ -8,19 +8,9 @@ const Message = mongoose.model('Message');
 const Topic = mongoose.model('Topic');
 const { requireUser } = require('../../config/passport');
 
-router.get('/', async (req, res) => {
-    try {
-        const topics = Topic.find();
-        return res.json(topics);
-    } catch(err) {
-        debug(err);
-        return res.json({ error: "Unable to fetch topics" });
-    }
-});
-
 router.get('/user/:userId', async (req, res) => {
     try {
-        const user = User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId);
         return res.json(user.topics);
     } catch(err) {
         debug(err);
@@ -28,16 +18,26 @@ router.get('/user/:userId', async (req, res) => {
     }
 });
 
+router.get('/', async (req, res) => {
+    try {
+        const topics = await Topic.find();
+        return res.json(topics);
+    } catch(err) {
+        debug(err);
+        return res.json({ error: "Unable to fetch topics" });
+    }
+});
+
 router.post('/user/:userId', requireUser, async (req, res) => {
     let topic;
     try {
-        topic = Topic.findById(req.body.topic._id);
+        topic = await Topic.findById(req.body.topic._id);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to find topic" });
     }
     try {
-        User.updateOne({ _id: req.params.userId },
+        await User.updateOne({ _id: req.params.userId },
             { $push: { topics: topic._id } });
     } catch(err) {
         debug(err);
@@ -48,7 +48,7 @@ router.post('/user/:userId', requireUser, async (req, res) => {
 router.delete('/user/:userId', requireUser, async (req, res) => {
     try {
         const topicId = req.query.topicId;
-        User.updateOne({ _id: req.params.userId },
+        await User.updateOne({ _id: req.params.userId },
             { $pullAll: { topics: topicId } });
         return res.json({ message: "success" });
     } catch(err) {
