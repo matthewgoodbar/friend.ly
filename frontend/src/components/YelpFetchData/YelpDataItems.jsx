@@ -1,8 +1,9 @@
-import {useState, useEffect} from "react"
-import { Rating } from "react-simple-star-rating"
-import { getDistance } from "geolib";
-import "./yelp.css"
-import interest from "./interest.js"
+import {useState, useEffect} from 'react'
+import { Rating } from 'react-simple-star-rating'
+import { Link } from 'react-router-dom';
+import { getDistance } from 'geolib';
+import './yelp.css'
+import interest from './interest.js'
 
 
 const YelpDataItems =(props) => {
@@ -21,7 +22,6 @@ const YelpDataItems =(props) => {
         .then(stringifiedData => JSON.parse(stringifiedData))
         .then(parsedData => {
             setRestaurants(parsedData);
-            // setRestaurantName(parsedData[0].name)
         })
         .catch((error) => {
             console.log(error);
@@ -35,38 +35,34 @@ const YelpDataItems =(props) => {
     }, [])
     console.log(restaurants)
     return (
-        <aside className="rightSidebar">
-            <div className="innerAside">
-                <div className="top"
-                style={{backgroundImage: `url(${interest[term].imgUrl})`}}>
-                    <h4>Thai food</h4>
-                    <h3>
-                        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 6.11465C5.34375 6.11465 5.63812 5.9948 5.88313 5.75511C6.12771 5.51582 6.25 5.22803 6.25 4.89172C6.25 4.55541 6.12771 4.26741 5.88313 4.02772C5.63812 3.78843 5.34375 3.66879 5 3.66879C4.65625 3.66879 4.36208 3.78843 4.1175 4.02772C3.8725 4.26741 3.75 4.55541 3.75 4.89172C3.75 5.22803 3.8725 5.51582 4.1175 5.75511C4.36208 5.9948 4.65625 6.11465 5 6.11465ZM5 12C4.91667 12 4.83333 11.9847 4.75 11.9541C4.66667 11.9236 4.59375 11.8828 4.53125 11.8318C3.01042 10.5172 1.875 9.29692 1.125 8.17101C0.375 7.04469 0 5.99236 0 5.01401C0 3.48535 0.502708 2.26752 1.50813 1.36051C2.51313 0.453503 3.67708 0 5 0C6.32292 0 7.48688 0.453503 8.49187 1.36051C9.49729 2.26752 10 3.48535 10 5.01401C10 5.99236 9.625 7.04469 8.875 8.17101C8.125 9.29692 6.98958 10.5172 5.46875 11.8318C5.40625 11.8828 5.33333 11.9236 5.25 11.9541C5.16667 11.9847 5.08333 12 5 12Z" fill="white"/>
-                        </svg> San Francisco
-                    </h3>
-                    <div class="gradient"></div>
-                </div>
-                <p>{interest[term].description}</p>
-                <div className="uppercase">PLACES</div>
-                {restaurants.map((data,i) => 
-                <div className="restaurants-cards" key={i}>
-                    <img  src={data.image_url} alt=""  ></img>
-                    <div className="single-restaurant">
-                    <p>{data.name}</p>
-                    <Rating className="rating" initialValue={data.rating} />
-                    <div className="miles-address">
-                        <div>
-                            {Math.round((data.distance) * 0.00062 * 100) / 100} miles
-                        </div>
-                        <div> - </div>
-                        <div>{data.location.address1}</div>
-                    </div>
-                    </div>
-                </div>
-                )}
+        <div className='recommendation-container'>
+            <div className='recommendation-head'
+            style={{backgroundImage: `url(${interest[term].imgUrl})`}}>
+                <div className='recommendation-interest'>Thai food</div>
+                <div className='recommendation-location'>San Francisco</div>
             </div>
-        </aside>
+            <div className='description'>{interest[term].description}</div>
+            <hr className='right-bar-line'/>
+            <div className='uppercase'>PLACES</div>
+            {restaurants.map((data,i) => 
+            <Link to={{ pathname: `${data.url}` }} target="_blank">
+            <div className="restaurants-cards" key={i}>
+                <img  src={data.image_url} alt=""  ></img>
+                <div className='single-restaurant'>
+                <p>{data.name}</p>
+                <Rating className='rating' initialValue={data.rating} />
+                <div className='miles-address'>
+                    <div>
+                        {Math.round((data.distance) * 0.00062 * 100) / 100} miles
+                    </div>
+                    <div> - </div>
+                    <div>{data.location.address1}</div>
+                </div>
+                </div>
+            </div>
+            </Link>
+            )}
+        </div>
     )
 
 }

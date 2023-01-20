@@ -14,7 +14,9 @@ import MessagesPage from './components/MessagesPage/MessagesPage';
 import GeoLocation from './components/GeoLocation/GeoLocation'
 
 import { getCurrentUser } from './store/session';
-import YelpDataItems from './components/YelpFetchData/YelpDataItems';
+import InterestPage from './components/InterestPage';
+
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +33,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path="/chatbox" component={ChatBox} />
+        <Route path='/interests' component={InterestPage} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
         <ProtectedRoute path="/geo-location" component={GeoLocation} />
       </Switch>
