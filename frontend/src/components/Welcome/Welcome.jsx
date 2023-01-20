@@ -1,13 +1,27 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Countdown from "../Counters/Countdown"
 import DayCounter from "../Counters/DayCounter"
 import CurrentDate from "../Counters/CurrentDate"
 import NavBarSide from "../NavBarSide/NavBarSide"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import io from "socket.io-client";
+import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 import "./Welcome.css"
 
 const Welcome = () => {
+    const dispatch = useDispatch();
+
+    const chats = useSelector(state => state.chats)
+
+    useEffect(()=>{
+        console.log("useeffect chats",chats)
+    },[chats])
+
+    useEffect(()=>{
+        dispatch(fetchUserChatrooms(user._id))
+    },[])
+    
     const topicBackground = {
         background:"url(https://friendly-aa.s3.us-west-1.amazonaws.com/thaifood.jpg) 0 0 no-repeat",
         backgroundSize: "cover"
@@ -49,7 +63,7 @@ const Welcome = () => {
                                                     </svg>
                                                     <span>San Francisco</span>
                                                 </div>
-                                                <div className="time">Expires in <span>09:43:20</span></div>
+                                                <div className="time"><span><Countdown /></span></div>
                                             </div>
                                             <div className="cta">Join Chat</div>
                                         </button>
