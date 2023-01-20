@@ -21,7 +21,11 @@ const matthew = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: []
+    friends: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
 });
 users.push(matthew);
 
@@ -32,7 +36,11 @@ const marcos = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: []
+    friends: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
 });
 users.push(marcos);
 
@@ -43,7 +51,11 @@ const vivian = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: []
+    friends: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
 });
 users.push(vivian);
 
@@ -54,7 +66,11 @@ const evgenii = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: []
+    friends: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
 });
 users.push(evgenii);
 
@@ -65,7 +81,11 @@ const diego = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: []
+    friends: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
 });
 users.push(diego);
 
@@ -80,7 +100,11 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
             topics: _.sample(topics, 4),
             daily: null,
             chats: [],
-            friends: []
+            friends: [],
+            location: {
+                zip: 94108,
+                city: "San Francisco"
+            }
         })
     )
 }

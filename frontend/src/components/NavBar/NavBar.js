@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
@@ -27,8 +27,8 @@ function NavBar () {
     } else {
       return (
         <div className="links-auth">
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
+          <NavLink to={'/signup'}>Signup</NavLink>
+          <NavLink to={'/login'}>Login</NavLink>
         </div>
       );
     }

@@ -18,6 +18,14 @@ const userSchema = Schema({
         type: String,
         required: true
     },
+    location: {
+        zip: {
+            type: Number
+        },
+        city: {
+            type: String
+        }
+    },
     topics: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Topic'

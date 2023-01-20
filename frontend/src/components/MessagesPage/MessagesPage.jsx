@@ -24,6 +24,7 @@ const MessagesPage = () => {
     transports: ['websocket']
   }))
 
+
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
@@ -43,7 +44,12 @@ const MessagesPage = () => {
         dispatch(receiveNewMessage(msgObj))
       });
     })
-  },[])
+
+    return (()=>{
+      socket.disconnect()
+    })
+
+    },[])
 
 
   return (

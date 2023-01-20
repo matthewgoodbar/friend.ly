@@ -77,6 +77,10 @@ aside.leftSidebar .groupChat button figure img {
 aside.leftSidebar .groupChat button .name {
     font-weight: 700;
     font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 160px;
 }
 aside.leftSidebar .groupChat button .location {
     margin: calc(var(--base-unit)) 0;

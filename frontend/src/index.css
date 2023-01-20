@@ -29,8 +29,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 ol, ul {
 	list-style: none;

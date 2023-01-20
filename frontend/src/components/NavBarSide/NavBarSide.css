@@ -77,3 +77,31 @@ header nav a span {
     left: calc(var(--base-unit)*10);
     z-index: 9;
 }
+header nav.secondaryNav {
+    position: relative;
+}
+header nav.secondaryNav span {
+    position: absolute;
+    top: calc(var(--base-unit)*-20);
+    width: max-content;
+    text-align: left;
+    /* bottom: calc(var(--base-unit)*5); */
+    height: max-content;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 0 calc(var(--base-unit)*2) var(--color-transparent-black);
+    border-radius: var(--base-unit);
+    color: var(--color-primary);
+    padding: calc(var(--base-unit)*3);
+    z-index: 100;
+}
+header nav.secondaryNav span em {
+    border-bottom: 1px solid var(--color-transparent-black);
+    width: auto;
+    padding-bottom: calc(var(--base-unit)*3);
+    display: block;
+    margin-bottom: calc(var(--base-unit)*3);
+}
+header nav.secondaryNav span a {
+    justify-content: left; 
+}
