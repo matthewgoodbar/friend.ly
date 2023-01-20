@@ -26,6 +26,9 @@ const userSchema = Schema({
             type: String
         }
     },
+    image: {
+        type: String
+    },
     topics: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Topic'

@@ -25,7 +25,8 @@ const matthew = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    }
+    },
+    image: ""
 });
 users.push(matthew);
 
@@ -40,7 +41,8 @@ const marcos = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    }
+    },
+    image: ""
 });
 users.push(marcos);
 
@@ -55,7 +57,8 @@ const vivian = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    }
+    },
+    image: ""
 });
 users.push(vivian);
 
@@ -70,7 +73,8 @@ const evgenii = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    }
+    },
+    image: ""
 });
 users.push(evgenii);
 
@@ -85,7 +89,8 @@ const diego = new User ({
     location: {
         zip: 94108,
         city: "San Francisco"
-    }
+    },
+    image: ""
 });
 users.push(diego);
 

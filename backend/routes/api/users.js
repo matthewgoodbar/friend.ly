@@ -22,7 +22,8 @@ router.get('/current', restoreUser, (req, res) => {
     _id: req.user._id,
     username: req.user.username,
     email: req.user.email,
-    location: req.user.location
+    location: req.user.location,
+    image: req.user.image
   });
 });
 
