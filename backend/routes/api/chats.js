@@ -81,8 +81,8 @@ router.post('/', requireUser, validateChatInput, async (req, res, next) => {
             topic: Topic.where({ name: req.body.topic })._id
         });
         let chat = await newChat.save();
-        req.body.users.forEach((userId) => {
-            User.updateOne({ _id: userId },
+        req.body.users.forEach(async (userId) => {
+            await User.updateOne({ _id: userId },
                 { $push: { chats: chat._id } });
         })
         return res.json(chat);

@@ -15,7 +15,7 @@ const MessagesPage = () => {
   const dispatch = useDispatch();
   const chats = useSelector(state => state.chats)
   const user = useSelector(state => state.session.user)
-  const messages = useSelector(state => Object.values(state.messages.all).reverse());
+  const messages = useSelector(state => Object.values(state.messages.all).sort((a,b) => a.createdAt - b.createdAt));
 
   const [activeChatRoom, setActiveChatRoom] = useState("")
   const [setupCounter, setSetupCounter] = useState(0)
