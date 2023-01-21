@@ -7,6 +7,7 @@ import './yelp.css'
 
 
 const YelpDataItems =({props}) => {
+
     // props ={name:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
 
     const term = props.name
