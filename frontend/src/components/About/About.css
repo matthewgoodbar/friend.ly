@@ -1,0 +1,67 @@
+.about-modal h1 {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.05em;
+    color: #000000;
+    display: inline;
+}
+.about-modal .authors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:calc(var(--base-unit)*10) 0;
+}
+.about-modal .authors .author {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex: 1 1 0px;
+}
+.about-modal .author h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.03em;
+    margin: calc(var(--base-unit)*4) 0;
+}
+.about-modal .author figure {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.about-modal .author figure img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+.about-modal .author .links {
+    display: flex;
+    justify-content:space-evenly;
+}
+.about-modal .author .links svg {
+    color:var(--color-transparent-black-dark);
+    fill:var(--color-transparent-black-dark);
+}
+.about-modal .author .links a:hover svg {
+    color:var(--color-pink);
+    fill:var(--color-pink);
+}
+
+#about-button {
+    position: fixed;
+    top: 0;
+    left: 75%;
+    z-index: 99;
+    background-color: var(--color-pink);
+    color: white;
+    border-bottom-left-radius: var(--base-unit);
+    border-bottom-right-radius: var(--base-unit);
+    border: 0;
+    padding: calc(var(--base-unit)*2) calc(var(--base-unit)*4);
+    cursor: pointer;
+}
+#about-button:hover {
+    background-color: var(--color-purple-dark);
+}
