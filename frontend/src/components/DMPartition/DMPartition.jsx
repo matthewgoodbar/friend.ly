@@ -27,18 +27,13 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
   const createConnection = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(createFriendship({ userId: user._id, contactId: contact._id })).then(()=>{
-      dispatch(fetchUserChatrooms(user._id))
-    })
+    dispatch(createFriendship({ userId: user._id, contactId: contact._id }))
   }
 
   const closeConnection = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(destroyFriendship({ userId: user._id, contactId: contact._id })).then(() => {
-      console.log("in close connection")
-      dispatch(fetchUserChatrooms(user._id))
-    })
+    dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }))
   }
 
   return (

@@ -8,14 +8,14 @@ import { getCurrentUser } from "./session";
 export const createFriendship = data => async dispatch => {
     try {
         const res = await jwtFetch(`/api/users/request/${data.contactId}`, {
-            method: 'POST',
-            body: JSON.stringify(data)
+            method: 'POST'
         });
         if (res.ok) {
             dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
         } else {
             console.log("error in createFriendship response")
+            console.log(res.message)
         }
     } catch (err) {
         console.log("error in createFriendship")
@@ -26,11 +26,33 @@ export const createFriendship = data => async dispatch => {
     }
 };
 
+// export const destroyFriendship = data => async dispatch => {
+
+//     const res = await jwtFetch(`/api/users/request/${data.contactId}`, {
+//         method: 'DELETE'
+//     });
+//     if (res.ok) {
+//         dispatch(fetchUserChatrooms(data.userId));
+//         dispatch(getCurrentUser())
+//     } else {
+//         console.log("error in destroyFriendship response")
+//     }
+
+
+//     // } catch (err) {
+//     //     console.log(err)
+//     //     console.log("error in destroyFriendship")
+//     //     // const resBody = await err.json();
+//     //     // if (resBody.statusCode === 400) {
+//     //     //   return dispatch(receiveErrors(resBody.errors));
+//     //     // }
+//     // }
+// };
+
 export const destroyFriendship = data => async dispatch => {
     try {
         const res = await jwtFetch(`/api/users/request/${data.contactId}`, {
-            method: 'DELETE',
-            body: JSON.stringify(data)
+            method: 'DELETE'
         });
         if (res.ok) {
             dispatch(fetchUserChatrooms(data.userId));
@@ -39,6 +61,7 @@ export const destroyFriendship = data => async dispatch => {
             console.log("error in destroyFriendship response")
         }
     } catch (err) {
+        console.log(err)
         console.log("error in destroyFriendship")
         // const resBody = await err.json();
         // if (resBody.statusCode === 400) {

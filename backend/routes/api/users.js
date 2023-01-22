@@ -89,11 +89,11 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
 });
 
 router.post('/request/:contactId', restoreUser, async (req, res) => {
-  const user = res.user;
-  if (!user) return res.json({ error: "No user logged in" });
+  const user = req.user;
+  if (!user) return res.status(400).send({ error: "No user logged in" });
   const contact = await User.findById(req.params.contactId);
-  if (!contact) return res.json({ error: "No user exists with that ID" });
-  if (user.pings.includes(contact._id)) return res.json({ error: "You have already pinged this user" });
+  if (!contact) return res.status(404).send({ error: "No user exists with that ID" });
+  if (user.pings.includes(contact._id)) res.status(400).send({ error: "You have already pinged this user" });
   try {
     await User.updateOne({ _id: user._id },
       { $push: { pings: contact._id } });
@@ -109,28 +109,31 @@ router.post('/request/:contactId', restoreUser, async (req, res) => {
     }
     return res.json({ message: "success" });
   } catch(err) {
-    return res.json({ error: "Unable to add ping/create DM" });
+    return res.status(400).send({ message: "Unable to add ping/create DM" });
   }
 });
 
 router.delete('/request/:contactId', restoreUser, async (req, res) => {
-  const user = res.user;
-  if (!user) return res.json({ error: "No user logged in" });
+  const user = req.user;
+  debug(user)
+  if (!user) return res.status(400).send({ message: "No user logged in" });
   const contact = await User.findById(req.params.contactId);
-  if (!contact) return res.json({ error: "No user exists with that ID" });
-  if (!user.pings.includes(contact._id)) return res.json({ error: "You have not pinged this user" });
+  // debug(contact)
+  if (!contact) return res.status(400).send({ message: "No user exists with that ID" });
+  if (!user.pings.includes(contact._id)) return res.status(400).send({ message: "You have not pinged this user" });
   try {
     await User.updateOne({ _id: user._id },
-      { $push: { pings: contact._id } });
+      { $pull: { pings: contact._id } });
     const dm = await Chat.find({ daily: false },
       { users: contact._id },
       { users: user._id });
-    dm.remove();
-    await User.updateMany({ _id: [user._id, contact._id] },
-      { $pull: { chats: dm._id } });
+      await User.updateMany({ _id: [user._id, contact._id] },
+        { $pull: { chats: dm._id } });
+        dm.remove();
     return res.json({ message: "success" });
   } catch(err) {
-    return res.json({ error: "Unable to remove ping/delete DM" });
+    debug("in catch")
+    return res.status(400).send({  message: "Unable to remove ping/delete DM" });
   }
 });
 
