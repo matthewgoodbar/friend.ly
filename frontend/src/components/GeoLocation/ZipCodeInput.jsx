@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { PuffLoader } from 'react-spinners';
+import './GeoLocation.css'
 
 function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
 
@@ -34,7 +35,7 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
 
   const findMyLocation = (e) => {
     e.preventDefault();
-      // setError('');
+      setError('');
       setLoading(true);
   
     const success = async (position) => {
@@ -94,7 +95,7 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
             </label>
         <div className="errors">{error && <p>{error}</p>}</div>
         
-          <button onClick={findMyLocation}>Get Zip Code</button>
+          <button id="get-zip-btn" onClick={findMyLocation}>Get Zip Code</button>
           
     </div>
   );
