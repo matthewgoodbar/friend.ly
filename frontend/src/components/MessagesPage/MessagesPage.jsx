@@ -18,7 +18,6 @@ const MessagesPage = () => {
   const messages = useSelector(state => Object.values(state.messages.all).sort((a,b) => a.createdAt - b.createdAt));
 
   const [activeChatRoom, setActiveChatRoom] = useState("")
-  const [setupCounter, setSetupCounter] = useState(0)
 
   let socket;
   if (process.env.NODE_ENV === "production") {

@@ -42,13 +42,13 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
 };
 
 
-const userDevHardCode = [
-    { _id: '63caed634a586ee5b3330a4b', username: 'matthew', image: 'https://i.imgur.com/YiWuKeh.jpg', friendships: []},
-    { _id: '63cd83fe2bdf7ad71e45cc2e', username: 'marcos', image: 'https://i.imgur.com/zxiytKs.jpg', friendships: [] },
-    { _id: '63caed634a586ee5b3330a4d', username: 'vivian', image: 'https://i.imgur.com/DN8158s.jpg', friendships: [] },
-    { _id: '63caed634a586ee5b3330a4e', username: 'evgenii', image: 'https://i.imgur.com/XNPUclU.jpg', friendships: ['63cd83fe2bdf7ad71e45cc2e'] },
-    { _id: '63caed634a586ee5b3330a4f', username: 'diego', image: 'https://i.imgur.com/sClpoq6.jpg', friendships: ['63cd83fe2bdf7ad71e45cc2e'] }
-]
+// const userDevHardCode = [
+//     { _id: '63caed634a586ee5b3330a4b', username: 'matthew', image: 'https://i.imgur.com/YiWuKeh.jpg', friendships: []},
+//     { _id: '63cd83fe2bdf7ad71e45cc2e', username: 'marcos', image: 'https://i.imgur.com/zxiytKs.jpg', friendships: [] },
+//     { _id: '63caed634a586ee5b3330a4d', username: 'vivian', image: 'https://i.imgur.com/DN8158s.jpg', friendships: [] },
+//     { _id: '63caed634a586ee5b3330a4e', username: 'evgenii', image: 'https://i.imgur.com/XNPUclU.jpg', friendships: ['63cd83fe2bdf7ad71e45cc2e'] },
+//     { _id: '63caed634a586ee5b3330a4f', username: 'diego', image: 'https://i.imgur.com/sClpoq6.jpg', friendships: ['63cd83fe2bdf7ad71e45cc2e'] }
+// ]
 
 
 // const evaluateFriendships = (usersInChat) => {
@@ -63,13 +63,7 @@ const chatsReducer = (state = {}, action) => {
     switch (action.type) {
 
         case RECIEVE_USER_CHATROOMS:
-
-            console.log("chat state is hardcoded")
-            let chat = action.chatrooms
-            chat.daily.users = userDevHardCode
-            // let chat = action.chatrooms
-            // chat.daily.users =evaluateFriendships(chat.daily.users)
-            return chat
+            return action.chatrooms
 
         default:
             return state;

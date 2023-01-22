@@ -38,10 +38,8 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
     // }, 1000);
 
     const friendshipEvaluator = (contact) =>{
-        const sampleFriends = ['63caed634a586ee5b3330a4f', '63caed634a586ee5b3330a4b']
-        const contactFriend = contact.friendships.includes(user._id)
-        // const contactFriend = user.friendships.include(contact._id)
-        const userFriend = sampleFriends.includes(contact._id)
+        const contactFriend = contact.pings.includes(user._id)
+        const userFriend = user.pings.includes(contact._id)
 
         if (userFriend && !contactFriend) {
             return "awaiting"

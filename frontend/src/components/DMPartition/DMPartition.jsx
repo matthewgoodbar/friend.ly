@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { receiveNewMessage, composeMessage } from '../../store/messages';
 import dwight from '../../assets/dwight.png'
 import { createFriendship, destroyFriendship } from "../../store/friendships";
+import { fetchUserChatrooms } from "../../store/chats";
 
 
 
@@ -23,15 +24,20 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
 
   
 
-  const createConnection = () => {
+  const createConnection = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
     dispatch(createFriendship({ userId: user._id, contactId: contact._id })).then(()=>{
-
+      dispatch(fetchUserChatrooms(user._id))
     })
   }
 
-  const closeConnection = () => {
+  const closeConnection = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
     dispatch(destroyFriendship({ userId: user._id, contactId: contact._id })).then(() => {
-
+      console.log("in close connection")
+      dispatch(fetchUserChatrooms(user._id))
     })
   }
 
