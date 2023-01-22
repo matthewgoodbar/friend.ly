@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { createUserTopic } from "../../store/topics";
 import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 import interestImg from './interest.png'
 
 const SingleInterest =({interest}) => {
+    const history = useHistory()
     const user = useSelector(state => state.session.user);
     const userTopics = useSelector(getUserTopics)
     const dispatch = useDispatch();
@@ -17,6 +19,9 @@ const SingleInterest =({interest}) => {
     const find = findObjectWithId(userTopics, interest._id)
     const addInterest =(e) => {
         e.preventDefault();
+        if(!user){
+            history.push('/login')
+        }
         if (!find) {
             dispatch(createUserTopic(user._id, interest))
         }
