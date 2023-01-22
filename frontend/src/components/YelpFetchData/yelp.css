@@ -77,4 +77,10 @@
     display: flex;
     justify-content: space-between;
     font-size: 10px;
+    margin-top: 3px;
+}
+
+.rr--group {
+    display: flex;
+    width: 70%;
 }

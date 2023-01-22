@@ -1,13 +1,22 @@
 import {useState, useEffect} from 'react'
-import { Rating } from 'react-simple-star-rating'
+// import { Rating } from 'react-simple-star-rating'
+import { Rating,ThinStar  } from '@smastrom/react-rating'
+
+import '@smastrom/react-rating/style.css'
 import { Link } from 'react-router-dom';
-import { getDistance } from 'geolib';
+
 import './yelp.css'
 import { useSelector } from 'react-redux';
+const myStyles = {
+    itemShapes: ThinStar,
+    activeFillColor: '#ffb700',
+    inactiveFillColor: '#fbf1a9'
 
+}
 
 
 const YelpDataItems =({props}) => {
+
     const user = useSelector(state => state.session.user)
     // props ={name:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
 
@@ -51,12 +60,12 @@ const YelpDataItems =({props}) => {
                 <img  src={data.image_url} alt=""  ></img>
                 <div className='single-restaurant'>
                 <p>{data.name}</p>
-                <Rating className='rating' initialValue={data.rating} />
+                <Rating readOnly ={true} value={data.rating}  itemStyles={myStyles} />
                 <div className='miles-address'>
                     <div>
                         {Math.round((data.distance) * 0.00062 * 100) / 100} miles
                     </div>
-                    <div> - </div>
+                    {/* <div> - </div> */}
                     <div>{data.location.address1}</div>
                 </div>
                 </div>
