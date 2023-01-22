@@ -37,6 +37,24 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
     // // console.log(`Time left until end of day: ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
     // }, 1000);
 
+    const friendshipEvaluator = (contact) =>{
+        const sampleFriends = ['63caed634a586ee5b3330a4f', '63caed634a586ee5b3330a4b']
+        const contactFriend = contact.friendships.includes(user._id)
+        // const contactFriend = user.friendships.include(contact._id)
+        const userFriend = sampleFriends.includes(contact._id)
+
+        if (userFriend && !contactFriend) {
+            return "awaiting"
+        } else if (!userFriend && contactFriend) {
+            return "requested"
+        } else {
+            return "neutral"
+        }
+    }
+
+
+
+
     const chatSidebarAggregator = () => {
         // look in chats.chats and identify the names of the users that have active dm chats with main user
         // look in chats.dailys and make an array object that contains the chatId
@@ -45,7 +63,7 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
         chats.chats.forEach((dmChat)=> {
             dmChat.users.forEach((dmChatUser)=> {
                 if (dmChatUser.username !== user.username) {
-                    dmContacts[dmChatUser.username] = { ...dmChatUser, chatId: dmChat._id}
+                    dmContacts[dmChatUser.username] = { ...dmChatUser, chatId: dmChat._id, friendship: "friend"}
                     }
             })
         })
@@ -53,7 +71,7 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
         const dailyContactsNoDM = {}
         chats.daily.users.forEach((dailyChatUser) => {
             if (dailyChatUser.username !== user.username && !dmContacts[dailyChatUser.username] ) {
-                dailyContactsNoDM[dailyChatUser.username] = { ...dailyChatUser, chatId: null}
+                dailyContactsNoDM[dailyChatUser.username] = { ...dailyChatUser, chatId: null, friendship: friendshipEvaluator(dailyChatUser)}
             }
         })
 

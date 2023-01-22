@@ -20,9 +20,7 @@ const MessagesPage = () => {
   const [activeChatRoom, setActiveChatRoom] = useState("")
   const [setupCounter, setSetupCounter] = useState(0)
 
-  const [socket] = useState(io("http://localhost:3001", {
-    transports: ['websocket']
-  }))
+  const socket = io()
 
 
   useEffect(() => {
@@ -42,6 +40,12 @@ const MessagesPage = () => {
 
       socket.on("message recieved", (msgObj) => {
         dispatch(receiveNewMessage(msgObj))
+      });
+
+      socket.on("fetchYourChatrooms", (contactId) => {
+        if (contactId === user._id) {
+          dispatch(fetchUserChatrooms(user._id))
+        }
       });
     })
 
