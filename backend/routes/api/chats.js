@@ -19,7 +19,7 @@ router.get('/user/:userId', async (req, res) => {
             select: 'users topic daily',
             populate: [{
                 path: 'users',
-                select: '_id username image'
+                select: '_id username image pings'
             },
             {
                 path: 'topic',

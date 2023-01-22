@@ -8,6 +8,7 @@ const { isProduction } = require('../../config/keys');
 const validateLoginInput = require('../../validations/login');
 const validateRegisterInput = require('../../validations/register');
 const mongoose = require('mongoose');
+const Chat = mongoose.model('Chat');
 const User = mongoose.model('User');
 
 //Get current user
@@ -23,7 +24,8 @@ router.get('/current', restoreUser, (req, res) => {
     username: req.user.username,
     email: req.user.email,
     location: req.user.location,
-    image: req.user.image
+    image: req.user.image,
+    pings: req.user.pings
   });
 });
 
@@ -84,6 +86,35 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
     }
     return res.json(await loginUser(user));
   })(req, res, next);
+});
+
+router.post('/request/:contactId', restoreUser, async (req, res) => {
+  const user = res.user;
+  if (!user) return res.json({
+    error: "No user logged in"
+  });
+  const contact = await User.findById(req.params.contactId);
+  if (!contact) return res.json({
+    error: "No user exists with that ID"
+  });
+  if (user.pings.includes(contact._id)) return res.json({
+    error: "You have already pinged this user"
+  });
+  try {
+    await User.updateOne({ _id: user._id },
+      { $push: { pings: contact._id } });
+    if (contact.pings.includes(user._id)) {
+      const newDM = new Chat({
+        users: [user, contact],
+        messages: [],
+        daily: false
+      });
+      await newDM.save();
+    }
+    return res.json({ message: "success" });
+  } catch(err) {
+    return res.json({ error: "Unable to create DM" });
+  }
 });
 
 //Gets user by id

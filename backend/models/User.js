@@ -41,7 +41,7 @@ const userSchema = Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Chat'
     }],
-    friends: [{
+    pings: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }]
