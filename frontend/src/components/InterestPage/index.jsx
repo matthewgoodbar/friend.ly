@@ -16,7 +16,7 @@ const InterestPage = () => {
 
     //get current user's himself topics
     const userTopics = useSelector(getUserTopics)
-    console.log(userTopics)
+    // console.log(userTopics)
 
     useEffect( () => {
         dispatch(fetchAllTopics()) 
