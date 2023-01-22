@@ -13,7 +13,7 @@ import { receiveNewMessage, composeMessage } from '../../store/messages';
 // import ryan from '../../assets/ryan.png'
 
 
-const ChatBox = ({ chatName,activeChatRoom, messages, socket }) => {
+const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const chatHistory = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");

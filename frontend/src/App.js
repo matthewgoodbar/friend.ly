@@ -4,14 +4,13 @@ import { Switch, Route } from 'react-router-dom';
 
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
-import NavBar from './components/NavBar/NavBar';
 
 import Welcome from './components/Welcome/Welcome';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import ChatBox from './components/ChatBox/ChatBox';
 import MessagesPage from './components/MessagesPage/MessagesPage'
-import Settings from './components/Settings/Settings'
+import Settings from "./components/Settings/Settings"
 
 import { getCurrentUser } from './store/session';
 import InterestPage from './components/InterestPage';

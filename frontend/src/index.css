@@ -111,3 +111,7 @@ li {
 strong {
     font-weight: bold;
 }
+
+a:hover {
+    cursor: pointer;
+}
