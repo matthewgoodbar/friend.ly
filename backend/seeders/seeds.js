@@ -22,13 +22,12 @@ const matthew = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: [],
+    pings: [],
     location: {
         zip: 94108,
         city: "San Francisco"
     }
 });
-users.push(matthew);
 
 const marcos = new User ({
     username: 'marcos',
@@ -38,13 +37,12 @@ const marcos = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: [],
+    pings: [],
     location: {
         zip: 94108,
         city: "San Francisco"
     }
 });
-users.push(marcos);
 
 const vivian = new User ({
     username: 'vivian',
@@ -54,13 +52,12 @@ const vivian = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: [],
+    pings: [],
     location: {
         zip: 94108,
         city: "San Francisco"
     }
 });
-users.push(vivian);
 
 const evgenii = new User ({
     username: 'evgenii',
@@ -70,13 +67,12 @@ const evgenii = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: [],
+    pings: [],
     location: {
         zip: 94108,
         city: "San Francisco"
     }
 });
-users.push(evgenii);
 
 const diego = new User ({
     username: 'diego',
@@ -86,12 +82,21 @@ const diego = new User ({
     topics: [],
     daily: null,
     chats: [],
-    friends: [],
+    pings: [],
     location: {
         zip: 94108,
         city: "San Francisco"
     }
 });
+
+marcos.pings = [diego._id, matthew._id];
+diego.pings = [marcos._id];
+evgenii.pings = [marcos._id];
+
+users.push(matthew);
+users.push(marcos);
+users.push(vivian);
+users.push(evgenii);
 users.push(diego);
 
 for (let i = 1; i < NUM_SEED_USERS; i++) {
@@ -105,7 +110,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
             topics: _.sample(topics, 4),
             daily: null,
             chats: [],
-            friends: [],
+            pings: [],
             location: {
                 zip: 94108,
                 city: "San Francisco"
@@ -133,18 +138,6 @@ chats.push(dailyGroup);
 [matthew, marcos, vivian, evgenii, diego].forEach((user) => {
     user.daily = dailyGroup._id;
 });
-
-const marcosEvgeniiChat = new Chat({
-    users: [
-        marcos._id,
-        evgenii._id
-    ],
-    messages: [],
-    daily: false
-});
-chats.push(marcosEvgeniiChat);
-marcos.chats.push(marcosEvgeniiChat._id);
-evgenii.chats.push(marcosEvgeniiChat._id);
 
 const marcosDiegoChat = new Chat({
     users: [
