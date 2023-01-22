@@ -115,7 +115,7 @@ router.post('/request/:contactId', restoreUser, async (req, res) => {
 
 router.delete('/request/:contactId', restoreUser, async (req, res) => {
   const user = req.user;
-  debug(user)
+  // debug(user)
   if (!user) return res.status(400).send({ message: "No user logged in" });
   const contact = await User.findById(req.params.contactId);
   // debug(contact)
@@ -124,12 +124,12 @@ router.delete('/request/:contactId', restoreUser, async (req, res) => {
   try {
     await User.updateOne({ _id: user._id },
       { $pull: { pings: contact._id } });
-    const dm = await Chat.find({ daily: false },
+    await User.updateMany({ _id: [user._id, contact._id] },
+      { $pull: { chats: dm._id } });
+    const dm = await Chat.remove({ daily: false },
       { users: contact._id },
       { users: user._id });
-      await User.updateMany({ _id: [user._id, contact._id] },
-        { $pull: { chats: dm._id } });
-        dm.remove();
+    debug(dm)
     return res.json({ message: "success" });
   } catch(err) {
     debug("in catch")
