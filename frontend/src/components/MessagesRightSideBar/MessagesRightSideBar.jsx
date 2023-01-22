@@ -1,6 +1,6 @@
 import {React,useState, useEffect}  from 'react'
 import './MessagesRightSideBar.css'
-import { Rating } from 'react-simple-star-rating'
+// import { Rating } from 'react-simple-star-rating'
 import './MessagesRightSideBar.css'
 import interest from "../YelpFetchData/interest.js"
 

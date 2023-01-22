@@ -78,13 +78,14 @@ export const deleteUserTopic =(userId, topicId) => async dispatch => {
 export const getTopics = (state) => {
     if(state && state.topics){
         return Object.values(state.topics.all)
-    }
+    }return []
 }
 
 export const getUserTopics = (state) => {
-    if(state && state.topics){
+    if(state && state.topics.userTopics){
         return Object.values(state.topics.userTopics)
     }
+    return null
 }
 
 // reducer

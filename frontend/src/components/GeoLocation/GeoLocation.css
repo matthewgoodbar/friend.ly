@@ -1,0 +1,28 @@
+.zipcode-input{
+    position: relative;
+}
+
+#get-zip-btn{
+    text-align: center;
+    margin: 0 auto;
+    /* background-color: red; */
+    position: absolute;
+    top: 75px;
+    right: 0px;
+    background: #AD00FF;
+    border: 1px solid #AD00FF;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    /* font-style: normal; */
+    /* font-weight: 700; */
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 4px;
+    cursor: pointer;
+}
+
+#get-zip-btn:hover{
+    background: #8904c6;
+}

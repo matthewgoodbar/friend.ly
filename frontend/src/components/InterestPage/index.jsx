@@ -16,11 +16,11 @@ const InterestPage = () => {
 
     //get current user's himself topics
     const userTopics = useSelector(getUserTopics)
-    console.log(allTopics,userTopics)
+    // console.log(userTopics)
 
     useEffect( () => {
-        dispatch(fetchAllTopics())
-        dispatch(fetchUserTopics(user._id))
+        dispatch(fetchAllTopics()) 
+        dispatch(fetchUserTopics(user._id))    
     }, [])
 
     
@@ -42,19 +42,25 @@ const InterestPage = () => {
                         <div className="title">
                             <h1>My Interests</h1> 
                             <p>Based on your interests we'll select people with similar tastes to put you all into the same group chat.</p>
-                            {userTopics.length === 0 && 
+                            {/* {!user && 
                             <ul className="empty">
-                                <li>You don't have any interest in your list yet :(</li>
+                            <li>Please login to add interests</li>
+                            </ul>
+                            } */}
+                            {userTopics.length < 3 && 
+                            <ul className="empty">
+                                <li>You need to pick at least 3 interests to join a new chat each day.</li>
                             </ul>
                             }
-                            <ul>
+                            
                             {userTopics.map(
                                 (topic, i) => (
-                               
+                                    <ul>
                                     <List topic={topic} key={i}/>
+                                    </ul>
                                 )
                             )}
-                            </ul>
+                            
                         </div>
 
                     </div>

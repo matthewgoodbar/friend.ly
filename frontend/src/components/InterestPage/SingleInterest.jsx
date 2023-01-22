@@ -27,7 +27,7 @@ const SingleInterest =({interest}) => {
     return(
         <a className="interest" onClick={addInterest}>
             <div className="thumbnail">
-                <img src={interest.background||interestImg} alt={interest.name} />
+                <img src={interest.thumbnail||interestImg} alt={interest.name} />
             </div>
             <button>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
