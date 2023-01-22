@@ -30,8 +30,7 @@ const ChatBox = ({ chatName,activeChatRoom, messages, socket }) => {
     event.preventDefault();
     event.stopPropagation();
     let msgObj = { body: text, author: { username: user.username, _id: user._id }, chat: activeChatRoom, createdAt: new Date() }
-    socket.emit("new message", { msgObj, activeChatRoom });
-    dispatch(composeMessage({ body: text, chat: activeChatRoom, author: user._id }));
+    dispatch(composeMessage(socket, activeChatRoom, { body: text, chat: activeChatRoom, author: user._id }));
     setText("");
   };
 

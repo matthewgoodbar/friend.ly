@@ -33,13 +33,15 @@ export const fetchChatMessages = (chatId) => async dispatch => {
     }
   };
   
-  export const composeMessage = data => async dispatch => {
+export const composeMessage = (socket, activeChatRoom, data) => async dispatch => {
     try {
       const res = await jwtFetch(`/api/messages/chat/${data.chat}`, {
         method: 'POST',
         body: JSON.stringify(data)
       });
       const message = await res.json();
+      console.log(message)
+      socket.emit("new message", { message, activeChatRoom });
       dispatch(receiveNewMessage(message));
     } catch(err) {
       console.log("error in composeMessage")
