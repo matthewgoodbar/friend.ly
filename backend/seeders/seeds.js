@@ -134,17 +134,17 @@ chats.push(dailyGroup);
     user.daily = dailyGroup._id;
 });
 
-// const marcosEvgeniiChat = new Chat({
-//     users: [
-//         marcos._id,
-//         evgenii._id
-//     ],
-//     messages: [],
-//     daily: false
-// });
-// chats.push(marcosEvgeniiChat);
-// marcos.chats.push(marcosEvgeniiChat._id);
-// evgenii.chats.push(marcosEvgeniiChat._id);
+const marcosEvgeniiChat = new Chat({
+    users: [
+        marcos._id,
+        evgenii._id
+    ],
+    messages: [],
+    daily: false
+});
+chats.push(marcosEvgeniiChat);
+marcos.chats.push(marcosEvgeniiChat._id);
+evgenii.chats.push(marcosEvgeniiChat._id);
 
 const marcosDiegoChat = new Chat({
     users: [
