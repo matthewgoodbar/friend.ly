@@ -104,7 +104,7 @@ router.post('/request/:contactId', restoreUser, async (req, res) => {
         daily: false
       });
       await newDM.save();
-      await User.updateMany({ id: [user._id, contact._id] },
+      await User.updateMany({ _id: [user._id, contact._id] },
         { $push: { chats: newDM._id } });
     }
     return res.json({ message: "success" });
