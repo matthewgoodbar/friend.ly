@@ -102,7 +102,9 @@ router.patch('/:id', validateRegisterInput, async (req, res) => {
       {
         username: req.body.username,
         hashedPassword: newHashedPass,
-        email: req.body.email
+        email: req.body.email,
+        image: req.body.image,
+        location: req.body.location
       });
   } catch(err) {
     debug(err);
