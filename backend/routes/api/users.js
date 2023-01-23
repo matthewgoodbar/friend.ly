@@ -128,12 +128,11 @@ router.delete('/request/:contactId', restoreUser, async (req, res) => {
     if (dm){
       await User.updateMany({ _id: [user._id, contact._id] },
         { $pull: { chats: dm._id } });
-      await Chat.remove({ daily: false, users: { $all: [user._id, contact._id] } }, (err) => {
-        if (err) debug(err);
-      });
+      await Chat.remove(dm)
     }
     return res.json({ message: "success" });
   } catch(err) {
+    debug(err)
     return res.status(400).send({  message: "Unable to remove ping/delete DM" });
   }
 });
