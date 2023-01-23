@@ -16,7 +16,7 @@ const Welcome = () => {
     const chats = useSelector(state => state.chats)
 
     useEffect(()=>{
-        console.log("useeffect chats",chats)
+        // console.log("useeffect chats",chats)
     },[chats])
 
     useEffect(()=>{

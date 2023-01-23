@@ -7,7 +7,7 @@ function AboutModal() {
     const handleClick = () => {
         setShowModal(true)
         if (showModal) alert("about modal / modal should be open now");
-        console.log("value of showModal:",showModal)
+        // console.log("value of showModal:",showModal)
     }
     return (
         <>
