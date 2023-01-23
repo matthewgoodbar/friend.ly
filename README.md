@@ -1,6 +1,6 @@
 [![friend ly-logo](https://user-images.githubusercontent.com/46214277/213944861-26d84a04-5535-4541-a8ca-cfca00ba760e.png)](https://friend-ly.onrender.com/)  <br/>
 
-[Friend.ly](https://friend-ly.onrender.com/) is a social media website for meeting new people based on user location and interests. A group project built with MongoDB, Express.js, Node.js, React.js (MERN) stack.
+[Friend.ly](https://friend-ly.onrender.com/) is a social media website for meeting new people based on user location and interests. It is a group project built with MongoDB, Express.js, Node.js, React.js (MERN) stack.
 
 <br />
 
@@ -8,13 +8,13 @@
 
 
 ## Technologies
-**Backend:** Express.js, Node.js, Sockets.io <br/>
+**Backend:** Express.js, Node.js, Socket.io <br/>
 **Frontend:** React-Redux, JavaScript <br/>
 **Database:** MongoDB <br/>
 **Other:** AWS S3, Yelp API, BigDataCloud API, ZipCodeBase API <br/>
 
 ## Features
-Users can specify their **location** and **interests** and based on these information the app generates new chat every 24 hours. <br /> <br />
+Users specify their **location** and **interests** when signing up. The app produces a daily chatroom every 24 hours based on a common interest with people nearby, connecting the user with locals that share the same interest. <br /> <br />
 ![interests](https://user-images.githubusercontent.com/46214277/213945545-976b2ca3-a872-4e69-b58e-eb3ac3d57f8c.gif) <br /><br />
 
 **Interact** with other participants in the **main** and **private** chat rooms <br /><br />
@@ -22,15 +22,84 @@ Users can specify their **location** and **interests** and based on these inform
 
 
 ## Significant Code
-#### LOREN IPSUM
+#### LOREM IPSUM
 ```javascript
 code snippets
 
 ```
 
+
+## Significant Code
+#### Socket.io
+
+Socket.io powers our websocket connections to provide real-time communication amongst unconnected browser instances. Upon chat component mount, we build our component connections as a .then to ensure the presence of the user's chatroom objects. We then iterate through our chat constructs to allocate private rooms, and set a disconnection of the socket during component unmount. Additionally, messages are brought into state via dispatch as part of the thunk action flow. 
+
+frontend
+```javascript
+  useEffect(() => {
+    dispatch(fetchChatMessages(activeChatRoom))
+  }, [activeChatRoom])
+
+  useEffect(()=>{
+    dispatch(fetchUserChatrooms(user._id)).then( async (res)=>{
+      const chatrooms = await res.json()
+      setActiveChatRoom(chatrooms.daily._id)
+
+      socket.emit("setup", chatrooms.daily._id)
+
+      chatrooms.chats.forEach((chatroom)=>{
+        socket.emit("setup", chatroom._id)
+      })
+
+      socket.on("message recieved", (msgObj) => {
+        dispatch(receiveNewMessage(msgObj))
+      });
+
+      socket.on("fetch your chatrooms", (contactId) => {
+        if (contactId === user._id) {
+          dispatch(fetchUserChatrooms(user._id))
+        }
+      });
+    })
+
+    return (()=>{
+      socket.disconnect()
+    })
+
+    },[])
+
+
+```
+
+backend
+```javascript
+io.on("connection", (socket) => {
+
+  socket.on("setup", (room) => {
+    socket.join(room);
+  });
+
+  socket.on("force fetch chatrooms", (contactId) => {
+    socket.emit("fetch your chatrooms", contactId);
+  });
+
+
+  socket.on("new message", ({ message, activeChatRoom }) => {
+    socket.to(activeChatRoom).emit("message recieved", message);
+  });
+
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
+  });
+});
+
+
+```
+
 #### [Yelp-Fusion library](https://github.com/Yelp/yelp-fusion).
  
-Besides the official documents, when i try to fetch data from frontend, it won't work because the CORS policy. To avoid the CORS policy, I installed the [cors library](https://expressjs.com/en/resources/middleware/cors.html).
+Yelp-Fusion provided some technical challenges with cors protocol. To overcome this, we installed the [cors library](https://expressjs.com/en/resources/middleware/cors.html).
 
 code snippets
 ```js
@@ -56,7 +125,7 @@ router.get('/', (req, res) => {
 module.exports = router;
 
 ```
-In the frontend the following code snippet should send your desired data to the backend sever 
+We use the following frontend code to send your desired data to the backend sever 
 
 ```js
 const getDataFromYelp = () => {
