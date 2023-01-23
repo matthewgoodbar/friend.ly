@@ -28,10 +28,57 @@ code snippets
 
 ```
 
-#### LOREN IPSUM
-```javascript
+#### [Yelp-Fusion library](https://github.com/Yelp/yelp-fusion).
+ 
+Besides the official documents, when i try to fetch data from frontend, it won't work because the CORS policy. To avoid the CORS policy, I installed the [cors library](https://expressjs.com/en/resources/middleware/cors.html).
+
 code snippets
+```js
+const express = require('express');
+const router = express.Router();
+const yelp = require('yelp-fusion');
+const apiKey = process.env.YELP_API_KEY;
+const client = yelp.client(apiKey);
+
+router.get('/', (req, res) => {
+    client.search({
+        location: req.query.location,
+        term: req.query.term,
+        limit: '6',
+        sort_by: "review_count"
+    }).then(response => {
+        // console.log(JSON.stringify(response.jsonBody));
+        res.send(response.jsonBody.businesses);
+    }).catch(e => {
+        console.log(e);
+    });
+})
+module.exports = router;
+
 ```
+In the frontend the following code snippet should send your desired data to the backend sever 
+
+```js
+const getDataFromYelp = () => {
+        fetch(`/api/yelp?term=${term}&radius=${radius}&location=${location}&sort_by=${sort_by}`)
+        .then(response => response.json())
+        .then(data => JSON.stringify(data))
+        .then(stringifiedData => JSON.parse(stringifiedData))
+        .then(parsedData => {
+            setRestaurants(parsedData);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    // use react hook to get all the data 
+    useEffect(() => {
+        getDataFromYelp()
+    }, [])
+```
+
+ 
 
 
 

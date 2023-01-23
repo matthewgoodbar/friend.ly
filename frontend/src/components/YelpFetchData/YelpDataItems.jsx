@@ -18,8 +18,6 @@ const myStyles = {
 const YelpDataItems =({props}) => {
 
     const user = useSelector(state => state.session.user)
-    // props ={name:"Thai food", location:"San Francisco", radius: "5000", sort_by: "review_count"}
-
     const term = props.name
     const location = user.location.zip
     const radius = 5000
