@@ -29,7 +29,6 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const handleSubmit = event => {
     event.preventDefault();
     event.stopPropagation();
-    let msgObj = { body: text, author: { username: user.username, _id: user._id }, chat: activeChatRoom, createdAt: new Date() }
     dispatch(composeMessage(socket, activeChatRoom, { body: text, chat: activeChatRoom, author: user._id }));
     setText("");
   };

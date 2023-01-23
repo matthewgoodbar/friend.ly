@@ -33,6 +33,10 @@ io.on("connection", (socket) => {
     socket.join(room);
   });
 
+  socket.on("force fetch chatrooms", (contactId) => {
+    socket.emit("fetch your chatrooms", contactId);
+  });
+
 
   socket.on("new message", ({ message, activeChatRoom }) => {
     socket.to(activeChatRoom).emit("message recieved", message);

@@ -14,7 +14,7 @@ import dwight from '../../assets/dwight.png'
 import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
-const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
+const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
     const user = useSelector(state => state.session.user)
 
     // const end = new Date();
@@ -84,7 +84,7 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats }) => {
         
         return allContacts.map((contact, i) => {
             if (user._id !== contact._id) {
-                return <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom} />
+                return <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom} socket={socket} />
             }
         })
         

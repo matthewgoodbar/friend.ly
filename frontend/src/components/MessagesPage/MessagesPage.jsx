@@ -51,7 +51,7 @@ const MessagesPage = () => {
         dispatch(receiveNewMessage(msgObj))
       });
 
-      socket.on("fetchYourChatrooms", (contactId) => {
+      socket.on("fetch your chatrooms", (contactId) => {
         if (contactId === user._id) {
           dispatch(fetchUserChatrooms(user._id))
         }
@@ -70,7 +70,7 @@ const MessagesPage = () => {
                 <NavBarSide />
 
                 <div className="content">
-                  { chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} />)}
+            {chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} socket={socket} />)}
                   <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
                   <YelpDataItems props={chats.daily.topic}/>
                 </div>

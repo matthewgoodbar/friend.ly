@@ -9,7 +9,7 @@ import { fetchUserChatrooms } from "../../store/chats";
 
 
 
-const DMPartition = ({ contact, setActiveChatRoom }) => {
+const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
   const chatId = contact.chatId
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch()
@@ -22,18 +22,16 @@ const DMPartition = ({ contact, setActiveChatRoom }) => {
       }
   }
 
-  
-
   const createConnection = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(createFriendship({ userId: user._id, contactId: contact._id }))
+    dispatch(createFriendship({ userId: user._id, contactId: contact._id }, socket))
   }
 
   const closeConnection = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }))
+    dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }, socket))
   }
 
   return (

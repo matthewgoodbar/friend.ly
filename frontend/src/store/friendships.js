@@ -5,12 +5,13 @@ import { getCurrentUser } from "./session";
 
 
 
-export const createFriendship = data => async dispatch => {
+export const createFriendship = (data, socket) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/users/request/${data.contactId}`, {
             method: 'POST'
         });
         if (res.ok) {
+            socket.emit("force fetch chatrooms", data.contactId)
             dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
         } else {
@@ -26,35 +27,13 @@ export const createFriendship = data => async dispatch => {
     }
 };
 
-// export const destroyFriendship = data => async dispatch => {
-
-//     const res = await jwtFetch(`/api/users/request/${data.contactId}`, {
-//         method: 'DELETE'
-//     });
-//     if (res.ok) {
-//         dispatch(fetchUserChatrooms(data.userId));
-//         dispatch(getCurrentUser())
-//     } else {
-//         console.log("error in destroyFriendship response")
-//     }
-
-
-//     // } catch (err) {
-//     //     console.log(err)
-//     //     console.log("error in destroyFriendship")
-//     //     // const resBody = await err.json();
-//     //     // if (resBody.statusCode === 400) {
-//     //     //   return dispatch(receiveErrors(resBody.errors));
-//     //     // }
-//     // }
-// };
-
-export const destroyFriendship = data => async dispatch => {
+export const destroyFriendship = (data, socket) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/users/request/${data.contactId}`, {
             method: 'DELETE'
         });
         if (res.ok) {
+            socket.emit("force fetch chatrooms", data.contactId)
             dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
         } else {
