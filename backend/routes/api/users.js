@@ -88,6 +88,27 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
   })(req, res, next);
 });
 
+router.patch('/:id', validateRegisterInput, async (req, res) => {
+  try {
+    let newHashedPass;
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) throw err;
+      bcrypt.hash(req.body.password, salt, async (err, hashedPassword) => {
+        if (err) throw err;
+        newHashedPass = hashedPassword;
+      });
+    });
+    User.updateOne({ _id: req.params.id },
+      {
+        username: req.body.username,
+        hashedPassword: newHashedPass,
+        email: req.body.email
+      });
+  } catch(err) {
+    debug(err);
+  }
+});
+
 router.post('/request/:contactId', restoreUser, async (req, res) => {
   const user = res.user;
   if (!user) return res.json({ error: "No user logged in" });
