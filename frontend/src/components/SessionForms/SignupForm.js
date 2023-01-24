@@ -4,6 +4,7 @@ import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
 import {Link} from "react-router-dom";
 import ZipCodeInput from '../GeoLocation/ZipCodeInput';
+import { useHistory } from 'react-router-dom';
 
 
 function SignupForm () {
@@ -15,6 +16,7 @@ function SignupForm () {
   const [city, setCity] = useState("");
   const [error, setError] = useState('');
 
+  const history = useHistory()
 
 
 
@@ -62,7 +64,8 @@ function SignupForm () {
       zipCode
     };
 
-    dispatch(signup(user)); 
+    dispatch(signup(user)).then(()=>history.push('/interests'))
+    
   }
 
   return (

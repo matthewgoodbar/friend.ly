@@ -29,7 +29,7 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
         .then(res => res.json())
         .then(data=>{
             // console.log(data.results[zipCode][0].city)
-            setCity(data.results[zipCode][0].city);
+            setCity(data?.results[zipCode][0].city);
           })
     } 
 
