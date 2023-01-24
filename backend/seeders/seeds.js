@@ -132,7 +132,7 @@ const dailyGroup = new Chat({
     ],
     messages: [],
     daily: true,
-    topic: topics[1]._id
+    topic: topics[23]._id
 });
 chats.push(dailyGroup);
 [matthew, marcos, vivian, evgenii, diego].forEach((user) => {
