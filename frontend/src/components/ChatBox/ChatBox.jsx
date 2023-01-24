@@ -66,10 +66,14 @@ const bannerName = () => {
     let tempName = ""
     chats.chats.forEach(dm => {
       if (dm?._id === activeChatRoom) {
-        tempName = dm.users[0].username
+        if (dm.users[0].username === user.username) {
+          tempName = dm.users[1].username
+        } else {
+          tempName = dm.users[0].username
+        }
       }
     })
-    return tempName
+    return `Private chat with ${tempName}`
   }
 }
 
