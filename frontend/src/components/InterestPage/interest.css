@@ -25,6 +25,11 @@
     border-radius: var(--base-unit);
     border: 1px solid var(--color-transparent-black);
 }
+.interests .leftSidebar ul.empty {
+    margin-bottom: calc(var(--base-unit)*8);
+    border-color: var(--color-aa);
+    color: var(--color-aa);
+}
 .interests .leftSidebar ul.empty li {
     text-align: center;
 }

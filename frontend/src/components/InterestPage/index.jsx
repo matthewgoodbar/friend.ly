@@ -31,6 +31,8 @@ const InterestPage = () => {
         }
         return false
     }
+    console.log("these are the userTopics",userTopics)
+    const showList = userTopics.length === 0;
 
     return (
     
@@ -53,13 +55,15 @@ const InterestPage = () => {
                             </ul>
                             }
                             
+                            {!showList &&
+                            <ul>
                             {userTopics.map(
                                 (topic, i) => (
-                                    <ul>
                                     <List topic={topic} key={i}/>
-                                    </ul>
                                 )
                             )}
+                            </ul>
+                            }
                             
                         </div>
 

@@ -39,7 +39,7 @@ function About() {
             <h1>Creators of Friendly</h1>
             <div className="authors">
                 {authors.map(author=> 
-                    <div className="author">
+                    <div className="author" key={author.name}>
                         <figure>
                             <img src={author.picture} alt={author.name} />
                         </figure>

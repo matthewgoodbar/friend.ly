@@ -48,9 +48,9 @@ const YelpDataItems =({props}) => {
             style={{background: `url(${props.thumbnail}) 0 0 no-repeat`, backgroundSize: "cover"}}>
                 <div className='recommendation-interest'>{term}</div>
                 <div className='recommendation-location'>{user.location.city}</div>
+                <div className="gradient"></div>
             </div>
             <div className='description'>{props.description}</div>
-            <hr className='right-bar-line'/>
             <div className='uppercase'>PLACES</div>
             {restaurants.map((data,i) => 
             <Link to={{ pathname: `${data.url}` }} target="_blank" key={i}>
