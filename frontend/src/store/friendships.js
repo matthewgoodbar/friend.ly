@@ -16,7 +16,6 @@ export const createFriendship = (data, socket) => async dispatch => {
             dispatch(getCurrentUser())
         } else {
             console.log("error in createFriendship response")
-            console.log(res.message)
         }
     } catch (err) {
         console.log("error in createFriendship")
@@ -40,7 +39,6 @@ export const destroyFriendship = (data, socket) => async dispatch => {
             console.log("error in destroyFriendship response")
         }
     } catch (err) {
-        console.log(err)
         console.log("error in destroyFriendship")
         // const resBody = await err.json();
         // if (resBody.statusCode === 400) {
