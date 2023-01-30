@@ -55,7 +55,7 @@ exports.loginUser = async (user) => {
         secretOrKey,
         { expiresIn: 3600 }
     );
-    // if (isProduction) await addUserToQueue(user);
+    await addUserToQueue(user._id);
     return {
         user: userInfo,
         token
