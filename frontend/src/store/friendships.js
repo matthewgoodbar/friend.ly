@@ -11,6 +11,7 @@ export const createFriendship = (data, socket) => async dispatch => {
             method: 'POST'
         });
         if (res.ok) {
+            console.log("in create friendship")
             socket.emit("force fetch chatrooms", data.contactId)
             dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
@@ -33,7 +34,8 @@ export const destroyFriendship = (data, socket) => async dispatch => {
             method: 'DELETE'
         });
         if (res.ok) {
-            socket.emit("force fetch chatrooms", data.contactId)
+            console.log("in destroy friendship")
+            socket.emit("force chatrooms", data.contactId)
             dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
         } else {

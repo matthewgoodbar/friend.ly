@@ -51,7 +51,8 @@ const MessagesPage = () => {
         dispatch(receiveNewMessage(msgObj))
       });
 
-      socket.on("fetch your chatrooms", (contactId) => {
+      socket.on("fetch chatrooms", (contactId) => {
+        console.log("in socket fetch chatrooms")
         if (contactId === user._id) {
           dispatch(fetchUserChatrooms(user._id))
         }
