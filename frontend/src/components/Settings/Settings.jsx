@@ -10,7 +10,7 @@ const Settings = () => {
   const user = useSelector(state => state.session.user)
   const [username,setUsername] = useState(user.username)
   const [email,setEmail] = useState(user.email)
-  const [zipcode,setZipcode] = useState("94019")
+  const [zipcode,setZipcode] = useState(user.location.zip)
   const [password,setPassword] = useState("")
   const errors = useSelector(state => state.errors.session);
 

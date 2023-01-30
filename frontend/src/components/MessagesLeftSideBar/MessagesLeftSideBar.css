@@ -176,5 +176,17 @@ aside.leftSidebar .directMessages button.awaiting  {
     cursor: default;
 }
 aside.leftSidebar .directMessages button.awaiting:hover  {
-    background-color: transparent;
+    background: transparent;
+}
+aside.leftSidebar .directMessages button.awaiting:hover span {
+    background: var(--color-aa);
+    color: white;
+}
+aside.leftSidebar .directMessages button.awaiting:hover span:hover {
+    cursor: pointer;
+}
+aside.leftSidebar .directMessages button.friend span {
+    display: none;
+    background-color: var(--color-pink-light);
+    color: var(--color-transparent-black-dark);
 }

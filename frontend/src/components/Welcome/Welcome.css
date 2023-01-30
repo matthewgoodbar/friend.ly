@@ -14,7 +14,7 @@
 }
 .welcome .leftSidebar {
     color: white;
-    text-shadow: 1px 1px 0 var(--color-transparent-black);
+    text-shadow: 1px 2px var(--base-unit) var(--color-transparent-black);
     z-index: 10;
 }
 .welcome .leftSidebar h1 {
@@ -86,9 +86,9 @@
     top: -20vh;
     left: -10vw;
     display: block;
-    background: var(--color-transparent-white);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: var(--color-transparent-black);
+    backdrop-filter: blur(calc(var(--base-unit)*2));
+    -webkit-backdrop-filter: blur(calc(var(--base-unit)*2));
     z-index: 2;
     transform: rotate(-15deg);
 }

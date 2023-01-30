@@ -32,6 +32,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path='/interests' component={InterestPage} />
+        <ProtectedRoute path='/settings' component={Settings} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
       </Switch>
     </>

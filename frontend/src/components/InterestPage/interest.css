@@ -167,3 +167,18 @@
     color: var(--color-purple-light);
     fill: var(--color-purple-light);
 }
+.coverSideBar {
+    background-color: var(--color-transparent-white);
+    backdrop-filter: blur(var(--base-unit));
+    -webkit-backdrop-filter: blur(var(--base-unit));
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 120px;
+    z-index: 1000;
+}
+#highlighted {
+    background-color: var(--color-aa);
+    color:white;
+}

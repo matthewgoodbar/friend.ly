@@ -35,7 +35,7 @@ const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
   }
 
   return (
-    <button onClick={e => { chatClickHandler(e) }}>
+    <button className={contact.friendship} onClick={e => { chatClickHandler(e) }}>
         <figure>
         <img src={contact.image} alt={contact.username} />
         </figure>
