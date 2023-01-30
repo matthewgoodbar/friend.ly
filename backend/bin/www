@@ -33,12 +33,13 @@ io.on("connection", (socket) => {
     socket.join(room);
   });
 
-  socket.on("force chatrooms", (contactId) => {
-    debug("in force chatrooms")
-    debug(contactId)
-    io.emit("fetch chatrooms", contactId);
+  socket.on("leave", (room) => {
+    socket.leave(room);
   });
 
+  socket.on("force chatrooms", (contactObj) => {
+    io.emit("fetch chatrooms", contactObj);
+  });
 
   socket.on("new message", ({ message, activeChatRoom }) => {
     socket.to(activeChatRoom).emit("message recieved", message);
