@@ -15,6 +15,7 @@ import { receiveNewMessage, composeMessage } from '../../store/messages';
 
 const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const chatHistory = useRef(null);
+  const lastMessage = useRef(null);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const chats = useSelector(state => state.chats)
@@ -25,6 +26,12 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
   // useEffect(()=>{
   //     chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
   // }, [messages])
+
+  useEffect(()=>{
+    if(lastMessage.current){
+      lastMessage.current.scrollIntoView({ behavior: "smooth", block:"end" });
+    }
+}, [messages])
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -94,7 +101,7 @@ const bannerName = () => {
 
                       { messages.map((message, index) =>  {
                         if (message.chat === activeChatRoom) {
-                          return (<div key={index} className={message.author.username === user.username ? "message currentUser" : "message"}>
+                          return (<div key={index} ref={index === messages.length - 1 ? lastMessage : null} className={message.author.username === user.username ? "message currentUser" : "message"}>
                               <p><strong>{message.author.username}</strong></p>
                               <div className="bubble">
                                 <div className="who">
