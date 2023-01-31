@@ -13,7 +13,6 @@ const Message = ({ message, activeChatRoom, socket }) => {
     const colors = ['#14eecd', '#d170d0', '#8a2be2', '#ffd700'];
     const random_color = colors[Math.floor(Math.random() * colors.length)];
 
-
     const timeFormat = date => {
         const dateObject = new Date(date);
         let hours = dateObject.getHours();

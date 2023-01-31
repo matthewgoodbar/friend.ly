@@ -22,12 +22,6 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const user = useSelector(state => state.session.user)
 
   const [inputValue, setInputValue] = useState('');
-  
-//code for scrolling new messages down
-
-  // useEffect(()=>{
-  //     chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
-  // }, [messages])
 
   useEffect(()=>{
     if(lastMessage.current){
@@ -75,11 +69,8 @@ const bannerName = () => {
                         <h4>{bannerName()}</h4>
                         </div>
                     </div>
-
-                    {/* actual message section */}
                     
                     <div className="bubbles" ref={chatHistory}>
-                    {/* { messages.length > 0 && populateMessages()} */}
 
                       { messages.map((message, index) =>  {
                         if (message.chat === activeChatRoom) {
@@ -87,13 +78,7 @@ const bannerName = () => {
                         }
                       })}
                           
-                
-                        
-
-                        {/* actual message section */}
-
                     </div>
-
 
                     <form onSubmit={handleSubmit}>
                         <input type="text" placeholder="Type message..." value={text}
