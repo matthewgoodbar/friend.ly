@@ -34,15 +34,21 @@ const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
     dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }, socket))
   }
 
-  const letter = contact.username.split('')[0].toUpperCase()
-  const colors = ['#14eecd', '#d170d0', '#8a2be2','#ffd700'];
-  const random_color = colors[Math.floor(Math.random() * colors.length)];
+  const initial = contact.username.split('')[0].toUpperCase()
+  const firstLetter = contact.username.split('')[0].toLowerCase()
+  const alphbet ='abcdefghijklnmopqrstuvwxyz'
+  const indexOfFirst = alphbet.indexOf(firstLetter)
+  console.log(indexOfFirst)
+  const colors = ['#14eecd', '#d170d0', '#8a2be2', '#ffd700','#f1908e','#aa00ff', '#14f111','#e86e4d','#cb4273'];
+  // const random_color = colors[Math.floor(Math.random() * colors.length)];
+  const random_color = colors[indexOfFirst % colors.length]
+  console.log(random_color)
 
   return (
     <button className={contact.friendship} onClick={e => { chatClickHandler(e) }}>
         <figure>
         {contact.image ? <img src={contact.image} alt={contact.username} /> :
-            <div className="letter-avatar" style={{backgroundColor: random_color}}>{letter}</div>
+            <div className="letter-avatar" style={{backgroundColor: random_color}}>{initial}</div>
             }
         </figure>
         <div className="right">

@@ -36,6 +36,11 @@ function About() {
     ]
     return (
         <div className="about-modal">
+            <div className="description-container">
+                <h1>About this project</h1>
+                <div className="about-description">Friend.ly is a social media website for meeting new people based on user location and interests. It is a group project built with MongoDB, Express.js, Node.js, React.js (MERN) stack.
+                </div>
+            </div>
             <h1>Creators of Friendly</h1>
             <div className="authors">
                 {authors.map(author=> 
