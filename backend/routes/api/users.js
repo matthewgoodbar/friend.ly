@@ -88,7 +88,7 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
   })(req, res, next);
 });
 
-router.patch('/:id', restoreUser, validateRegisterInput, async (req, res) => {
+router.patch('/:id', restoreUser, async (req, res) => {
   const user = req.user;
   let username = req.body.username || user.username;
   let password = req.body.password || user.hashedPassword;
