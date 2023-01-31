@@ -7,7 +7,7 @@ const _ = require('underscore');
 
 exports.addUserToQueue = async (userId) => {
     const userObj = await User.findById(userId);
-    if (userObj.topics.length >= 3){
+    if (!userObj.daily && userObj.topics.length >= 3){
         await Topic.updateMany({ _id: { $in: userObj.topics } },
             { $push: { users: userObj._id } });
         await checkQueue();
