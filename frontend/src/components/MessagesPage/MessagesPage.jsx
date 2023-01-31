@@ -51,9 +51,21 @@ const MessagesPage = () => {
         dispatch(receiveNewMessage(msgObj))
       });
 
-      socket.on("fetch your chatrooms", (contactId) => {
-        if (contactId === user._id) {
-          dispatch(fetchUserChatrooms(user._id))
+      socket.on("fetch chatrooms", ({ userId, contactId}) => {
+        if (contactId === user._id || userId === user._id) {
+          dispatch(fetchUserChatrooms(user._id)).then(async (res) => {
+            const chatrooms = await res.json()
+
+            chatrooms.chats.forEach((chatroom) => {
+              socket.emit("leave", chatroom._id)
+            })
+
+            chatrooms.chats.forEach((chatroom) => {
+              socket.emit("setup", chatroom._id)
+            })
+
+          })
+          // the problem: I need to setup the room between the two users
         }
       });
     })

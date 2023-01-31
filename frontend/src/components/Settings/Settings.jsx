@@ -32,6 +32,7 @@ const Settings = () => {
         }
       }
       dispatch(updateUser(editedUser,user._id))
+
     } else if (tab === "personalInfo") {
       let editedUser = {
         username,

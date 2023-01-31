@@ -34,10 +34,16 @@ const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
     dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }, socket))
   }
 
+  const letter = contact.username.split('')[0].toUpperCase()
+  const colors = ['#14eecd', '#d170d0', '#8a2be2','#ffd700'];
+  const random_color = colors[Math.floor(Math.random() * colors.length)];
+
   return (
     <button className={contact.friendship} onClick={e => { chatClickHandler(e) }}>
         <figure>
-        <img src={contact.image} alt={contact.username} />
+        {contact.image ? <img src={contact.image} alt={contact.username} /> :
+            <div className="letter-avatar" style={{backgroundColor: random_color}}>{letter}</div>
+            }
         </figure>
         <div className="right">
         <div className="name">{contact.username}</div>
