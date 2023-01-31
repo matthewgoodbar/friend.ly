@@ -88,7 +88,7 @@ function ZipCodeInput({city, setCity, zipCode, setZipCode, error, setError }) {
 
       <label>Zip Code<br />
       {loading && <PuffLoader size={35} color={'purple'} />}
-              <input type="number" value={zipCode} onChange={handleZipCodeChange} required minLength={5} maxLength={5}
+              <input type="number" value={zipCode} onChange={handleZipCodeChange} onFocus={()=>setCity("")} required minLength={5} maxLength={5}
               onBlur={getUserCity}
                 placeholder="Zip code"
               />

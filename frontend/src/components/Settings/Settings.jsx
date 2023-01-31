@@ -1,64 +1,146 @@
-import React from 'react'
+import React from "react"
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBarSide from '../NavBarSide/NavBarSide'
+import NavBarSide from "../NavBarSide/NavBarSide"
 import "./Settings.css"
-import {clearSessionErrors} from '../../store/session';
+import ZipCodeInput from "../GeoLocation/ZipCodeInput";
+import {updateUser} from "../../store/session"
 
 const Settings = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
   const [username,setUsername] = useState(user.username)
+  const [image,setImage] = useState(user.image)
   const [email,setEmail] = useState(user.email)
-  const [zipcode,setZipcode] = useState(user.location.zip)
+  const [zipCode,setZipCode] = useState(user.location.zip)
+  const [city,setCity] = useState(user.location.city)
   const [password,setPassword] = useState("")
-  const errors = useSelector(state => state.errors.session);
+  const [passwordConfirmation,setPasswordConfirmation] = useState("")
+  const [error, setError] = useState("");
+  const [personalInfoFormReady,setPersonalInfoFormReady] = useState(false);
+  const [locationFormReady,setLocationFormReady] = useState(false);
+  const [passwordFormReady,setPasswordFormReady] = useState(false);
+  const [tab,setTab] = useState("location");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("submit form")
+    if (tab==="location") {
+      let editedUser = {
+        location: {
+          zipCode,
+          city
+        }
+      }
+      dispatch(updateUser(editedUser,user._id))
+    } else if (tab === "personalInfo") {
+      let editedUser = {
+        username,
+        email,
+        image
+      }
+      dispatch(updateUser(editedUser,user._id))
+    } else if (tab === "password") {
+      let editedUser = {
+        password
+      }
+      dispatch(updateUser(editedUser,user._id))
+    }
   }
 
-  useEffect(() => {
-    return () => {
-      dispatch(clearSessionErrors());
-    };
-  }, [dispatch]);
+
+  useEffect(()=>{
+    if (zipCode.toString().length===5 && city) {
+      setLocationFormReady(true)
+    } else {
+      setLocationFormReady(false)
+    }
+  },[zipCode,city,tab])
+
+  useEffect(()=>{
+    if (email && username) {
+      setPersonalInfoFormReady(true)
+    } else {
+      setPersonalInfoFormReady(false)
+    }
+  },[email,username])
+
+  useEffect(()=>{
+    if (password.length>=8 && password===passwordConfirmation) {
+      setPasswordFormReady(true)
+    } else {
+      setPasswordFormReady(false)
+    }
+  },[password,passwordConfirmation])
+
 
   return (
-    <div className='container settings'> 
-          <NavBarSide />
-
+    <div className="container settings"> 
+        <NavBarSide />
           <div className="content">
             <h1>Settings</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Zipcode<br/>
-                        <input type="number" onChange={(e)=>setZipcode(e.currentTarget.value)} value={zipcode} />
-                    </label>
-                    <div className="errors">{errors?.zipcode}</div>
-                </div>
-                <div>
-                    <label>Username<br/>
-                        <input type="text" onChange={(e)=>setUsername(e.currentTarget.value)} value={username} />
-                    </label>
-                    <div className="errors">{errors?.username}</div>
-                </div>
-                <div>
-                    <label>Email<br/>
-                        <input type="email" onChange={(e)=>setEmail(e.currentTarget.value)} value={email} />
-                    </label>
-                    <div className="errors">{errors?.email}</div>
-                </div>
-                <div>
-                    <label>Password<br/>
-                        <input type="password" onChange={(e)=>setPassword(e.currentTarget.value)} value={password} />
-                    </label>
-                    <div className="errors">{errors?.password}</div>
-                </div>
-                
-                <button>Save</button>
-            </form>
+
+            <div className="tabs">
+              <button onClick={()=>setTab("location")} className={ tab === "location" ? "active" : null }>Location</button>
+              <button onClick={()=>setTab("personalInfo")} className={ tab === "personalInfo" ? "active" : null }>Personal Info</button>
+              <button onClick={()=>setTab("password")} className={ tab === "password" ? "active" : null }>Password</button>
+            </div>
+
+            { tab === "location" && (
+              <form onSubmit={handleSubmit}>
+                  <ZipCodeInput city={city} setCity={setCity} zipCode={zipCode} setZipCode={setZipCode}  error={error} setError={setError}/>
+                  <div>
+                      <label>City (you don't need to set this)<br/>
+                          <input type="text" onChange={(e)=>setCity(e.currentTarget.value)} value={city} disabled />
+                      </label>
+                      <div className="error">{error?.image}</div>
+                  </div>
+                  <button disabled={locationFormReady ? null : "disabled"}>Save</button>
+              </form>
+            )}
+
+            { tab === "personalInfo" && (
+              <form onSubmit={handleSubmit}>
+                  <div>
+                      <label>Username<br/>
+                          <input type="text" onChange={(e)=>setUsername(e.currentTarget.value)} value={username} placeholder="Type your username here" required />
+                      </label>
+                      <div className="error">{error?.username}</div>
+                  </div>
+                  <div>
+                      <label>Email<br/>
+                          <input type="email" onChange={(e)=>setEmail(e.currentTarget.value)} value={email} placeholder="email@example.com" required />
+                      </label>
+                      <div className="error">{error?.email}</div>
+                  </div>
+                  <div>
+                      <label>Profile Picture<br/>
+                          <input type="text" onChange={(e)=>setImage(e.currentTarget.value)} value={image} placeholder="URL of your profile picture" />
+                      </label>
+                      <div className="error">{error?.image}</div>
+                  </div>
+                  <button disabled={personalInfoFormReady ? null : "disabled"}>Save</button>
+              </form>
+            )}
+
+            { tab === "password" && (
+              <form onSubmit={handleSubmit}>
+                  <div>
+                      <label>New password<br/>
+                          <input type="password" onChange={(e)=>setPassword(e.currentTarget.value)} value={password} placeholder="Type new password" required />
+                      </label>
+                      <div className="error">{error?.password}</div>
+                  </div>
+                  <div>
+                      <label>Confirm new password<br/>
+                          <input type="password" onChange={(e)=>setPasswordConfirmation(e.currentTarget.value)} value={passwordConfirmation} placeholder="Type new password again" required />
+                      </label>
+                      <div className="error">{error?.password}</div>
+                  </div>
+
+                  <button disabled={passwordFormReady ? null : "disabled"}>Save</button>
+              </form>
+            )}
+
           </div>
 
     </div>
@@ -66,3 +148,12 @@ const Settings = () => {
 }
 
 export default Settings
+
+
+
+{/* <div>
+<label>Password<br/>
+    <input type="password" onChange={(e)=>setPassword(e.currentTarget.value)} value={password} required />
+</label>
+<div className="error">{error?.password}</div>
+</div> */}
