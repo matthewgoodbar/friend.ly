@@ -98,4 +98,40 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res)
     }
 });
 
+router.patch('/:id', async (req, res) => {
+    try {
+
+        await Message.updateOne({ _id: req.params.id },
+            {
+                body: req.body.body
+            });
+        const message = await Message.findById(req.params.id)
+                    .populate({
+                        path: 'author',
+                        select: '_id username image'
+                    });
+        await Chat.updateOne({ _id: message.chatId },
+            { $push: { messages: message._id } });
+        return res.json(message);
+    } catch (err) {
+        // debug(err);
+    }
+});
+
+// how to delete the message object and also the chat reference?
+router.delete('/:id', async (req, res) => {
+    try {
+        const message = await Message.findById(req.params.id)
+        const chat = await Chat.findById(message.chat)
+        debug(message)
+        debug(chat)
+        await Chat.updateOne({ _id: chat._id },
+            { $pull: { messages: message._id } });
+        return res.json({ message: "success" });
+    } catch (err) {
+        debug(err);
+        return res.json({ error: "Unable to delete message" })
+    }
+});
+
 module.exports = router;

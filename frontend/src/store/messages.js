@@ -3,6 +3,8 @@ import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_CHAT_MESSAGES = "RECEIVE_CHAT_MESSAGES";
 const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
+const RECEIVE_EDITED_MESSAGE = "RECEIVE_EDITED_MESSAGE"
+const DELETE_MESSAGE = "DELETE_MESSAGE"
 
 //Actions
 
@@ -14,6 +16,16 @@ const receiveChatMessages = chatMessages => ({
 export const receiveNewMessage = message => ({
   type: RECEIVE_MESSAGE,
   message
+});
+
+export const receiveEditedMessage = message => ({
+  type: RECEIVE_EDITED_MESSAGE,
+  message
+});
+
+export const removeMessage = messageId => ({
+  type: DELETE_MESSAGE,
+  messageId
 });
 
 
@@ -50,9 +62,78 @@ export const composeMessage = (socket, activeChatRoom, data) => async dispatch =
     }
   };
 
+export const editMessage = (socket, activeChatRoom, data) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/messages/${data._id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    const message = await res.json();
+    socket.emit("edit message", { message, activeChatRoom } );
+  } catch (err) {
+    console.log("error in editMessage")
+    // const resBody = await err.json();
+    // if (resBody.statusCode === 400) {
+    //   return dispatch(receiveErrors(resBody.errors));
+    // }
+  }
+};
+
+export const deleteMessage = (socket, activeChatRoom, data) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/messages/${data._id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(data)
+    });
+    const resObj = await res.json();
+    
+    if (resObj.message === "success") {
+      socket.emit("delete message", { messageId: data._id, activeChatRoom });
+    } else {
+      console.log("message failed to delete")
+    }
+  } catch (err) {
+    console.log("error in editMessage")
+    // const resBody = await err.json();
+    // if (resBody.statusCode === 400) {
+    //   return dispatch(receiveErrors(resBody.errors));
+    // }
+  }
+};
+
 //Regular Reducer
 
-const messagesReducer = (state = { all: {}, user: {} }, action) => {
+const updateMessageInState = (newMessage, state) => {
+
+  for (let i = 0; i < state.all.length; i++) {	
+    let message = state.all[i]
+    if (message._id === newMessage._id) {
+      state.all[i] = newMessage
+      break
+    }
+  }
+
+  return { ...state }
+}
+
+const deleteMessageInState = (messageId, state) => {
+
+  let delIndex;
+  for (let i = 0; i < state.all.length; i++) {
+    let message = state.all[i]
+    if (message._id === messageId) {
+      delIndex = i
+      break
+    }
+  }
+  state.all.splice(delIndex, 1)
+  return { ...state }
+}
+
+
+
+
+const messagesReducer = (state = { all: {}, unread: {} }, action) => {
     switch(action.type) {
       case RECEIVE_CHAT_MESSAGES:
         return { ...state, all: action.chatMessages };
@@ -60,6 +141,12 @@ const messagesReducer = (state = { all: {}, user: {} }, action) => {
       case RECEIVE_MESSAGE:
         state.all.push(action.message)
         return { ...state };
+
+      case RECEIVE_EDITED_MESSAGE:
+        return updateMessageInState(action.message, state)
+
+      case DELETE_MESSAGE:
+        return deleteMessageInState(action.messageId, state)
 
       default:
         return state;
