@@ -105,7 +105,7 @@ router.patch('/:id', restoreUser, validateRegisterInput, async (req, res) => {
         });
       });
     }
-    User.updateOne({ _id: req.params._id },
+    User.updateOne({ _id: req.params.id },
       {
         username,
         password,
