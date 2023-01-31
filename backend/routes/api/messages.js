@@ -121,8 +121,12 @@ router.patch('/:id', async (req, res) => {
 // how to delete the message object and also the chat reference?
 router.delete('/:id', async (req, res) => {
     try {
-        await Chat.updateOne({ _id: req.body.chatId },
-            { $pullAll: { messages: [req.body.messageId] } });
+        const message = await Message.findById(req.params.id)
+        const chat = await Chat.findById(message.chat)
+        debug(message)
+        debug(chat)
+        await Chat.updateOne({ _id: chat._id },
+            { $pull: { messages: message._id } });
         return res.json({ message: "success" });
     } catch (err) {
         debug(err);

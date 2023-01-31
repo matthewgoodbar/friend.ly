@@ -85,8 +85,13 @@ export const deleteMessage = (socket, activeChatRoom, data) => async dispatch =>
       method: 'DELETE',
       body: JSON.stringify(data)
     });
-    const messageId = await res.json();
-    socket.emit("delete message", { messageId, activeChatRoom });
+    const resObj = await res.json();
+    
+    if (resObj.message === "success") {
+      socket.emit("delete message", { messageId: data._id, activeChatRoom });
+    } else {
+      console.log("message failed to delete")
+    }
   } catch (err) {
     console.log("error in editMessage")
     // const resBody = await err.json();
