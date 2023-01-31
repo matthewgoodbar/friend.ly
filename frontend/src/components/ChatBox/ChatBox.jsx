@@ -85,6 +85,9 @@ const bannerName = () => {
 }
 
 
+  const colors = ['#14eecd', '#d170d0', '#8a2be2','#ffd700'];
+  const random_color = colors[Math.floor(Math.random() * colors.length)];
+  
   return (
             <main className="messengerComponent">
 
@@ -106,7 +109,11 @@ const bannerName = () => {
                               <div className="bubble">
                                 <div className="who">
                                   <figure>
-                                    <img src={message.author.image || logo} alt="" width="50px" />
+                                    {/* <img src={message.author.image || logo} alt="" width="50px" /> */}
+
+                                    {message.author.image ? <img src={message.author.image } alt={message.author.username} /> :
+                                        <div className="letter-avatar" style={{backgroundColor: random_color}}>{message.username.split('')[0].toUpperCase()}</div>
+                                        }
                                   </figure>
                                   <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
                                 </div>
