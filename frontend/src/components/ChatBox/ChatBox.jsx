@@ -40,6 +40,7 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
     event.stopPropagation();
     dispatch(composeMessage(socket, activeChatRoom, { body: text, chat: activeChatRoom, author: user._id }));
     setText("");
+    setInputValue("");
   };
 
   const handleInputChange = event => {
