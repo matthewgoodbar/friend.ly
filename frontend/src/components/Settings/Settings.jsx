@@ -34,7 +34,6 @@ const Settings = () => {
       dispatch(updateUser(editedUser,user._id))
 
     } else if (tab === "personalInfo") {
-      console.log("trying to submit personalInfo form")
       let editedUser = {
         username,
         email,
@@ -45,7 +44,6 @@ const Settings = () => {
         },
         password
       }
-      console.log("dispatching this:",editedUser)
       dispatch(updateUser(editedUser,user._id)).then(()=>{
         console.log("submited personalInfo form")
       })
