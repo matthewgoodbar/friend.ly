@@ -36,5 +36,11 @@ const createChat = async (topic, users) => {
     await User.updateMany({ _id: { $in: users } },
         { daily: newChat });
     await Topic.updateMany({},
-        { $pullAll: { users: users } })
+        { $pullAll: { users: users } });
+};
+
+exports.removeUserFromQueue = async (userId) => {
+    const userObj = await User.findById(userId);
+    await Topic.updateMany({},
+        { $pull: { users: userObj } });
 };
