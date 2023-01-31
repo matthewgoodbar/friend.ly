@@ -98,4 +98,17 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res)
     }
 });
 
+router.patch('/:id', async (req, res) => {
+    try {
+        await Message.updateOne({ _id: req.params.id },
+            {
+                body: req.body.text
+            });
+        const message = Message.findById(req.params.id);
+        return res.json(message);
+    } catch (err) {
+        debug(err);
+    }
+});
+
 module.exports = router;

@@ -7,7 +7,7 @@ import ChatBox from '../ChatBox/ChatBox'
 import MessagesRightSideBar from '../MessagesRightSideBar/MessagesRightSideBar'
 import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
-import { fetchChatMessages, receiveNewMessage } from '../../store/messages';
+import { fetchChatMessages, receiveNewMessage, receiveEditedMessage } from '../../store/messages';
 import io from "socket.io-client";
 import "./MessagesPage.css"
 
@@ -51,6 +51,10 @@ const MessagesPage = () => {
         dispatch(receiveNewMessage(msgObj))
       });
 
+      socket.on("message edited", (msgObj) => {
+        dispatch(receiveEditedMessage(msgObj))
+      });
+
       socket.on("fetch chatrooms", ({ userId, contactId}) => {
         if (contactId === user._id || userId === user._id) {
           dispatch(fetchUserChatrooms(user._id)).then(async (res) => {
@@ -58,12 +62,8 @@ const MessagesPage = () => {
 
             chatrooms.chats.forEach((chatroom) => {
               socket.emit("leave", chatroom._id)
-            })
-
-            chatrooms.chats.forEach((chatroom) => {
               socket.emit("setup", chatroom._id)
             })
-
           })
           // the problem: I need to setup the room between the two users
         }
