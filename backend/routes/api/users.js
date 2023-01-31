@@ -112,7 +112,15 @@ router.patch('/:id', restoreUser, async (req, res) => {
     editedUser.image = image;
     editedUser.location = location;
     await editedUser.save();
-    return res.json(await loginUser(editedUser));
+    const userInfo = {
+      _id: editedUser._id,
+      username: editedUser.username,
+      email: editedUser.email,
+      location: editedUser.location,
+      image: editedUser.image,
+      pings: editedUser.pings
+  };
+    return res.json({ user: userInfo });
   } catch(err) {
     debug(err);
   }
