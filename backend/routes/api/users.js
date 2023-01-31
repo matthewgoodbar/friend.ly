@@ -105,16 +105,14 @@ router.patch('/:id', restoreUser, async (req, res) => {
         });
       });
     }
-    const editedUser = User.updateOne({ _id: req.params.id },
-      {
-        username,
-        password,
-        email,
-        image,
-        location
-      });
-      debug("this is the edited user")
-      debug(editedUser)
+    const editedUser = await User.findById(req.params.id);
+    editedUser.username = username;
+    editedUser.password = password;
+    editedUser.email = email;
+    editedUser.image = image;
+    editedUser.location = location;
+    await editedUser.save();
+    return res.json(await loginUser(editedUser));
   } catch(err) {
     debug(err);
   }
