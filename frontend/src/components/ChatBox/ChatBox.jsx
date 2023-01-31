@@ -115,7 +115,7 @@ const bannerName = () => {
                                     {/* <img src={message.author.image || logo} alt="" width="50px" /> */}
 
                                     {message.author.image ? <img src={message.author.image } alt={message.author.username} /> :
-                                        <div className="letter-avatar" style={{backgroundColor: random_color}}>{message.username.split('')[0].toUpperCase()}</div>
+                                        <div className="letter-avatar" style={{backgroundColor: random_color}}>{message.author.username.split('')[0].toUpperCase()}</div>
                                         }
                                   </figure>
                                   <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
