@@ -10,8 +10,14 @@ const Message = ({ message, activeChatRoom, socket }) => {
     const [isEdit, setIsEdit] = useState(false)
     const [editedText, setEditedText] = useState(message.body)
 
-    const colors = ['#14eecd', '#d170d0', '#8a2be2', '#ffd700'];
-    const random_color = colors[Math.floor(Math.random() * colors.length)];
+
+    const alphbet ='abcdefghijklnmopqrstuvwxyz'
+    const firstLetter = message.author.username[0].toLowerCase();
+    const indexOfFirst = alphbet.indexOf(firstLetter)
+
+    const colors = ['#14eecd', '#d170d0', '#8a2be2', '#ffd700','#f1908e','#aa00ff', '#14f111','#e86e4d','#cb4273'];
+    // const random_color = colors[Math.floor(Math.random() * colors.length)];
+    const random_color = colors[indexOfFirst % colors.length]
 
     const timeFormat = date => {
         const dateObject = new Date(date);
@@ -53,37 +59,37 @@ const Message = ({ message, activeChatRoom, socket }) => {
     }
 
 
-  return (
-      <div className={message.author.username === user.username ? "message currentUser" : "message"}>
-          <p><strong>{message.author.username}</strong></p>
-          <div className="bubble">
-              <div className="who">
-                  <figure>
-                      {message.author.image ? <img src={message.author.image} alt={message.author.username} /> :
-                          <div className="letter-avatar" style={{ backgroundColor: random_color }}>{message.author.username[0].toUpperCase()}</div>
-                      }
-                  </figure>
-                  <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
-              </div>
-              {isEdit && (
-                  <cite>
-                      <textarea cols="30" rows="10" value={editedText} onChange={e => setEditedText(e.target.value) }></textarea>
-                      <button onClick={e => { submitEditMessage(e) }}>edit</button>
-                  </cite>
-              )}
+    return (
+        <div className={message.author.username === user.username ? "message currentUser" : "message"}>
+            <p><strong>{message.author.username}</strong></p>
+            <div className="bubble">
+                <div className="who">
+                    <figure>
+                        {message.author.image ? <img src={message.author.image} alt={message.author.username} /> :
+                            <div className="letter-avatar" style={{ backgroundColor: random_color }}>{message.author.username[0].toUpperCase()}</div>
+                        }
+                    </figure>
+                    <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
+                </div>
+                {isEdit && (
+                    <cite>
+                        <textarea cols="30" rows="10" value={editedText} onChange={e => setEditedText(e.target.value) }></textarea>
+                        <button onClick={e => { submitEditMessage(e) }}>edit</button>
+                    </cite>
+                )}
 
-              {!isEdit && (
-                  <cite>
-                      {message.body}
-                  </cite>
-              )}
+                {!isEdit && (
+                    <cite>
+                        {message.body}
+                    </cite>
+                )}
 
-          </div>
-          {message.author._id === user._id && (<div onClick={e => setEditClickHandler(e)}>edit</div>)}
-          {message.author._id === user._id && (<div onClick={e => deleteClickHandler(e)}>delete</div>)}
-          {message.createdAt !== message.updatedAt && (<div>edited</div>)}
-      </div>
-  )
+            </div>
+            {message.author._id === user._id && (<div onClick={e => setEditClickHandler(e)}>edit</div>)}
+            {message.author._id === user._id && (<div onClick={e => deleteClickHandler(e)}>delete</div>)}
+            {message.createdAt !== message.updatedAt && (<div>edited</div>)}
+        </div>
+    )
 }
 
 export default Message

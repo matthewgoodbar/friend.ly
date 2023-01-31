@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const debug = require('debug')('backend:server');
 const { loginUser, restoreUser } = require('../../config/passport');
+const { addUserToQueue, removeUserFromQueue } = require('../../config/chatGeneration');
 const { isProduction } = require('../../config/keys');
 const validateLoginInput = require('../../validations/login');
 const validateRegisterInput = require('../../validations/register');
@@ -88,6 +89,20 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
   })(req, res, next);
 });
 
+//Puts current user in queue
+router.get('/enqueue', restoreUser, async (req, res) => {
+  const user = req.user;
+  await addUserToQueue(user._id);
+  return res.json({ message: 'success' });
+});
+
+//Removes current user from queue
+router.get('/dequeue', restoreUser, async (req, res) => {
+  const user = req.user;
+  await removeUserFromQueue(user._id);
+  return res.json({ message: 'success' });
+});
+
 router.patch('/:id', restoreUser, async (req, res) => {
   const user = req.user;
   let username = req.body.username || user.username;
@@ -107,12 +122,20 @@ router.patch('/:id', restoreUser, async (req, res) => {
     }
     const editedUser = await User.findById(req.params.id);
     editedUser.username = username;
-    editedUser.password = password;
+    editedUser.hashedPassword = password;
     editedUser.email = email;
     editedUser.image = image;
     editedUser.location = location;
     await editedUser.save();
-    return res.json(await loginUser(editedUser));
+    const userInfo = {
+      _id: editedUser._id,
+      username: editedUser.username,
+      email: editedUser.email,
+      location: editedUser.location,
+      image: editedUser.image,
+      pings: editedUser.pings
+  };
+    return res.json(userInfo);
   } catch(err) {
     debug(err);
   }
