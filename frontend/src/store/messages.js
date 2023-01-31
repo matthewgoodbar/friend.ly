@@ -75,7 +75,6 @@ export const editMessage = (socket, activeChatRoom, data) => async dispatch => {
       body: JSON.stringify(data)
     });
     const message = await res.json();
-    console.log(message)
     socket.emit("edit message", { message, activeChatRoom } );
   } catch (err) {
     console.log("error in editMessage")
@@ -90,11 +89,11 @@ export const editMessage = (socket, activeChatRoom, data) => async dispatch => {
 
 const updateMessageInState = (newMessage, state) => {
   state.all.forEach((message, i) => {
-    if (message.id === newMessage.id) {
+    if (message._id === newMessage._id) {
       state.all[i] = newMessage
     }
   });
-  return state
+  return { ...state }
 }
 
 const messagesReducer = (state = { all: {}, unread: {} }, action) => {

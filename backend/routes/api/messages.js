@@ -105,8 +105,13 @@ router.patch('/:id', async (req, res) => {
             {
                 body: req.body.body
             });
-        const message = await Message.findById(req.params.id);
-        debug(message)
+        const message = await Message.findById(req.params.id)
+                    .populate({
+                        path: 'author',
+                        select: '_id username image'
+                    });
+        await Chat.updateOne({ _id: message.chatId },
+            { $push: { messages: message._id } });
         return res.json(message);
     } catch (err) {
         // debug(err);

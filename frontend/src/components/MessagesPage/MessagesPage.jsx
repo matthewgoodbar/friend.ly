@@ -65,7 +65,6 @@ const MessagesPage = () => {
               socket.emit("setup", chatroom._id)
             })
           })
-          // the problem: I need to setup the room between the two users
         }
       });
     })

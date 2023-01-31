@@ -9,6 +9,7 @@ const Message = ({ message, activeChatRoom, socket }) => {
     const user = useSelector(state => state.session.user)
     const [isEdit, setIsEdit] = useState(false)
     const [editedText, setEditedText] = useState(message.body)
+    const messages = useSelector(state => Object.values(state.messages.all).sort((a, b) => a.createdAt - b.createdAt));
 
     const colors = ['#14eecd', '#d170d0', '#8a2be2', '#ffd700'];
     const random_color = colors[Math.floor(Math.random() * colors.length)];
