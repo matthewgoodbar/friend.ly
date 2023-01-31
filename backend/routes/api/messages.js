@@ -100,14 +100,16 @@ router.post('/chat/:chatId', requireUser, validateMessageInput, async (req, res)
 
 router.patch('/:id', async (req, res) => {
     try {
+
         await Message.updateOne({ _id: req.params.id },
             {
-                body: req.body.text
+                body: req.body.body
             });
-        const message = Message.findById(req.params.id);
+        const message = await Message.findById(req.params.id);
+        debug(message)
         return res.json(message);
     } catch (err) {
-        debug(err);
+        // debug(err);
     }
 });
 

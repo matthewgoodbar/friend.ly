@@ -75,6 +75,7 @@ export const editMessage = (socket, activeChatRoom, data) => async dispatch => {
       body: JSON.stringify(data)
     });
     const message = await res.json();
+    console.log(message)
     socket.emit("edit message", { message, activeChatRoom } );
   } catch (err) {
     console.log("error in editMessage")
