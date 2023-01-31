@@ -88,23 +88,30 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
   })(req, res, next);
 });
 
-router.patch('/:id', validateRegisterInput, async (req, res) => {
+router.patch('/:id', restoreUser, validateRegisterInput, async (req, res) => {
+  const user = req.user;
+  let username = req.body.username || user.username;
+  let password = req.body.password || user.hashedPassword;
+  let email = req.body.email || user.email;
+  let image = req.body.image || user.image;
+  let location = req.body.location || user.location;
   try {
-    let newHashedPass;
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) throw err;
-      bcrypt.hash(req.body.password, salt, async (err, hashedPassword) => {
+    if (req.body.password) {
+      bcrypt.genSalt(10, (err, salt) => {
         if (err) throw err;
-        newHashedPass = hashedPassword;
+        bcrypt.hash(req.body.password, salt, async (err, hashedPassword) => {
+          if (err) throw err;
+          password = hashedPassword;
+        });
       });
-    });
-    User.updateOne({ _id: req.params.id },
+    }
+    User.updateOne({ _id: req.params._id },
       {
-        username: req.body.username,
-        hashedPassword: newHashedPass,
-        email: req.body.email,
-        image: req.body.image,
-        location: req.body.location
+        username,
+        password,
+        email,
+        image,
+        location
       });
   } catch(err) {
     debug(err);
