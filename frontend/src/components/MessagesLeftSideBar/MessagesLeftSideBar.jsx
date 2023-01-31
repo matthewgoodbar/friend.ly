@@ -7,6 +7,7 @@ import DMPartition from '../DMPartition/DMPartition'
 import { useDispatch, useSelector } from "react-redux";
 
 
+
 //logos
 import thai from '../../assets/thai.png'
 import michael from '../../assets/michael.png'
@@ -81,7 +82,6 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
             allContacts.push(dailyContactsNoDM[key])
         }
 
-        
         return allContacts.map((contact, i) => {
             if (user._id !== contact._id) {
                 return <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom} socket={socket} />

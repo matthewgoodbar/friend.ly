@@ -138,6 +138,11 @@ margin: 20px;
     border-bottom-left-radius: var(--base-unit);
     width: 100%;
 }
+.bubbles .bubble div {
+    border-top-left-radius: var(--base-unit);
+    border-bottom-left-radius: var(--base-unit);
+    width: 100%; 
+}
 .bubbles .bubble cite {
     grid-area: cite;
     line-height: 1.5;

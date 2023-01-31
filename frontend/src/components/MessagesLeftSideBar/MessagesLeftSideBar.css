@@ -178,3 +178,20 @@ aside.leftSidebar .directMessages button.awaiting  {
 aside.leftSidebar .directMessages button.awaiting:hover  {
     background-color: transparent;
 }
+
+aside.leftSidebar .directMessages button figure div {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--base-unit)*6);
+    border: 2px solid var(--color-transparent-black);
+    border-collapse: separate;
+}
+
+.letter-avatar {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
+    font-size: 30px;
+    color: white;
+}

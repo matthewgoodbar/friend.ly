@@ -50,7 +50,7 @@ const vivian = new User ({
     username: 'vivian',
     email: 'vivian@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
-    image: "https://i.imgur.com/DN8158s.jpg",
+    // image: "https://i.imgur.com/DN8158s.jpg",
     topics: [],
     daily: null,
     chats: [],
