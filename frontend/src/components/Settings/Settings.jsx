@@ -27,24 +27,36 @@ const Settings = () => {
     if (tab==="location") {
       let editedUser = {
         location: {
-          zipCode,
+          zip: zipCode,
           city
         }
       }
       dispatch(updateUser(editedUser,user._id))
 
     } else if (tab === "personalInfo") {
+      console.log("trying to submit personalInfo form")
       let editedUser = {
         username,
         email,
-        image
+        image,
+        location: {
+          zip: zipCode,
+          city
+        },
+        password
       }
-      dispatch(updateUser(editedUser,user._id))
+      console.log("dispatching this:",editedUser)
+      dispatch(updateUser(editedUser,user._id)).then(()=>{
+        console.log("submited personalInfo form")
+      })
+      
+
     } else if (tab === "password") {
       let editedUser = {
         password
       }
       dispatch(updateUser(editedUser,user._id))
+
     }
   }
 
