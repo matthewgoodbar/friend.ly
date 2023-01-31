@@ -4,8 +4,7 @@ import { RECEIVE_USER_LOGOUT } from './session';
 const RECEIVE_CHAT_MESSAGES = "RECEIVE_CHAT_MESSAGES";
 const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 const RECEIVE_EDITED_MESSAGE = "RECEIVE_EDITED_MESSAGE"
-const RECEIVE_UNREAD_MESSAGE = "RECEIVE_UNREAD_MESSAGE"
-const CLEAR_UNREAD_MESSAGE = "CLEAR_UNREAD_MESSAGE"
+const DELETE_MESSAGE = "DELETE_MESSAGE"
 
 //Actions
 
@@ -24,14 +23,9 @@ export const receiveEditedMessage = message => ({
   message
 });
 
-export const receiveUnreadMessage = message => ({
-  type: RECEIVE_UNREAD_MESSAGE,
-  message
-});
-
-export const clearUnreadMessage = chatId => ({
-  type: CLEAR_UNREAD_MESSAGE,
-  chatId
+export const deleteMessage = messageId => ({
+  type: DELETE_MESSAGE,
+  messageId
 });
 
 
@@ -88,13 +82,38 @@ export const editMessage = (socket, activeChatRoom, data) => async dispatch => {
 //Regular Reducer
 
 const updateMessageInState = (newMessage, state) => {
-  state.all.forEach((message, i) => {
+
+  for (let i = 0; i < state.all.length; i++) {	
+    let message = state.all[i]
     if (message._id === newMessage._id) {
       state.all[i] = newMessage
+      break
+    }
+  }
+
+  return { ...state }
+
+  // state.all.forEach((message, i) => {
+  //   if (message._id === newMessage._id) {
+  //     state.all[i] = newMessage
+  //   }
+  // });
+  // return { ...state }
+}
+
+const deleteMessageInState = (messageId, state) => {
+  let delIndex;
+  state.all.forEach((message, i) => {
+    if (message._id === messageId) {
+      delIndex = i
     }
   });
+  state.all.splice(delIndex, 1)
   return { ...state }
 }
+
+
+
 
 const messagesReducer = (state = { all: {}, unread: {} }, action) => {
     switch(action.type) {
@@ -107,6 +126,9 @@ const messagesReducer = (state = { all: {}, unread: {} }, action) => {
 
       case RECEIVE_EDITED_MESSAGE:
         return updateMessageInState(action.message, state)
+
+      case DELETE_MESSAGE:
+        return deleteMessageInState(action.messageId, state)
 
       default:
         return state;
