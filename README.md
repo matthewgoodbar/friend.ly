@@ -99,9 +99,14 @@ io.on("connection", (socket) => {
 
 #### [Yelp-Fusion library](https://github.com/Yelp/yelp-fusion).
  
-Yelp-Fusion provided some technical challenges with cors protocol. To overcome this, we installed the [cors library](https://expressjs.com/en/resources/middleware/cors.html).
+Yelp-Fusion provided some technical challenges with cors protocol. To avoid the CORS policy, we installed the [cors library](https://expressjs.com/en/resources/middleware/cors.html).
+Now to use the cors library, all you have to do is call the app.use() function on our app.
+```js
+app.use(cors());
+```
 
-code snippets
+Afterwards, created API endpoint using app.get() in the backend.
+
 ```js
 const express = require('express');
 const router = express.Router();
