@@ -4,12 +4,14 @@ const User = require('../models/User');
 const Topic = require('../models/Topic');
 const Chat = require('../models/Chat');
 const Message = require("../models/Message.js");
+const debug = require('debug')('backend:server');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const topics = require('./topicSeeds');
 const _ = require('underscore');
+const { addUserToQueue } = require('../config/chatGeneration')
 
-const NUM_SEED_USERS = 10;
+const NUM_SEED_USERS = 40;
 
 // Create users
 const users = [];
@@ -19,7 +21,7 @@ const matthew = new User ({
     email: 'matthew@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
     image: "https://i.imgur.com/YiWuKeh.jpg",
-    topics: [],
+    topics: _.sample(topics, 4),
     daily: null,
     chats: [],
     pings: [],
@@ -100,8 +102,8 @@ users.push(evgenii);
 users.push(diego);
 
 for (let i = 1; i < NUM_SEED_USERS; i++) {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
     users.push(
         new User ({
             username: faker.internet.userName(firstName, lastName),
@@ -124,7 +126,7 @@ const chats = [];
 
 const dailyGroup = new Chat({
     users: [
-        matthew._id,
+        // matthew._id,
         marcos._id,
         vivian._id,
         evgenii._id,
@@ -135,7 +137,13 @@ const dailyGroup = new Chat({
     topic: topics[23]._id
 });
 chats.push(dailyGroup);
-[matthew, marcos, vivian, evgenii, diego].forEach((user) => {
+[
+    // matthew, 
+    marcos, 
+    vivian, 
+    evgenii, 
+    diego
+].forEach((user) => {
     user.daily = dailyGroup._id;
 });
 
@@ -174,7 +182,8 @@ const insertSeeds = () => {
                 .then(() => User.insertMany(users))
                 .then(() => Topic.insertMany(topics))
                 .then(() => Chat.insertMany(chats))
-                .then(() => {
+                .then(async () => {
+                    await addSeedsToQueue();
                     console.log("Done!");
                     mongoose.disconnect();
                 })
@@ -183,3 +192,10 @@ const insertSeeds = () => {
                     process.exit(1);
                 });
 }
+
+const addSeedsToQueue = async () => {
+    for (let i = 0; i < users.length; i++) {
+        await addUserToQueue(users[i]._id);
+        debug(i);
+    }
+};

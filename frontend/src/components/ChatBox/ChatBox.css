@@ -179,6 +179,7 @@ margin: 20px;
     display: flex;
     padding: calc(var(--base-unit)*5);
     justify-content: space-between;
+    position: relative;
 }
 .messengerComponent form input {
     background-color: white;
@@ -187,6 +188,7 @@ margin: 20px;
     padding-left: calc(var(--base-unit)*5);
     width: -webkit-fill-available;
     width: -moz-available;
+    padding-right: 55px;
 }
 .messengerComponent form button {
     background-color: var(--color-pink);
@@ -203,3 +205,15 @@ margin: 20px;
     color: white;
     fill: white;
 }
+.messengerComponent form {
+    position: relative;
+}
+
+.messengerComponent form #symbols-counter{
+    position: absolute;
+    top: 59px;
+    right:97px;
+    color: grey;
+    font-size: 12px;
+}
+
