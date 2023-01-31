@@ -1,6 +1,5 @@
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from '../NavBar/NavBar.js'
 import './interest.css'
 import NavBarSide from '../NavBarSide/NavBarSide'
 import interestImg from './interest.png'
@@ -10,6 +9,7 @@ import List from './list'
 const InterestPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
+    const [highlighted,setHighlighted] = useState(false)
 
     // get all topics from state
     const allTopics = useSelector(getTopics)
@@ -31,11 +31,15 @@ const InterestPage = () => {
         }
         return false
     }
+
+    const highlightEmpty = () => {
+        setHighlighted(!highlighted)
+    }
+
     console.log("these are the userTopics",userTopics)
     const showList = userTopics.length === 0;
 
     return (
-    
         <div className="container interests">
         <NavBarSide />
             <div className="content">
@@ -48,11 +52,14 @@ const InterestPage = () => {
                             <ul className="empty">
                             <li>Please login to add interests</li>
                             </ul>
-                            } */}
+                        } */}
                             {userTopics.length < 3 && 
-                            <ul className="empty">
-                                <li>You need to pick at least 3 interests to join a new chat each day.</li>
-                            </ul>
+                            <>
+                                <div className="coverSideBar" onMouseOver={highlightEmpty} onMouseOut={highlightEmpty}></div> 
+                                <ul className="empty" id={highlighted ? "highlighted" : ""}>
+                                    <li>You need to pick at least 3 interests to join a new chat each day.</li>
+                                </ul>
+                            </>
                             }
                             
                             {!showList &&

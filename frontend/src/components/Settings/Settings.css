@@ -16,6 +16,7 @@
     font-weight: 700;
     font-size: 32px;
     letter-spacing: -0.05em;
+    margin-bottom: calc(var(--base-unit)*5);
     color: #000000;
     display: block;
 }
@@ -54,4 +55,37 @@
 }
 .settings form button:hover {
     background: #8904c6;
+}
+.settings form button:disabled, .settings form input:disabled {
+    background-color: var(--color-pink-light);
+    cursor: not-allowed;
+}
+.settings .tabs {
+    border-bottom: 1px solid var(--color-pink-light);
+    margin-bottom: calc(var(--base-unit)*8);
+    display: flex;
+}
+.settings .tabs button {
+    border: 0;
+    background-color: transparent;
+    font-weight: normal;
+    color: var(--color-primary);
+    border-radius: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid transparent;
+    padding: calc(var(--base-unit)*3);
+    width: -webkit-fill-available;
+    transition: 0.25s all;
+}
+.settings .tabs button:hover {
+    border-color: var(--color-pink-light);
+    cursor: pointer;
+}
+.settings .tabs button.active {
+    font-weight: bold;
+    color: var(--color-pink);
+    border-color: var(--color-pink);
+}
+.settings #get-zip-btn {
+    margin-bottom: 30px;
 }

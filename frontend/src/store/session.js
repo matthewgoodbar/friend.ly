@@ -58,6 +58,25 @@ export const getCurrentUser = () => async dispatch => {
     return dispatch(receiveCurrentUser(user));
 };  
 
+export const updateUser = (userInfo,userId) => async dispatch => {
+  console.log("enters updateUser reducer")
+  try {
+    const res = await jwtFetch(`/api/users/${userId}`, {
+      method: "PATCH",
+      body: JSON.stringify(userInfo)
+    });
+    const user = await res.json();
+    console.log("trying to dispatch the returned user from the backend",user)
+    return dispatch(receiveCurrentUser(user));
+  } catch(err) {
+    const res = await err.json();
+    console.log("error",err)
+    if (res.statusCode === 400) {
+      return dispatch(receiveErrors(res.errors));
+    }
+  }
+};  
+
   const nullErrors = null;
 
   export const sessionErrorsReducer = (state = nullErrors, action) => {

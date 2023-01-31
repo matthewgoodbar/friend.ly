@@ -39,7 +39,7 @@ const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
   const random_color = colors[Math.floor(Math.random() * colors.length)];
 
   return (
-    <button onClick={e => { chatClickHandler(e) }}>
+    <button className={contact.friendship} onClick={e => { chatClickHandler(e) }}>
         <figure>
         {contact.image ? <img src={contact.image} alt={contact.username} /> :
             <div className="letter-avatar" style={{backgroundColor: random_color}}>{letter}</div>
