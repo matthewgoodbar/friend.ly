@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react"; 
 import './ChatBox.css';
-import logo from "../../assets/logo-test.png";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveNewMessage, composeMessage } from '../../store/messages';
+import Message from "../Message/Message";
 
 
 //logos
@@ -22,12 +22,6 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
   const user = useSelector(state => state.session.user)
 
   const [inputValue, setInputValue] = useState('');
-  
-//code for scrolling new messages down
-
-  // useEffect(()=>{
-  //     chatHistory.current.scrollIntoView({ behavior: "smooth", block:"end" });
-  // }, [messages])
 
   useEffect(()=>{
     if(lastMessage.current){
@@ -48,26 +42,6 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
     setInputValue(event.target.value);
   };
 
-  const timeFormat = date=>{
-    const dateObject = new Date(date);
-    let hours = dateObject.getHours();
-    let minutes = dateObject.getMinutes();
-    let ampm = 'AM';
-    if (hours >= 12) {
-        ampm = 'PM';
-        hours = hours % 12;
-    }
-    if (hours === 0) {
-        hours = 12;
-    }
-    if (hours < 10) {
-        hours = "0" + hours;
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    return `${hours}:${minutes} ${ampm}`;
-  }
     
 
 const bannerName = () => {
@@ -88,10 +62,6 @@ const bannerName = () => {
   }
 }
 
-
-  const colors = ['#14eecd', '#d170d0', '#8a2be2','#ffd700'];
-  const random_color = colors[Math.floor(Math.random() * colors.length)];
-  
   return (
             <main className="messengerComponent">
 
@@ -100,39 +70,16 @@ const bannerName = () => {
                         <h4>{bannerName()}</h4>
                         </div>
                     </div>
-
-                    {/* actual message section */}
                     
                     <div className="bubbles" ref={chatHistory}>
-                    {/* { messages.length > 0 && populateMessages()} */}
 
                       { messages.map((message, index) =>  {
                         if (message.chat === activeChatRoom) {
-                          return (<div key={index} ref={index === messages.length - 1 ? lastMessage : null} className={message.author.username === user.username ? "message currentUser" : "message"}>
-                              <p><strong>{message.author.username}</strong></p>
-                              <div className="bubble">
-                                <div className="who">
-                                  <figure>
-                                    {/* <img src={message.author.image || logo} alt="" width="50px" /> */}
-
-                                    {message.author.image ? <img src={message.author.image } alt={message.author.username} /> :
-                                        <div className="letter-avatar" style={{backgroundColor: random_color}}>{message.author.username.split('')[0].toUpperCase()}</div>
-                                        }
-                                  </figure>
-                                  <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
-                                </div>
-                                <cite>
-                                  {message.body}
-                                </cite>
-                              </div>
-                            </div>)
+                          return <Message key={index} message={message} activeChatRoom={activeChatRoom} socket={socket}/>
                         }
-                        })}
-
-                        {/* actual message section */}
-
+                      })}
+                          
                     </div>
-
 
                     <form onSubmit={handleSubmit}>
                         <input type="text" placeholder="Type message..." value={text}
