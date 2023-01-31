@@ -49,6 +49,10 @@ io.on("connection", (socket) => {
     socket.to(activeChatRoom).emit("message edited", message);
   });
 
+  socket.on("delete message", ({ messageId, activeChatRoom }) => {
+    socket.to(activeChatRoom).emit("message deleted", messageId);
+  });
+
   socket.off("setup", () => {
     console.log("USER DISCONNECTED");
     socket.leave(userData._id);

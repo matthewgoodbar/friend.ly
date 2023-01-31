@@ -7,7 +7,7 @@ import ChatBox from '../ChatBox/ChatBox'
 import MessagesRightSideBar from '../MessagesRightSideBar/MessagesRightSideBar'
 import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
-import { fetchChatMessages, receiveNewMessage, receiveEditedMessage } from '../../store/messages';
+import { fetchChatMessages, receiveNewMessage, receiveEditedMessage, removeMessage } from '../../store/messages';
 import io from "socket.io-client";
 import "./MessagesPage.css"
 
@@ -53,6 +53,10 @@ const MessagesPage = () => {
 
       socket.on("message edited", (msgObj) => {
         dispatch(receiveEditedMessage(msgObj))
+      });
+
+      socket.on("message deleted", (msgId) => {
+        dispatch(removeMessage(msgId))
       });
 
       socket.on("fetch chatrooms", ({ userId, contactId}) => {

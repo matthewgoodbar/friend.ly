@@ -23,7 +23,7 @@ export const receiveEditedMessage = message => ({
   message
 });
 
-export const deleteMessage = messageId => ({
+export const removeMessage = messageId => ({
   type: DELETE_MESSAGE,
   messageId
 });
@@ -79,6 +79,23 @@ export const editMessage = (socket, activeChatRoom, data) => async dispatch => {
   }
 };
 
+export const deleteMessage = (socket, activeChatRoom, data) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/messages/${data._id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(data)
+    });
+    const messageId = await res.json();
+    socket.emit("delete message", { messageId, activeChatRoom });
+  } catch (err) {
+    console.log("error in editMessage")
+    // const resBody = await err.json();
+    // if (resBody.statusCode === 400) {
+    //   return dispatch(receiveErrors(resBody.errors));
+    // }
+  }
+};
+
 //Regular Reducer
 
 const updateMessageInState = (newMessage, state) => {
@@ -92,22 +109,18 @@ const updateMessageInState = (newMessage, state) => {
   }
 
   return { ...state }
-
-  // state.all.forEach((message, i) => {
-  //   if (message._id === newMessage._id) {
-  //     state.all[i] = newMessage
-  //   }
-  // });
-  // return { ...state }
 }
 
 const deleteMessageInState = (messageId, state) => {
+
   let delIndex;
-  state.all.forEach((message, i) => {
+  for (let i = 0; i < state.all.length; i++) {
+    let message = state.all[i]
     if (message._id === messageId) {
       delIndex = i
+      break
     }
-  });
+  }
   state.all.splice(delIndex, 1)
   return { ...state }
 }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react"; 
-import { editMessage } from '../../store/messages';
+import { editMessage, deleteMessage } from '../../store/messages';
 
 
 
@@ -40,6 +40,12 @@ const Message = ({ message, activeChatRoom, socket }) => {
         setIsEdit(!isEdit)
     }
 
+    const deleteClickHandler = (e) => {
+        e.stopPropagation()
+        dispatch(deleteMessage(socket, activeChatRoom, { _id: message._id }))
+
+    }
+
     const submitEditMessage = (e) => {
         e.stopPropagation()
         e.preventDefault()
@@ -75,6 +81,7 @@ const Message = ({ message, activeChatRoom, socket }) => {
 
           </div>
           {message.author._id === user._id && (<div onClick={e => setEditClickHandler(e)}>edit</div>)}
+          {message.author._id === user._id && (<div onClick={e => deleteClickHandler(e)}>delete</div>)}
           {message.createdAt !== message.updatedAt && (<div>edited</div>)}
       </div>
   )
