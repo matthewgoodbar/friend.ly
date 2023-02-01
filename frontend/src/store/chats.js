@@ -22,6 +22,8 @@ export const getActiveChatroom = (state) => {
     return null
 }
 
+// export const joinChat = user => startSession(user, 'api/users/register');
+
 
 //Thunk action Creators
 
@@ -40,6 +42,22 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
         // }
     }
 };
+
+export const joinQueue = () => async dispatch => {
+    try {
+        const res = await jwtFetch(`/api/users/enqueue`);
+        // const resClone = res.clone();
+        const backendResponse = await res.json();
+        return backendResponse
+    } catch (err) {
+        console.log("error in JoinQueue")
+        // const resBody = await err.json();
+        // if (resBody.statusCode === 400) {
+        //     dispatch(receiveErrors(resBody.errors));
+        // }
+    }
+};
+
 
 
 // const userDevHardCode = [

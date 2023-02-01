@@ -4,9 +4,12 @@ import './interest.css'
 import NavBarSide from '../NavBarSide/NavBarSide'
 import interestImg from './interest.png'
 import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
+
 import SingleInterest from "./SingleInterest.jsx";
 import List from './list'
 import { useHistory } from 'react-router-dom';
+
+import {fetchUserChatrooms,joinQueue} from "../../store/chats";
 
 const InterestPage = () => {
     const dispatch = useDispatch();
@@ -39,7 +42,8 @@ const InterestPage = () => {
     }
 
     const handleJoin =()=>{
-        history.push('/messages-page')
+        dispatch(joinQueue()).then((res) => dispatch(fetchUserChatrooms(user._id))).then(()=>history.push('/'))
+        
     }
 
     console.log("these are the userTopics",userTopics)

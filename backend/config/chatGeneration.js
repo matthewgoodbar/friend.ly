@@ -55,8 +55,8 @@ exports.fakeQueue = async (userId) => {
     for (let i = 0; i < 3; i++) {
         users.push(
             new User ({
-                username: faker.internet.userName(firstName, lastName),
-                email: faker.internet.email(firstName, lastName),
+                username: faker.internet.userName(faker.name.firstName()), //replaced firstName and lastName
+                email: faker.internet.email(faker.name.firstName()), //replaced firstName and lastName
                 hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
                 topics: [topic],
                 daily: null,
