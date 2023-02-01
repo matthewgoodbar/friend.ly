@@ -80,7 +80,7 @@ function LoginForm () {
         <input id="submit-btn"
           type="submit"
           value="LOG IN"
-          disabled={!email || !password}
+          // disabled={!email || !password}
         />
 
       </form>

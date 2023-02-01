@@ -19,6 +19,9 @@ function SignupForm () {
   const history = useHistory()
 
 
+  //test
+  // const [errors, setErrors] = useState({});
+
 
   // const [password2, setPassword2] = useState('');
   const errors = useSelector(state => state.errors.session);
@@ -53,9 +56,32 @@ function SignupForm () {
     return e => setState(e.currentTarget.value);
   }
 
+  // const validate = () => {
+  //   let newErrors = {};
+  //   if (!email) {
+  //     newErrors.email = 'Email is required';
+  //   } else if (!/\S+@\S+\.\S+/.test(email)) {
+  //     newErrors.email = 'Email is not valid';
+  //   }
+  //   if (!username) {
+  //     newErrors.username = 'Username is required';
+  //   } else if(username.length < 2){
+  //     newErrors.username = 'Username must be at least 2 characters';
+  //   }
+  //   if (!password) {
+  //     newErrors.password = 'Password is required';
+  //   } else if (password.length < 6) {
+  //     newErrors.password = 'Password must be at least 6 characters';
+  //   }
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+
   const usernameSubmit = e => {
     e.preventDefault();
     // if(!city )
+
+    // if(validate()){
     const user = {
       email,
       username,
@@ -64,8 +90,16 @@ function SignupForm () {
       zipCode
     };
 
-    dispatch(signup(user)).then(()=>history.push('/interests'))
-    
+    // dispatch(signup(user)).then(()=>history.push('/interests'))
+    // dispatch(signup(user))
+
+    dispatch(signup(user)).then((res)=> {
+      console.log(res)
+      if(!res.errors){
+        history.push('/interests')
+      }
+    })
+  // }
   }
 
   return (
@@ -96,6 +130,7 @@ function SignupForm () {
                   value={email}
                   onChange={update('email')}
                   placeholder="Email"
+                  required
                 />
               </label>
 
@@ -108,6 +143,7 @@ function SignupForm () {
                   value={username}
                   onChange={update('username')}
                   placeholder="Username"
+                  required
                 />
               </label>
 
@@ -120,6 +156,7 @@ function SignupForm () {
                 value={password}
                 onChange={update('password')}
                 placeholder="Password"
+                required
               />
             </label>
 
@@ -150,7 +187,7 @@ function SignupForm () {
             <input id="submit-btn"
               type="submit"
               value="SIGN UP"
-              disabled={!email || !username || !password /*|| password !== password2*/}
+              // disabled={!email || !username || !password /*|| password !== password2*/}
             />
 
           </form>
