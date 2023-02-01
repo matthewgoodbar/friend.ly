@@ -6,11 +6,13 @@ import interestImg from './interest.png'
 import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 import SingleInterest from "./SingleInterest.jsx";
 import List from './list'
+import { useHistory } from 'react-router-dom';
+
 const InterestPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const [highlighted,setHighlighted] = useState(false)
-
+    const history = useHistory()
     // get all topics from state
     const allTopics = useSelector(getTopics)
 
@@ -36,6 +38,10 @@ const InterestPage = () => {
         setHighlighted(!highlighted)
     }
 
+    const handleJoin =()=>{
+        history.push('/messages-page')
+    }
+
     console.log("these are the userTopics",userTopics)
     const showList = userTopics.length === 0;
 
@@ -53,13 +59,15 @@ const InterestPage = () => {
                             <li>Please login to add interests</li>
                             </ul>
                         } */}
-                            {userTopics.length < 3 && 
+                            {userTopics.length < 3 ? 
                             <>
                                 <div className="coverSideBar" onMouseOver={highlightEmpty} onMouseOut={highlightEmpty}></div> 
                                 <ul className="empty" id={highlighted ? "highlighted" : ""}>
                                     <li>You need to pick at least 3 interests to join a new chat each day.</li>
                                 </ul>
                             </>
+                            :
+                            <button id="join-chat-btn" onClick={handleJoin}>Join your daily chat</button>
                             }
                             
                             {!showList &&
