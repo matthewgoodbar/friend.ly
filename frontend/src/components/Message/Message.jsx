@@ -1,14 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react"; 
+import { useState, useEffect, useRef } from "react"; 
 import { editMessage, deleteMessage } from '../../store/messages';
 
 
 
 const Message = ({ message, activeChatRoom, socket }) => {
+
+    const chatHistory = useRef(null);
+    const lastMessage = useRef(null);
+
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const [isEdit, setIsEdit] = useState(false)
     const [editedText, setEditedText] = useState(message.body)
+
+    useEffect(()=>{
+        if(lastMessage.current){
+          lastMessage.current.scrollIntoView({ behavior: "smooth", block:"end" });
+        }
+    }, [message])
 
 
     const alphbet ='abcdefghijklnmopqrstuvwxyz'
@@ -60,7 +70,7 @@ const Message = ({ message, activeChatRoom, socket }) => {
 
 
     return (
-        <div className={message.author.username === user.username ? "message currentUser" : "message"}>
+        <div ref={lastMessage} className={message.author.username === user.username ? "message currentUser" : "message"}>
             <p><strong>{message.author.username}</strong></p>
             <div className="bubble">
                 <div className="who">
