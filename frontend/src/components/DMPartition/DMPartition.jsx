@@ -6,6 +6,7 @@ import { receiveNewMessage, composeMessage } from '../../store/messages';
 import dwight from '../../assets/dwight.png'
 import { createFriendship, destroyFriendship } from "../../store/friendships";
 import { fetchUserChatrooms } from "../../store/chats";
+import './DMPartition.css'
 
 
 

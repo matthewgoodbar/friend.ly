@@ -222,3 +222,8 @@ margin: 20px;
     font-size: 12px;
 }
 
+.bubbles.buuble div.letter_avatar{
+    border-top-left-radius: var(--base-unit);
+    border-bottom-left-radius: var(--base-unit);
+    width: 100%;
+}

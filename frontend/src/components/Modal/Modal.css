@@ -24,7 +24,7 @@
     z-index: 5000;
     background-color:var(--color-pink-light);
     max-width: 70vw;
-    max-height: 60vh;
+    /* max-height: 60vh; */
     width: 800px;
     border-radius: calc(var(--base-unit)*2);
     box-shadow: 0 0 calc(var(--base-unit)*10) var(--color-transparent-black-dark);

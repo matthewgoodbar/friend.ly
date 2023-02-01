@@ -66,7 +66,7 @@ const Message = ({ message, activeChatRoom, socket }) => {
                 <div className="who">
                     <figure>
                         {message.author.image ? <img src={message.author.image} alt={message.author.username} /> :
-                            <div className="letter-avatar" style={{ backgroundColor: random_color }}>{message.author.username[0].toUpperCase()}</div>
+                            <div className="letter-avatar-chat" style={{ backgroundColor: random_color }}>{message.author.username[0].toUpperCase()}</div>
                         }
                     </figure>
                     <time dateTime={message.createdAt}>{timeFormat(message.createdAt)}</time>
