@@ -97,13 +97,15 @@ const InterestPage = () => {
                     </div>
                     <h3>Food</h3>
                     <div className="carousel">
-                    {allTopics.map( (topic, i) => (topic.category === 'Food and Cooking' ?
+                    {allTopics.map( (topic, i) => 
+                    (topic.category === 'Food and Cooking' && !findObjectWithId(userTopics, topic._id)?
                             <SingleInterest interest={topic} key={i}/> : null)  
                     )}
                     </div>
                     <h3>Art</h3>
                     <div className="carousel">
-                    {allTopics.map( (topic, i) => ( topic.category === 'Art' ?
+                    {allTopics.map( (topic, i) => 
+                    ( topic.category === 'Art' && !findObjectWithId(userTopics, topic._id)?
                             <SingleInterest interest={topic} key={i}/> : null)  
                     )}
                     </div>

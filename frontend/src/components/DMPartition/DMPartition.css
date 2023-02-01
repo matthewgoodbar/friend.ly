@@ -18,7 +18,7 @@ div.letter-avatar-chat{
     line-height: 56px;
     font-size: 20px;
     color: white;
-    border: 2px solid var(--color-transparent-black);
+    /* border: 2px solid var(--color-transparent-black); */
     border-collapse: separate;
     border-top-left-radius: var(--base-unit);
     border-bottom-left-radius: var(--base-unit);
