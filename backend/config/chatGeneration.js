@@ -53,24 +53,22 @@ exports.fakeQueue = async (userId) => {
     const topic = _.sample(userObj.topics);
     const users = [userObj];
     for (let i = 0; i < 3; i++) {
-        
-        let randNumTag = Math.floor(Math.random() * 1000);
-        let userTag = faker.name.firstName() + faker.name.lastName() + randNumTag;
-
-        users.push(
-            new User ({
-                username: faker.internet.userName(userTag), 
-                email: faker.internet.email(userTag), 
-                hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
-                topics: [topic],
-                daily: null,
-                chats: [],
-                pings: [userObj._id],
-                location: userObj.location
-            })
-        );
+        const firstName = faker.name.firstName();
+        const lastName = faker.name.lastName();
+        let fakeUser = new User ({
+            username: faker.internet.userName(firstName, lastName), 
+            email: faker.internet.email(firstName, lastName), 
+            hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+            topics: [topic],
+            daily: null,
+            chats: [],
+            pings: [userObj._id],
+            location: userObj.location
+        });
+        fakeUser.save();
+        users.push(fakeUser);
     }
-    User.insertMany(users);
+    // User.insertMany(users);
     const newChat = new Chat({
         users,
         topic,
