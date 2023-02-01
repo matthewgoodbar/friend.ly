@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const debug = require('debug')('backend:server');
 const { loginUser, restoreUser } = require('../../config/passport');
-const { addUserToQueue, removeUserFromQueue } = require('../../config/chatGeneration');
+const { addUserToQueue, removeUserFromQueue, fakeQueue } = require('../../config/chatGeneration');
 const { isProduction } = require('../../config/keys');
 const validateLoginInput = require('../../validations/login');
 const validateRegisterInput = require('../../validations/register');
@@ -92,7 +92,8 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
 //Puts current user in queue
 router.get('/enqueue', restoreUser, async (req, res) => {
   const user = req.user;
-  await addUserToQueue(user._id);
+  // await addUserToQueue(user._id);
+  await fakeQueue(user._id);
   return res.json({ message: 'success' });
 });
 

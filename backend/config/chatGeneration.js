@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Chat = mongoose.model('Chat');
 const Topic = mongoose.model('Topic');
+const bcrypt = require('bcryptjs');
+const { faker } = require('@faker-js/faker');
 const _ = require('underscore');
 
 exports.addUserToQueue = async (userId) => {
@@ -43,4 +45,35 @@ exports.removeUserFromQueue = async (userId) => {
     const userObj = await User.findById(userId);
     await Topic.updateMany({},
         { $pull: { users: userObj } });
+};
+
+exports.fakeQueue = async (userId) => {
+    debug('Faking chat queue...');
+    const userObj = await User.findById(userId);
+    const topic = _.sample(userObj.topics);
+    const users = [userObj];
+    for (let i = 0; i < 3; i++) {
+        users.push(
+            new User ({
+                username: faker.internet.userName(firstName, lastName),
+                email: faker.internet.email(firstName, lastName),
+                hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+                topics: [topic],
+                daily: null,
+                chats: [],
+                pings: [userObj._id],
+                location: userObj.location
+            })
+        );
+    }
+    User.insertMany(users);
+    const newChat = new Chat({
+        users,
+        topic,
+        messages: [],
+        daily: true
+    });
+    newChat.save();
+    await User.updateMany({ _id: { $in: users } },
+        { daily: newChat });
 };
