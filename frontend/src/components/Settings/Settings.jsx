@@ -21,6 +21,7 @@ const Settings = () => {
   const [locationFormReady,setLocationFormReady] = useState(false);
   const [passwordFormReady,setPasswordFormReady] = useState(false);
   const [tab,setTab] = useState("location");
+  const demoUser = user.email === "evgenii@friend.ly"
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,9 +35,11 @@ const Settings = () => {
       dispatch(updateUser(editedUser,user._id))
 
     } else if (tab === "personalInfo") {
+      let newEmail = email
+      if (demoUser) newEmail = "evgenii@friend.ly"
       let editedUser = {
         username,
-        email,
+        email: newEmail,
         image,
         location: {
           zip: zipCode,
@@ -111,6 +114,7 @@ const Settings = () => {
 
             { tab === "personalInfo" && (
               <form onSubmit={handleSubmit}>
+              {demoUser && (<div className="alert">The email of the demo user can't be changed</div>)}
                   <div>
                       <label>Username<br/>
                           <input type="text" onChange={(e)=>setUsername(e.currentTarget.value)} value={username} placeholder="Type your username here" required />
@@ -119,7 +123,7 @@ const Settings = () => {
                   </div>
                   <div>
                       <label>Email<br/>
-                          <input type="email" onChange={(e)=>setEmail(e.currentTarget.value)} value={email} placeholder="email@example.com" required />
+                          <input type="email" onChange={(e)=>setEmail(e.currentTarget.value)} value={email} placeholder="email@example.com" required disabled={demoUser ? "disabled" : ""} />
                       </label>
                       <div className="error">{error?.email}</div>
                   </div>
@@ -135,20 +139,21 @@ const Settings = () => {
 
             { tab === "password" && (
               <form onSubmit={handleSubmit}>
+                  {demoUser && (<div className="alert">This feature is disabled for the demo user</div>)}
                   <div>
                       <label>New password<br/>
-                          <input type="password" onChange={(e)=>setPassword(e.currentTarget.value)} value={password} placeholder="Type new password" required />
+                          <input type="password" onChange={(e)=>setPassword(e.currentTarget.value)} value={password} placeholder="Type new password" required disabled={demoUser ? "disabled" : ""} />
                       </label>
                       <div className="error">{error?.password}</div>
                   </div>
                   <div>
                       <label>Confirm new password<br/>
-                          <input type="password" onChange={(e)=>setPasswordConfirmation(e.currentTarget.value)} value={passwordConfirmation} placeholder="Type new password again" required />
+                          <input type="password" onChange={(e)=>setPasswordConfirmation(e.currentTarget.value)} value={passwordConfirmation} placeholder="Type new password again" required disabled={demoUser ? "disabled" : ""} />
                       </label>
                       <div className="error">{error?.password}</div>
                   </div>
 
-                  <button disabled={passwordFormReady ? null : "disabled"}>Save</button>
+                  <button disabled={passwordFormReady && !demoUser ? null : "disabled"}>Save</button>
               </form>
             )}
 

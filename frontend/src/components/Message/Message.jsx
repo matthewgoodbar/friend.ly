@@ -57,8 +57,7 @@ const Message = ({ message, activeChatRoom, socket }) => {
 
     const deleteClickHandler = (e) => {
         e.stopPropagation()
-        dispatch(deleteMessage(socket, activeChatRoom, { _id: message._id }))
-
+        if (window.confirm("Confirm to delete this message") == true) dispatch(deleteMessage(socket, activeChatRoom, { _id: message._id }))
     }
 
     const submitEditMessage = (e) => {
@@ -83,8 +82,8 @@ const Message = ({ message, activeChatRoom, socket }) => {
                 </div>
                 {isEdit && (
                     <cite>
-                        <textarea cols="30" rows="10" value={editedText} onChange={e => setEditedText(e.target.value) }></textarea>
-                        <button onClick={e => { submitEditMessage(e) }}>edit</button>
+                        <textarea cols="30" rows="8" value={editedText} onChange={e => setEditedText(e.target.value) }></textarea>
+                        <button onClick={e => { submitEditMessage(e) }}>Save</button>
                     </cite>
                 )}
 
@@ -95,9 +94,11 @@ const Message = ({ message, activeChatRoom, socket }) => {
                 )}
 
             </div>
-            {message.author._id === user._id && (<div onClick={e => setEditClickHandler(e)}>edit</div>)}
-            {message.author._id === user._id && (<div onClick={e => deleteClickHandler(e)}>delete</div>)}
-            {message.createdAt !== message.updatedAt && (<div>edited</div>)}
+            <div className="editDelete">
+                {message.author._id === user._id && (<div onClick={e => setEditClickHandler(e)}>edit ✏️</div>)}
+                {message.author._id === user._id && (<div onClick={e => deleteClickHandler(e)}>delete ❌</div>)}
+            </div>
+            {message.createdAt !== message.updatedAt && (<em>↑ edited</em>)}
         </div>
     )
 }

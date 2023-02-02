@@ -154,10 +154,44 @@ margin: 20px;
 }
 .bubbles .currentUser {
     margin-left: auto;
+    position: relative;
+}
+.bubbles .currentUser .editDelete {
+    display: none;
+}
+.bubbles .currentUser:hover .editDelete {
+    display: block;
+    position: absolute;
+    top: calc(var(--base-unit)*10);
+    left: calc(var(--base-unit) * -20);
+    background-color: white;
+    box-shadow: 0 0 var(--base-unit) var(--color-transparent-black);
+    padding: calc(var(--base-unit)*2);
+    border-radius: var(--base-unit);
+    z-index: 100;
+    text-align: right;
+}
+.bubbles .currentUser .editDelete div {
+    cursor: pointer;
+    color: var(--color-purple);
+    font-weight: bold;
+    padding: calc(var(--base-unit)*2);
+}
+.bubbles .currentUser .editDelete div:hover {
+    color: var(--color-purple-light);
+    background-color: var(--color-pink-light);
+    border-radius: var(--base-unit);
 }
 .bubbles .currentUser .bubble {
     grid-template-areas: 'cite who';
     grid-template-columns: 1fr 60px;
+}
+.bubbles .currentUser em {
+    font-size: 90%;
+    color: var(--color-transparent-black-dark);
+    display: flex;
+    justify-content: right;
+    margin: var(--base-unit) calc(var(--base-unit)*20) 0 0;
 }
 .bubbles .currentUser .bubble img {
     border-top-left-radius: 0;
@@ -178,6 +212,27 @@ margin: 20px;
     color: var(--color-transparent-black-dark);
     display: table;
     margin: 0 auto;
+}
+.bubbles .currentUser .bubble cite textarea {
+    font-family: 'Roboto', sans-serif;
+    border:1px solid vard(--color-pink-light);
+    background-color: transparent;
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*5);
+    color: white;
+    resize: none;
+}
+.bubbles .currentUser .bubble cite textarea:focus {
+    outline: 0;
+    border-color: white;
+}
+.bubbles .currentUser .bubble cite button {
+    border: 0;
+    border-radius: var(--base-unit);
+    color: white;
+    background-color: var(--color-pink);
+    padding: calc(var(--base-unit)*2) calc(var(--base-unit)*4);
+    cursor: pointer;
 }
 .messengerComponent form {
     background-color: var(--color-pink-light);

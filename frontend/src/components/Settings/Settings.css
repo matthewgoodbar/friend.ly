@@ -89,3 +89,10 @@
 .settings #get-zip-btn {
     margin-bottom: 30px;
 }
+.settings .alert {
+    background-color: #FFC107;
+    color: black;
+    border-radius: var(--base-unit);
+    padding: calc(var(--base-unit)*4);
+    margin-bottom: calc(var(--base-unit)*8);
+}
