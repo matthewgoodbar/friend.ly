@@ -67,6 +67,8 @@ export const deleteUserTopic =(userId, topicId) => async dispatch => {
             method: 'DELETE'
         })
         dispatch(removeUserTopic(topicId))
+        const topics = await res.json();
+        return topics
     }catch(err) {
         console.log("error in deleteUserTopic")
 

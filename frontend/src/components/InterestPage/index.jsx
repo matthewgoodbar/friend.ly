@@ -37,6 +37,11 @@ const InterestPage = () => {
         })    
     }, [])
 
+
+    useEffect(() => {
+
+    }, [userTopics])
+
     
     const findObjectWithId =(arr, id) => {
         const objWithIdIndex = arr.findIndex((obj) => obj._id === id);
@@ -51,19 +56,17 @@ const InterestPage = () => {
     }
 
     const handleJoin =()=>{
-        dispatch(fetchUserChatrooms(user._id)).then(()=>history.push('/'))
+        history.push('/')
     }
 
 
 
     const removeUserInterestHandler = (topic) => {
-        dispatch(deleteUserTopic(user._id, topic._id)).then(()=>{
-            let chatId = userTopics[0].chat || null
-            console.log(userTopics[0])
-            // console.log(activeChatName)
+        dispatch(deleteUserTopic(user._id, topic._id)).then((userTopicRes)=>{
+            let chatId = userTopicRes[0].chat || null
             if (activeChatName === topic.name) {
-                // dispatch(changeUserChatroom({ chatId, userId: user._id }))
-                if (chatId) setActiveChatName(userTopics[0].name)
+                dispatch(changeUserChatroom(chatId))
+                if (chatId) setActiveChatName(userTopicRes[0].name)
                 
             } 
         })
