@@ -11,7 +11,7 @@ const topics = require('./topicSeeds');
 const _ = require('underscore');
 const { addUserToQueue } = require('../config/chatGeneration')
 
-const NUM_SEED_USERS = 40;
+const NUM_SEED_USERS = 120;
 
 // Create users
 const users = [];
@@ -133,12 +133,12 @@ for (let i = 0; i < topics.length; i++) {
         topic: topics[i]._id
     });
     chats.push(topicChat);
-    topic[i].chat = topicChat._id;
+    topics[i].chat = topicChat._id;
 }
 
 users.forEach(user => {
     let userTopic = _.sample(user.topics);
-    let userChat = chats.find(element => element._id === userTopic._id);
+    let userChat = chats.find(element => element.topic === userTopic._id);
     userChat.users.push(user._id);
     user.daily = userChat._id;
 });
