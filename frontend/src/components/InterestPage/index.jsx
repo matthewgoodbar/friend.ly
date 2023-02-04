@@ -58,11 +58,11 @@ const InterestPage = () => {
 
     const removeUserInterestHandler = (topic) => {
         dispatch(deleteUserTopic(user._id, topic._id)).then(()=>{
-            let chatId = userTopics[0]._id || null
-            console.log(activeChatName)
+            let chatId = userTopics[0].chat || null
+            console.log(userTopics[0])
+            // console.log(activeChatName)
             if (activeChatName === topic.name) {
                 // dispatch(changeUserChatroom({ chatId, userId: user._id }))
-                console.log(userTopics)
                 if (chatId) setActiveChatName(userTopics[0].name)
                 
             } 
