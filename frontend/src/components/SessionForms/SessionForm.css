@@ -223,6 +223,7 @@ line-height: 21px;
     bottom: -85px;
     left: -50px;
 }
+
 #topic-rec{
     width:260px;
     height: 210px;
@@ -248,25 +249,42 @@ line-height: 21px;
         width: 400px;
         margin: 0 auto;
     }
+
+
     #big-rec{
         width: 400px;
         height: 200px;
-        background-color: #ffffff;
-        background: #FFFFFF;
+        background: url(https://friendly-aa.s3.us-west-1.amazonaws.com/chathistory.png);
+        background-size: cover;
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
     }
+
     
     #small-rec{
         width: 240px;
-        height: 140px;
+        height: 262px;
         background-color: #ffffff;
-        background: #FFFFFF;
+        background: url(https://friendly-aa.s3.us-west-1.amazonaws.com/sidebar.png);
+        background-size: cover;
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         border-radius: 4px; 
         position: absolute;
-        bottom: -66px;
-        left: -40px;
+        bottom: -463px;
+        left: 0px;
+    }
+
+    #topic-rec{
+        width:222px;
+        height: 177px;
+        background-color: #ffffff;
+        background: url(https://friendly-aa.s3.us-west-1.amazonaws.com/thaifood.png);
+        background-size: cover;
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+        border-radius: 4px; 
+        position: absolute;
+        bottom: -190px;
+        left: 178px;
     }
 }
 
@@ -281,4 +299,35 @@ line-height: 21px;
     #session-right-side{
         height: 1000px;
     }
+}
+
+@media(max-height: 903px){
+    .session-left-side #logo{
+        margin-top: 20px;
+        /* margin-left: -190px; */
+        /* margin-left: 30px; */
+        }
+
+    .session-left-side h2{
+            margin-top: 20px;
+            /* text-align: center; */
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 42px;
+            color: #333333;
+            /* margin-left: 30px; */
+            text-align: left;
+        }
+    #signup-offer p{
+            margin-top: 30px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 14px;
+            text-align: center;
+            color: #757575;
+        }
 }
