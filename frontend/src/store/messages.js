@@ -53,6 +53,7 @@ export const composeMessage = (socket, activeChatRoom, data) => async dispatch =
       });
       const message = await res.json();
       socket.emit("new message", { message, activeChatRoom });
+      dispatch(receiveNewMessage(message))
     } catch(err) {
       console.log("error in composeMessage")
       // const resBody = await err.json();

@@ -8,8 +8,9 @@ import MessagesRightSideBar from '../MessagesRightSideBar/MessagesRightSideBar'
 import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 import { fetchChatMessages, receiveNewMessage, receiveEditedMessage, removeMessage } from '../../store/messages';
-import io from "socket.io-client";
 import "./MessagesPage.css"
+import socket from '../../utils/socket';
+
 
 const MessagesPage = () => {
   const dispatch = useDispatch();
@@ -18,15 +19,6 @@ const MessagesPage = () => {
   const messages = useSelector(state => Object.values(state.messages.all).sort((a,b) => a.createdAt - b.createdAt));
 
   const [activeChatRoom, setActiveChatRoom] = useState("")
-
-  let socket;
-  if (process.env.NODE_ENV === "production") {
-   socket = io()
-  } else {
-    socket = io("http://localhost:5001", {
-      transports: ['websocket']
-    })
-  }
 
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))

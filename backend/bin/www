@@ -42,6 +42,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new message", ({ message, activeChatRoom }) => {
+    console.log(message)
     socket.to(activeChatRoom).emit("message recieved", message);
   });
 
