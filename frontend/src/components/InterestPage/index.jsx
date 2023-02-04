@@ -50,7 +50,7 @@ const InterestPage = () => {
     }
 
     const handleJoin =()=>{
-        history.push('/')
+        history.push('/messages-page')
     }
 
 
