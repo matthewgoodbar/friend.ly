@@ -16,13 +16,9 @@ const InterestPage = () => {
     const user = useSelector(state => state.session.user)
     const [highlighted,setHighlighted] = useState(false)
     const history = useHistory()
-    // get all topics from state
     const allTopics = useSelector(getTopics)
     const [activeChatName, setActiveChatName] = useState("")
-
-    //get current user's himself topics
     const userTopics = useSelector(getUserTopics)
-    // console.log(userTopics)
 
     useEffect( () => {
         dispatch(fetchAllTopics()) 
