@@ -93,14 +93,14 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
 router.get('/enqueue', restoreUser, async (req, res) => {
   const user = req.user;
   // await addUserToQueue(user._id);
-  await fakeQueue(user._id);
+  // await fakeQueue(user._id);
   return res.json({ message: 'success' });
 });
 
 //Removes current user from queue
 router.get('/dequeue', restoreUser, async (req, res) => {
   const user = req.user;
-  await removeUserFromQueue(user._id);
+  // await removeUserFromQueue(user._id);
   return res.json({ message: 'success' });
 });
 

@@ -21,7 +21,7 @@ const matthew = new User ({
     email: 'matthew@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
     image: "https://i.imgur.com/YiWuKeh.jpg",
-    topics: _.sample(topics, 4),
+    topics: [topics[5]],
     daily: null,
     chats: [],
     pings: [],
@@ -36,7 +36,7 @@ const marcos = new User ({
     email: 'marcos@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
     image: "https://i.imgur.com/zxiytKs.jpg",
-    topics: [],
+    topics: [topics[5]],
     daily: null,
     chats: [],
     pings: [],
@@ -51,7 +51,7 @@ const vivian = new User ({
     email: 'vivian@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
     // image: "https://i.imgur.com/DN8158s.jpg",
-    topics: [],
+    topics: [topics[5]],
     daily: null,
     chats: [],
     pings: [],
@@ -66,7 +66,7 @@ const evgenii = new User ({
     email: 'evgenii@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
     image: "https://i.imgur.com/XNPUclU.jpg",
-    topics: [],
+    topics: [topics[5]],
     daily: null,
     chats: [],
     pings: [],
@@ -81,7 +81,7 @@ const diego = new User ({
     email: 'diego@friend.ly',
     hashedPassword: bcrypt.hashSync('password', 10),
     image: "https://i.imgur.com/sClpoq6.jpg",
-    topics: [],
+    topics: [topics[5]],
     daily: null,
     chats: [],
     pings: [],
@@ -124,28 +124,47 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 //Create Chatrooms
 const chats = [];
 
-const dailyGroup = new Chat({
-    users: [
-        // matthew._id,
-        marcos._id,
-        vivian._id,
-        evgenii._id,
-        diego._id
-    ],
-    messages: [],
-    daily: true,
-    topic: topics[23]._id
+let topicChat;
+for (let i = 0; i < topics.length; i++) {
+    topicChat = new Chat({
+        users: [],
+        messages: [],
+        daily: true,
+        topic: topics[i]._id
+    });
+    chats.push(topicChat);
+    topic[i].chat = topicChat._id;
+}
+
+users.forEach(user => {
+    let userTopic = _.sample(user.topics);
+    let userChat = chats.find(element => element._id === userTopic._id);
+    userChat.users.push(user._id);
+    user.daily = userChat._id;
 });
-chats.push(dailyGroup);
-[
-    // matthew, 
-    marcos, 
-    vivian, 
-    evgenii, 
-    diego
-].forEach((user) => {
-    user.daily = dailyGroup._id;
-});
+
+// const dailyGroup = new Chat({
+//     users: [
+//         // matthew._id,
+//         marcos._id,
+//         vivian._id,
+//         evgenii._id,
+//         diego._id
+//     ],
+//     messages: [],
+//     daily: true,
+//     topic: topics[23]._id
+// });
+// chats.push(dailyGroup);
+// [
+//     // matthew, 
+//     marcos, 
+//     vivian, 
+//     evgenii, 
+//     diego
+// ].forEach((user) => {
+//     user.daily = dailyGroup._id;
+// });
 
 const marcosDiegoChat = new Chat({
     users: [
@@ -183,7 +202,7 @@ const insertSeeds = () => {
                 .then(() => Topic.insertMany(topics))
                 .then(() => Chat.insertMany(chats))
                 .then(async () => {
-                    await addSeedsToQueue();
+                    // await addSeedsToQueue();
                     console.log("Done!");
                     mongoose.disconnect();
                 })
