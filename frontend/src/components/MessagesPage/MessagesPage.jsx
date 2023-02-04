@@ -28,17 +28,12 @@ const MessagesPage = () => {
     })
   }
 
-
-
-
-
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
 
   useEffect(()=>{
-    dispatch(fetchUserChatrooms(user._id)).then( async (res)=>{
-      const chatrooms = await res.json()
+    dispatch(fetchUserChatrooms(user._id)).then(async (chatrooms)=>{
       setActiveChatRoom(chatrooms.daily._id)
 
       socket.emit("setup", chatrooms.daily._id)
@@ -61,8 +56,7 @@ const MessagesPage = () => {
 
       socket.on("fetch chatrooms", ({ userId, contactId}) => {
         if (contactId === user._id || userId === user._id) {
-          dispatch(fetchUserChatrooms(user._id)).then(async (res) => {
-            const chatrooms = await res.json()
+          dispatch(fetchUserChatrooms(user._id)).then(async (chatrooms) => {
 
             chatrooms.chats.forEach((chatroom) => {
               socket.emit("leave", chatroom._id)

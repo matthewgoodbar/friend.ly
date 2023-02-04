@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import './interest.css'
 import NavBarSide from '../NavBarSide/NavBarSide'
 import interestImg from './interest.png'
-import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
+import {deleteUserTopic, fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 
 import SingleInterest from "./SingleInterest.jsx";
 import List from './list'
 import { useHistory } from 'react-router-dom';
 
-import {fetchUserChatrooms,joinQueue} from "../../store/chats";
+import {changeUserChatroom, fetchUserChatrooms,joinQueue} from "../../store/chats";
 
 const InterestPage = () => {
     const dispatch = useDispatch();
@@ -26,9 +26,11 @@ const InterestPage = () => {
 
     useEffect( () => {
         dispatch(fetchAllTopics()) 
-        dispatch(fetchUserTopics(user._id)).then((userTopicArray)=>{
-            if (userTopicArray[0]) {
-                setActiveChatName(userTopicArray[0].name)
+        dispatch(fetchUserTopics(user._id))
+    
+        dispatch(fetchUserChatrooms(user._id)).then((chats) => {
+            if (chats.daily) {
+                setActiveChatName(chats.daily.topic.name)
             } else {
 
             }
@@ -49,8 +51,31 @@ const InterestPage = () => {
     }
 
     const handleJoin =()=>{
-        dispatch(joinQueue()).then((res) => dispatch(fetchUserChatrooms(user._id))).then(()=>history.push('/'))
-        
+        dispatch(fetchUserChatrooms(user._id)).then(()=>history.push('/'))
+    }
+
+
+
+    const removeUserInterestHandler = (topic) => {
+        // if active chat room === topic.name,
+
+        dispatch(deleteUserTopic(user._id, topic._id)).then(()=>{
+            let chatId = userTopics[0] ? userTopics[0] : null
+            if (activeChatName === topic.name) {
+
+                dispatch(changeUserChatroom({ chatId: userTopics[0].chatId, userId: user._id }))
+
+
+
+
+        } 
+
+        })
+        // active chat room should become [0] in topic array
+        // if there is no topic [0]
+        // active chat room should become null
+
+
     }
 
     const showList = userTopics.length === 0;

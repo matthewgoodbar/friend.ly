@@ -10,6 +10,8 @@ const List = ({ topic, setActiveChatName }) => {
         e.stopPropagation()
         e.preventDefault()
         dispatch(deleteUserTopic(user._id, topic._id))
+        // if active chat room === topic.name, 
+        // dispatch(changeUserChatroom(user._id, topic._id))
         // if user removes the current set chat, it needs to transition to a different chat. 
     }
 
