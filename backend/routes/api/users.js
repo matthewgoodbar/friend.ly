@@ -105,29 +105,30 @@ router.get('/dequeue', restoreUser, async (req, res) => {
 });
 
 router.patch('/chatswap', restoreUser, async (req, res) => {
-  const user = req.user;
+  let user = req.user;
   const chatId = req.body.chatId;
   if (user.daily) {
     await Chat.updateOne({ _id: user.daily },
-      { $pull: { users: user } });
+      { $pull: { users: user._id } });
   }
   if (chatId) {
     await Chat.updateOne({ _id: chatId },
-      { $push: { users: user } });
+      { $push: { users: user._id } });
   }
-  user.daily = chatId;
-  await user.save();
-  await user.populate({
+  await User.updateOne({ _id: user._id },
+    { daily: chatId });
+  user = await User.findById(user._id)
+  .populate({
     path: 'daily',
-      select: 'users topic daily',
-      populate: [{
-        path: 'users',
-        select: '_id username image pings'
-      },
-      {
-        path: 'topic',
-        select: '_id name description background thumbnail'
-      }]
+    select: 'users topic daily',
+    populate: [{
+      path: 'users',
+      select: '_id username image pings'
+    },
+    {
+      path: 'topic',
+      select: '_id name description background thumbnail'
+    }]
   })
   .populate({
     path: 'chats',
