@@ -5,14 +5,17 @@ import {Link} from "react-router-dom";
 
 import { login, clearSessionErrors } from '../../store/session';
 import { useHistory } from 'react-router-dom';
+import { fetchUserChatrooms } from '../../store/chats';
 
 function LoginForm () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
-  
+  const history = useHistory();
 
+  const chats = useSelector(state=>state.chats.daily)
+  
   useEffect(() => {
     return () => {
       dispatch(clearSessionErrors());
@@ -26,7 +29,15 @@ function LoginForm () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })); 
+    dispatch(login({ email, password })).then((res)=>{
+      console.log('im in dispatch login',res)
+      dispatch(fetchUserChatrooms(res.currentUser._id)).then((chatrooms)=>{
+        console.log("im in dispatch chatrooms", chatrooms)
+        if(!chatrooms.daily){
+          history.push('/interests')
+        }
+      })
+    })
   }
 
   const demoLoginV1 = (e) => {
