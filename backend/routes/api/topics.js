@@ -53,7 +53,9 @@ router.delete('/user/:userId', requireUser, async (req, res) => {
         const topicId = req.query.topicId;
         await User.updateOne({ _id: req.params.userId },
             { $pullAll: { topics: [topicId] } });
-        return res.json({ message: "success" });
+        const user = await User.findById(req.params.userId)
+            .populate('topics');
+        return res.json(user.topics);
     } catch(err) {
         debug(err);
         return res.json({ error: "Unable to remove topic from user object" })

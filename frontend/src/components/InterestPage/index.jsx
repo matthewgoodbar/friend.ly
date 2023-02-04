@@ -3,30 +3,38 @@ import { useDispatch, useSelector } from "react-redux";
 import './interest.css'
 import NavBarSide from '../NavBarSide/NavBarSide'
 import interestImg from './interest.png'
-import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
+import {deleteUserTopic, fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../store/topics.js";
 
 import SingleInterest from "./SingleInterest.jsx";
 import List from './list'
 import { useHistory } from 'react-router-dom';
 
-import {fetchUserChatrooms,joinQueue} from "../../store/chats";
+import {changeUserChatroom, fetchUserChatrooms,joinQueue} from "../../store/chats";
 
 const InterestPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const [highlighted,setHighlighted] = useState(false)
     const history = useHistory()
-    // get all topics from state
     const allTopics = useSelector(getTopics)
-
-    //get current user's himself topics
+    const [activeChatName, setActiveChatName] = useState("")
     const userTopics = useSelector(getUserTopics)
-    // console.log(userTopics)
 
     useEffect( () => {
         dispatch(fetchAllTopics()) 
-        dispatch(fetchUserTopics(user._id))    
+        dispatch(fetchUserTopics(user._id))
+        dispatch(fetchUserChatrooms(user._id)).then((chats) => {
+            if (chats.daily) setActiveChatName(chats.daily.topic.name)
+        })    
     }, [])
+
+
+    useEffect(() => {
+        if (userTopics.length === 1 && !activeChatName) {
+            dispatch(changeUserChatroom(userTopics[0].chat))
+            setActiveChatName(userTopics[0].name)
+        }
+    }, [userTopics])
 
     
     const findObjectWithId =(arr, id) => {
@@ -42,13 +50,29 @@ const InterestPage = () => {
     }
 
     const handleJoin =()=>{
-        dispatch(joinQueue()).then((res) => dispatch(fetchUserChatrooms(user._id))).then(()=>history.push('/'))
-        
+        history.push('/')
     }
 
-    console.log("these are the userTopics",userTopics)
-    const showList = userTopics.length === 0;
 
+
+    const removeUserInterestHandler = (topic) => {
+        dispatch(deleteUserTopic(user._id, topic._id)).then((userTopicRes)=>{
+            console.log(userTopicRes)
+            let chatId = userTopicRes[0]?.chat || null
+            if (activeChatName === topic.name) {
+                console.log(chatId)
+                dispatch(changeUserChatroom(chatId))
+                if (chatId)  {
+                    setActiveChatName(userTopicRes[0].name)
+                } else {
+                    setActiveChatName("")
+                }
+                
+            } 
+        })
+    }
+
+    const showList = userTopics.length === 0;
     return (
         <div className="container interests">
         <NavBarSide />
@@ -57,28 +81,31 @@ const InterestPage = () => {
                     <div className="innerAside">
                         <div className="title">
                             <h1>My Interests</h1> 
-                            <p>Based on your interests we'll select people with similar tastes to put you all into the same group chat.</p>
+                            <p>Choose your favorite topics and we'll pair you with people who love what you love.</p>
                             {/* {!user && 
                             <ul className="empty">
                             <li>Please login to add interests</li>
                             </ul>
                         } */}
-                            {userTopics.length < 3 ? 
+                            {userTopics.length < 1 ? 
                             <>
                                 <div className="coverSideBar" onMouseOver={highlightEmpty} onMouseOut={highlightEmpty}></div> 
                                 <ul className="empty" id={highlighted ? "highlighted" : ""}>
-                                    <li>You need to pick at least 3 interests to join a new chat each day.</li>
+                                    <li>You need to pick at least one interest to join the chat.</li>
                                 </ul>
                             </>
                             :
-                            <button id="join-chat-btn" onClick={handleJoin}>Join your daily chat</button>
+
+                            <>
+                                {activeChatName && (<button id="join-chat-btn" onClick={handleJoin}>{`${activeChatName} Chat`}</button>)}
+                            </>
                             }
                             
                             {!showList &&
                             <ul>
                             {userTopics.map(
                                 (topic, i) => (
-                                    <List topic={topic} key={i}/>
+                                    <List topic={topic} setActiveChatName={setActiveChatName} removeUserInterestHandler={removeUserInterestHandler}key={i}/>
                                 )
                             )}
                             </ul>

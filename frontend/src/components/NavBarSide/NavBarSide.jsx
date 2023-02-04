@@ -74,6 +74,14 @@ const NavBarSide = () => {
                                         <span>Messages</span>
                                     </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to={'/direct-messages-page'} activeClassName="active">
+                                        <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21.6 0.399994C23 0.399994 24 1.49997 24 2.79999C24 4.10002 24 17.2 24 17.2C24 18.52 22.92 19.6 21.6 19.6H4.8L0 24.4V2.79999C0 1.47999 1.08 0.399994 2.4 0.399994C6.5 0.399994 20.2 0.399994 21.6 0.399994Z" fill="currentColor" />
+                                        </svg>
+                                        <span>Messages</span>
+                                    </NavLink>
+                                </li>
                                 </>
                                 )}
                                 <li>

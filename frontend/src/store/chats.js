@@ -30,10 +30,9 @@ export const getActiveChatroom = (state) => {
 export const fetchUserChatrooms = (userId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/chats/user/${userId}`);
-        const resClone = res.clone()
         const chatrooms = await res.json();
         dispatch(receiveUserChatrooms(chatrooms));
-        return resClone
+        return chatrooms
     } catch (err) {
         console.log("error in fetchUserChatrooms")
         // const resBody = await err.json();
@@ -42,6 +41,25 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
         // }
     }
 };
+
+export const changeUserChatroom = (chatId) => async dispatch => {
+    try {
+        const res = await jwtFetch(`/api/users/chatswap/`, {
+            method: 'PATCH',
+            body: JSON.stringify({chatId})
+        });
+        const chatrooms = await res.json();
+        dispatch(receiveUserChatrooms(chatrooms));
+        return chatrooms
+    } catch (err) {
+        console.log("error in changeUserChatroom")
+        // const resBody = await err.json();
+        // if (resBody.statusCode === 400) {
+        //     dispatch(receiveErrors(resBody.errors));
+        // }
+    }
+};
+
 
 export const joinQueue = () => async dispatch => {
     try {

@@ -8,8 +8,9 @@ import MessagesRightSideBar from '../MessagesRightSideBar/MessagesRightSideBar'
 import YelpDataItems from '../YelpFetchData/YelpDataItems'
 import { changeChatroom, getActiveChatroom, fetchUserChatrooms } from "../../store/chats";
 import { fetchChatMessages, receiveNewMessage, receiveEditedMessage, removeMessage } from '../../store/messages';
-import io from "socket.io-client";
 import "./MessagesPage.css"
+import socket from '../../utils/socket';
+
 
 const MessagesPage = () => {
   const dispatch = useDispatch();
@@ -19,17 +20,17 @@ const MessagesPage = () => {
 
   const [activeChatRoom, setActiveChatRoom] = useState("")
 
-  let socket;
-  if (process.env.NODE_ENV === "production") {
-   socket = io()
-  } else {
-    socket = io("http://localhost:5001", {
-      transports: ['websocket']
-    })
-  }
+  const mainChatBool = window.location.pathname === "/messages-page"
+  if (mainChatBool) console.log(chats)
 
+  useEffect(() => {
+    if (chats.daily && mainChatBool) {
+      setActiveChatRoom(chats.daily._id)
+    } else {
+      setActiveChatRoom(null)
+    }
 
-
+  }, [chats, mainChatBool])
 
 
   useEffect(() => {
@@ -37,8 +38,7 @@ const MessagesPage = () => {
   }, [activeChatRoom])
 
   useEffect(()=>{
-    dispatch(fetchUserChatrooms(user._id)).then( async (res)=>{
-      const chatrooms = await res.json()
+    dispatch(fetchUserChatrooms(user._id)).then(async (chatrooms)=>{
       setActiveChatRoom(chatrooms.daily._id)
 
       socket.emit("setup", chatrooms.daily._id)
@@ -61,9 +61,7 @@ const MessagesPage = () => {
 
       socket.on("fetch chatrooms", ({ userId, contactId}) => {
         if (contactId === user._id || userId === user._id) {
-          dispatch(fetchUserChatrooms(user._id)).then(async (res) => {
-            const chatrooms = await res.json()
-
+          dispatch(fetchUserChatrooms(user._id)).then((chatrooms) => {
             chatrooms.chats.forEach((chatroom) => {
               socket.emit("leave", chatroom._id)
               socket.emit("setup", chatroom._id)
@@ -85,13 +83,15 @@ const MessagesPage = () => {
                 <NavBarSide />
 
                 <div className="content">
-            {chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} socket={socket} />)}
+            {chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} socket={socket} mainChatBool={mainChatBool} />)}
                   <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
-                  <YelpDataItems props={chats.daily.topic}/>
+                  { mainChatBool && (<YelpDataItems props={chats.daily.topic}/>)}
                 </div>
 
           </div>
       )
+    } else {
+      
     }
 }
 

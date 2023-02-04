@@ -45,6 +45,10 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
     
 
 const bannerName = () => {
+
+  if (!activeChatRoom) return "Click on a friend to chat with them"
+
+
   if (activeChatRoom === chats.daily._id) {
     return `You are all interested in ${chats.daily.topic.name}`
   } else {

@@ -15,7 +15,7 @@ import dwight from '../../assets/dwight.png'
 import pam from '../../assets/pam.png'
 import angela from '../../assets/angela.png'
 
-const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
+const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket, mainChatBool }) => {
     const user = useSelector(state => state.session.user)
 
     // const end = new Date();
@@ -46,47 +46,88 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
             return "awaiting"
         } else if (!userFriend && contactFriend) {
             return "requested"
+        } else if (userFriend && contactFriend) {
+            return "friend"
         } else {
             return "neutral"
         }
     }
 
 
+    const friendshipChatFinder = (dailyChatUser) => {
+        console.log(dailyChatUser)
+        for (let i = 0; i < chats.chats.length; i++) {
+            const chat = chats.chats[i];
+            for (let j = 0; j < chat.users.length; j++) {
+                const friend = chat.users[j];
+                if (dailyChatUser.username === friend.username) return chat._id
+            }
+            
+        }
+    }
+
 
 
     const chatSidebarAggregator = () => {
-        // look in chats.chats and identify the names of the users that have active dm chats with main user
-        // look in chats.dailys and make an array object that contains the chatId
 
-        const dmContacts = {}
-        chats.chats.forEach((dmChat)=> {
-            dmChat.users.forEach((dmChatUser)=> {
-                if (dmChatUser.username !== user.username) {
-                    dmContacts[dmChatUser.username] = { ...dmChatUser, chatId: dmChat._id, friendship: "friend"}
-                    }
-            })
-        })
-
-        const dailyContactsNoDM = {}
-        chats.daily.users.forEach((dailyChatUser) => {
-            if (dailyChatUser.username !== user.username && !dmContacts[dailyChatUser.username] ) {
-                dailyContactsNoDM[dailyChatUser.username] = { ...dailyChatUser, chatId: null, friendship: friendshipEvaluator(dailyChatUser)}
+        let dmContacts = []
+        if (mainChatBool) {
+            chats.daily.users.forEach((dailyChatUser) => {
+            if (dailyChatUser.username !== user.username) {
+                const contactObj = { ...dailyChatUser, friendship: friendshipEvaluator(dailyChatUser) }
+                if (contactObj.friendship === "friend") {
+                    contactObj.chatId = friendshipChatFinder(dailyChatUser)
+                } else {
+                    contactObj.chatId = null
+                }
+                dmContacts.push(contactObj)
             }
         })
 
-        const allContacts = []
-        for (let key in dmContacts) {
-            allContacts.push(dmContacts[key])
-        }
-        for (let key in dailyContactsNoDM) {
-            allContacts.push(dailyContactsNoDM[key])
+        } else {
+            chats.chats.forEach((dmChat) => {
+                dmChat.users.forEach((dmChatUser) => {
+                    if (dmChatUser.username !== user.username) {
+                        dmContacts.push({ ...dmChatUser, chatId: dmChat._id, friendship: "friend" })
+                    }
+                })
+            })
         }
 
-        return allContacts.map((contact, i) => {
+        return dmContacts.map((contact, i) => {
             if (user._id !== contact._id) {
                 return <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom} socket={socket} />
             }
         })
+
+
+
+
+
+
+        // const dmContacts = {}
+        // chats.chats.forEach((dmChat)=> {
+        //     dmChat.users.forEach((dmChatUser)=> {
+        //         if (dmChatUser.username !== user.username) {
+        //             dmContacts[dmChatUser.username] = { ...dmChatUser, chatId: dmChat._id, friendship: "friend"}
+        //             }
+        //     })
+        // })
+
+
+        // const allContacts = []
+        // for (let key in dmContacts) {
+        //     allContacts.push(dmContacts[key])
+        // }
+        // for (let key in dailyContactsNoDM) {
+        //     allContacts.push(dailyContactsNoDM[key])
+        // }
+
+        // return allContacts.map((contact, i) => {
+        //     if (user._id !== contact._id) {
+        //         return <DMPartition key={i} contact={contact} setActiveChatRoom={setActiveChatRoom} socket={socket} />
+        //     }
+        // })
         
     }
 
@@ -101,6 +142,8 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
   return (
     <aside className="leftSidebar">
                     <div className="innerAside">
+                        {mainChatBool && (
+                            <>
                         <div className="title">
                             <h1>Messages</h1> 
                             <small>3 new</small>
@@ -109,6 +152,8 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
                             <small className="uppercase"><DayCounter /></small>
                             <h2><CurrentDate /></h2>
                         </div>
+                  
+             
                         <div className="groupChat">
                             <h3 className="uppercase">Group Chat</h3>
                   <button className="" onClick={e => { chatClickHandler(e) }}>
@@ -123,12 +168,14 @@ const MessagesLeftSideBar = ({ setActiveChatRoom, chats, socket }) => {
                                         </svg>
                                         <span>{user.location.city}</span>
                                     </div>
-                                    <div className="time"><span><Countdown /></span></div>
+                                    {/* <div className="time"><span><Countdown /></span></div> */}
                                 </div>
                             </button>
+                         
                         </div>
+                  </>)}
                         <div className="directMessages">
-                            <h3 className="uppercase">Direct Messages</h3>
+                            <h3 className="uppercase">{ mainChatBool ? "In This Chat" :"Direct Messages"}</h3>
                             {chatSidebarAggregator()}
                         </div>
                     </div>

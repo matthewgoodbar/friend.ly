@@ -4,6 +4,7 @@ import {fetchAllTopics, fetchUserTopics, getTopics, getUserTopics} from "../../s
 import interestImg from './interest.png'
 
 const SingleInterest =({interest}) => {
+    let addNewTopicAllowed = true
     const user = useSelector(state => state.session.user);
     const userTopics = useSelector(getUserTopics)
     const dispatch = useDispatch();
@@ -17,8 +18,10 @@ const SingleInterest =({interest}) => {
     const find = findObjectWithId(userTopics, interest._id)
     const addInterest =(e) => {
         e.preventDefault();
-        if (!find) {
+        if (!find && addNewTopicAllowed) {
+            addNewTopicAllowed = false
             dispatch(createUserTopic(user._id, interest))
+            setTimeout(() => { addNewTopicAllowed = true }, 500)
         }
     }
 

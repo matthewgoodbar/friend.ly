@@ -39,11 +39,9 @@ const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
   const firstLetter = contact.username.split('')[0].toLowerCase()
   const alphbet ='abcdefghijklnmopqrstuvwxyz'
   const indexOfFirst = alphbet.indexOf(firstLetter)
-  console.log(indexOfFirst)
   const colors = ['#14eecd', '#d170d0', '#8a2be2', '#ffd700','#f1908e','#aa00ff', '#14f111','#e86e4d','#cb4273'];
   // const random_color = colors[Math.floor(Math.random() * colors.length)];
   const random_color = colors[indexOfFirst % colors.length]
-  console.log(random_color)
 
   return (
     <button className={contact.friendship} onClick={e => { chatClickHandler(e) }}>

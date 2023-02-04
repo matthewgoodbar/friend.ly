@@ -8,7 +8,6 @@ import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import Welcome from './components/Welcome/Welcome';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
-import ChatBox from './components/ChatBox/ChatBox';
 import MessagesPage from './components/MessagesPage/MessagesPage'
 import Settings from "./components/Settings/Settings"
 
@@ -33,6 +32,7 @@ function App() {
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute path='/interests' component={InterestPage} />
         <ProtectedRoute path='/settings' component={Settings} />
+        <ProtectedRoute path="/direct-messages-page" component={MessagesPage} />
         <ProtectedRoute path="/messages-page" component={MessagesPage} />
       </Switch>
     </>
