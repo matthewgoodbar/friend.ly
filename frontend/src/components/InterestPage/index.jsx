@@ -23,7 +23,6 @@ const InterestPage = () => {
     useEffect( () => {
         dispatch(fetchAllTopics()) 
         dispatch(fetchUserTopics(user._id))
-    
         dispatch(fetchUserChatrooms(user._id)).then((chats) => {
             if (chats.daily) {
                 setActiveChatName(chats.daily.topic.name)
@@ -35,7 +34,10 @@ const InterestPage = () => {
 
 
     useEffect(() => {
-
+        if (userTopics.length === 1 && !activeChatName) {
+            dispatch(changeUserChatroom(userTopics[0].chat))
+            setActiveChatName(userTopics[0].name)
+        }
     }, [userTopics])
 
     
@@ -59,10 +61,16 @@ const InterestPage = () => {
 
     const removeUserInterestHandler = (topic) => {
         dispatch(deleteUserTopic(user._id, topic._id)).then((userTopicRes)=>{
-            let chatId = userTopicRes[0].chat || null
+            console.log(userTopicRes)
+            let chatId = userTopicRes[0]?.chat || null
             if (activeChatName === topic.name) {
+                console.log(chatId)
                 dispatch(changeUserChatroom(chatId))
-                if (chatId) setActiveChatName(userTopicRes[0].name)
+                if (chatId)  {
+                    setActiveChatName(userTopicRes[0].name)
+                } else {
+                    setActiveChatName("")
+                }
                 
             } 
         })
