@@ -18,6 +18,7 @@ const InterestPage = () => {
     const history = useHistory()
     // get all topics from state
     const allTopics = useSelector(getTopics)
+    const [activeChatName, setActiveChatName] = useState("")
 
     //get current user's himself topics
     const userTopics = useSelector(getUserTopics)
@@ -25,7 +26,13 @@ const InterestPage = () => {
 
     useEffect( () => {
         dispatch(fetchAllTopics()) 
-        dispatch(fetchUserTopics(user._id))    
+        dispatch(fetchUserTopics(user._id)).then((userTopicArray)=>{
+            if (userTopicArray[0]) {
+                setActiveChatName(userTopicArray[0].name)
+            } else {
+
+            }
+        })    
     }, [])
 
     
@@ -46,9 +53,7 @@ const InterestPage = () => {
         
     }
 
-    console.log("these are the userTopics",userTopics)
     const showList = userTopics.length === 0;
-
     return (
         <div className="container interests">
         <NavBarSide />
@@ -57,28 +62,31 @@ const InterestPage = () => {
                     <div className="innerAside">
                         <div className="title">
                             <h1>My Interests</h1> 
-                            <p>Based on your interests we'll select people with similar tastes to put you all into the same group chat.</p>
+                            <p>Choose your favorite topics and we'll pair you with people who love what you love.</p>
                             {/* {!user && 
                             <ul className="empty">
                             <li>Please login to add interests</li>
                             </ul>
                         } */}
-                            {userTopics.length < 3 ? 
+                            {userTopics.length < 1 ? 
                             <>
                                 <div className="coverSideBar" onMouseOver={highlightEmpty} onMouseOut={highlightEmpty}></div> 
                                 <ul className="empty" id={highlighted ? "highlighted" : ""}>
-                                    <li>You need to pick at least 3 interests to join a new chat each day.</li>
+                                    <li>You need to pick at least one interest to join the chat.</li>
                                 </ul>
                             </>
                             :
-                            <button id="join-chat-btn" onClick={handleJoin}>Join your daily chat</button>
+
+                            <>
+                                {activeChatName && (<button id="join-chat-btn" onClick={handleJoin}>{`${activeChatName} Chat`}</button>)}
+                            </>
                             }
                             
                             {!showList &&
                             <ul>
                             {userTopics.map(
                                 (topic, i) => (
-                                    <List topic={topic} key={i}/>
+                                    <List topic={topic} setActiveChatName={setActiveChatName} key={i}/>
                                 )
                             )}
                             </ul>

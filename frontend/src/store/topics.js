@@ -39,7 +39,8 @@ export const fetchUserTopics = (userId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/topics/user/${userId}`);
         const topics = await res.json();
-        dispatch(receiveUserTopics(topics));
+        dispatch(receiveUserTopics(topics))
+        return topics;
     } catch (err) {
         console.log("error in fetchUserTopics")
     }

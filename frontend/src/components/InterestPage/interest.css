@@ -43,6 +43,15 @@
     border-bottom: 1px solid var(--color-transparent-black);
     position: relative;
 }
+
+.interests .leftSidebar ul li:hover {
+    cursor: pointer;
+    background-color: #8904c6;
+    color: white;
+}
+
+
+
 .interests .leftSidebar ul li:last-child {
     border-bottom: 0;
 }
