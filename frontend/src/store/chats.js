@@ -42,11 +42,11 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
     }
 };
 
-export const changeUserChatroom = ({chatId, userId}) => async dispatch => {
+export const changeUserChatroom = ({chatId}) => async dispatch => {
     try {
-        const res = await jwtFetch(`/api/user/chats/${userId}`, {
+        const res = await jwtFetch(`/api/user/chats/`, {
             method: 'PATCH',
-            body: JSON.stringify(chatId)
+            body: JSON.stringify({chatId})
         });
         const chatrooms = await res.json();
         dispatch(receiveUserChatrooms(chatrooms));

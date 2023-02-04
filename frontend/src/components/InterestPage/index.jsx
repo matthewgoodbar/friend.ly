@@ -57,25 +57,16 @@ const InterestPage = () => {
 
 
     const removeUserInterestHandler = (topic) => {
-        // if active chat room === topic.name,
-
         dispatch(deleteUserTopic(user._id, topic._id)).then(()=>{
-            let chatId = userTopics[0] ? userTopics[0] : null
+            let chatId = userTopics[0]._id || null
+            console.log(activeChatName)
             if (activeChatName === topic.name) {
-
-                dispatch(changeUserChatroom({ chatId: userTopics[0].chatId, userId: user._id }))
-
-
-
-
-        } 
-
+                // dispatch(changeUserChatroom({ chatId, userId: user._id }))
+                console.log(userTopics)
+                if (chatId) setActiveChatName(userTopics[0].name)
+                
+            } 
         })
-        // active chat room should become [0] in topic array
-        // if there is no topic [0]
-        // active chat room should become null
-
-
     }
 
     const showList = userTopics.length === 0;
@@ -111,7 +102,7 @@ const InterestPage = () => {
                             <ul>
                             {userTopics.map(
                                 (topic, i) => (
-                                    <List topic={topic} setActiveChatName={setActiveChatName} key={i}/>
+                                    <List topic={topic} setActiveChatName={setActiveChatName} removeUserInterestHandler={removeUserInterestHandler}key={i}/>
                                 )
                             )}
                             </ul>

@@ -1,7 +1,7 @@
 import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUserTopic } from "../../store/topics";
-const List = ({ topic, setActiveChatName }) => {
+const List = ({ topic, setActiveChatName, removeUserInterestHandler }) => {
     const user = useSelector(state => state.session.user)
     
     const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const List = ({ topic, setActiveChatName }) => {
     const removeUserInterest = (e) => {
         e.stopPropagation()
         e.preventDefault()
-        dispatch(deleteUserTopic(user._id, topic._id))
+        removeUserInterestHandler(topic)
         // if active chat room === topic.name, 
         // dispatch(changeUserChatroom(user._id, topic._id))
         // if user removes the current set chat, it needs to transition to a different chat. 
