@@ -104,6 +104,38 @@ router.get('/dequeue', restoreUser, async (req, res) => {
   return res.json({ message: 'success' });
 });
 
+router.patch('/chatswap', restoreUser, async (req, res) => {
+  const user = req.user;
+  const chatId = req.body.chatId;
+  user.daily = chatId;
+  await user.save();
+  await user.populate({
+    path: 'daily',
+      select: 'users topic daily',
+      populate: [{
+        path: 'users',
+        select: '_id username image pings'
+      },
+      {
+        path: 'topic',
+        select: '_id name description background thumbnail'
+      }]
+  })
+  .populate({
+    path: 'chats',
+      select: 'users daily',
+      populate: {
+        path: 'users',
+        select: '_id username image'
+      }
+  });
+  const chats = user.chats;
+  const daily = user.daily;
+  return res.json({
+    chats, daily
+  });
+});
+
 router.patch('/:id', restoreUser, async (req, res) => {
   const user = req.user;
   let username = req.body.username || user.username;
