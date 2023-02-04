@@ -20,6 +20,19 @@ const MessagesPage = () => {
 
   const [activeChatRoom, setActiveChatRoom] = useState("")
 
+  const mainChatBool = window.location.pathname === "/messages-page"
+  if (mainChatBool) console.log(chats)
+
+  useEffect(() => {
+    if (chats.daily && mainChatBool) {
+      setActiveChatRoom(chats.daily._id)
+    } else {
+      setActiveChatRoom(null)
+    }
+
+  }, [chats, mainChatBool])
+
+
   useEffect(() => {
     dispatch(fetchChatMessages(activeChatRoom))
   }, [activeChatRoom])
@@ -48,8 +61,7 @@ const MessagesPage = () => {
 
       socket.on("fetch chatrooms", ({ userId, contactId}) => {
         if (contactId === user._id || userId === user._id) {
-          dispatch(fetchUserChatrooms(user._id)).then(async (chatrooms) => {
-
+          dispatch(fetchUserChatrooms(user._id)).then((chatrooms) => {
             chatrooms.chats.forEach((chatroom) => {
               socket.emit("leave", chatroom._id)
               socket.emit("setup", chatroom._id)
@@ -71,13 +83,15 @@ const MessagesPage = () => {
                 <NavBarSide />
 
                 <div className="content">
-            {chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} socket={socket} />)}
+            {chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} socket={socket} mainChatBool={mainChatBool} />)}
                   <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
-                  <YelpDataItems props={chats.daily.topic}/>
+                  { mainChatBool && (<YelpDataItems props={chats.daily.topic}/>)}
                 </div>
 
           </div>
       )
+    } else {
+      
     }
 }
 

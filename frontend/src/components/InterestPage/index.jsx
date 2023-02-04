@@ -24,11 +24,7 @@ const InterestPage = () => {
         dispatch(fetchAllTopics()) 
         dispatch(fetchUserTopics(user._id))
         dispatch(fetchUserChatrooms(user._id)).then((chats) => {
-            if (chats.daily) {
-                setActiveChatName(chats.daily.topic.name)
-            } else {
-
-            }
+            if (chats.daily) setActiveChatName(chats.daily.topic.name)
         })    
     }, [])
 
