@@ -42,7 +42,7 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
     }
 };
 
-export const changeUserChatroom = ({chatId}) => async dispatch => {
+export const changeUserChatroom = (chatId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/users/chatswap/`, {
             method: 'PATCH',
