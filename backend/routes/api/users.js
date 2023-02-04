@@ -107,6 +107,14 @@ router.get('/dequeue', restoreUser, async (req, res) => {
 router.patch('/chatswap', restoreUser, async (req, res) => {
   const user = req.user;
   const chatId = req.body.chatId;
+  if (user.daily) {
+    await Chat.updateOne({ _id: user.daily },
+      { $pull: { users: user } });
+  }
+  if (chatId) {
+    await Chat.updateOne({ _id: chatId },
+      { $push: { users: user } });
+  }
   user.daily = chatId;
   await user.save();
   await user.populate({
