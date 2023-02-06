@@ -91,6 +91,34 @@ const diego = new User ({
     }
 });
 
+const demo1 = new User ({
+    username: 'demo-user-1',
+    email: 'demo-user-1@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [topics[6], topics[7], topics[8], topics[16], topics[17]],
+    daily: null,
+    chats: [],
+    pings: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
+});
+
+const demo2 = new User ({
+    username: 'demo-user-2',
+    email: 'demo-user-2@friend.ly',
+    hashedPassword: bcrypt.hashSync('password', 10),
+    topics: [topics[6], topics[7], topics[8], topics[30], topics[31]],
+    daily: null,
+    chats: [],
+    pings: [],
+    location: {
+        zip: 94108,
+        city: "San Francisco"
+    }
+});
+
 marcos.pings = [diego._id, matthew._id];
 diego.pings = [marcos._id];
 evgenii.pings = [marcos._id];
@@ -100,6 +128,8 @@ users.push(marcos);
 users.push(vivian);
 users.push(evgenii);
 users.push(diego);
+users.push(demo1);
+users.push(demo2);
 
 for (let i = 1; i < NUM_SEED_USERS; i++) {
     const firstName = faker.name.firstName();
@@ -143,28 +173,12 @@ users.forEach(user => {
     user.daily = userChat._id;
 });
 
-// const dailyGroup = new Chat({
-//     users: [
-//         // matthew._id,
-//         marcos._id,
-//         vivian._id,
-//         evgenii._id,
-//         diego._id
-//     ],
-//     messages: [],
-//     daily: true,
-//     topic: topics[23]._id
-// });
-// chats.push(dailyGroup);
-// [
-//     // matthew, 
-//     marcos, 
-//     vivian, 
-//     evgenii, 
-//     diego
-// ].forEach((user) => {
-//     user.daily = dailyGroup._id;
-// });
+let demoTopic = topics[6];
+let demoChat = chats.find(element => element.topic === demoTopic._id);
+[demo1, demo2].forEach(demoUser => {
+    demoChat.users.push(demoUser._id);
+    demoUser.daily = demoChat._id;
+});
 
 const marcosDiegoChat = new Chat({
     users: [
