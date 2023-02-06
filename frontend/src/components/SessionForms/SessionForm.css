@@ -5,10 +5,17 @@
 
 .session-left-side{
     margin: 0 auto;
+    /* text-align: center; */
+}
+
+#login-welcome{
+    margin-left: 30px;
 }
 
 .session-left-side #logo{
 margin-top: 70px;
+/* margin-left: -190px; */
+/* margin-left: 30px; */
 }
 
 .session-left-side h2{
@@ -20,6 +27,8 @@ margin-top: 70px;
     font-size: 36px;
     line-height: 42px;
     color: #333333;
+    /* margin-left: 30px; */
+    text-align: left;
 }
 
 .session-form{
@@ -66,7 +75,7 @@ line-height: 21px;
     background: #8904c6;
 }
 
-#submit-btn-demo{
+.submit-btn-demo{
     width: 340px;
     height: 50px;
     background: #FFFFFF;
@@ -81,10 +90,31 @@ line-height: 21px;
     line-height: 21px;
     text-align: center;
     color: #AD00FF;
+    margin-left: 30px;
 }
-#submit-btn-demo:hover{
+.submit-btn-demo:hover{
     background: #AD00FF;
     color: white;
+}
+#demo-user-v2{
+    margin-top: 20px;
+}
+
+#bottom-line-demo-users{
+    margin-top: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#explore-app{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    color: #757575;
 }
 
 #bottom-line{
@@ -193,6 +223,7 @@ line-height: 21px;
     bottom: -85px;
     left: -50px;
 }
+
 #topic-rec{
     width:260px;
     height: 210px;
@@ -218,30 +249,85 @@ line-height: 21px;
         width: 400px;
         margin: 0 auto;
     }
+
+
     #big-rec{
         width: 400px;
         height: 200px;
-        background-color: #ffffff;
-        background: #FFFFFF;
+        background: url(https://friendly-aa.s3.us-west-1.amazonaws.com/chathistory.png);
+        background-size: cover;
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
     }
+
     
     #small-rec{
         width: 240px;
-        height: 140px;
+        height: 262px;
         background-color: #ffffff;
-        background: #FFFFFF;
+        background: url(https://friendly-aa.s3.us-west-1.amazonaws.com/sidebar.png);
+        background-size: cover;
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         border-radius: 4px; 
         position: absolute;
-        bottom: -66px;
-        left: -40px;
+        bottom: -463px;
+        left: 0px;
     }
+
+    #topic-rec{
+        width:222px;
+        height: 177px;
+        background-color: #ffffff;
+        background: url(https://friendly-aa.s3.us-west-1.amazonaws.com/thaifood.png);
+        background-size: cover;
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+        border-radius: 4px; 
+        position: absolute;
+        bottom: -190px;
+        left: 178px;
+    }
+}
+
+#demo-users-section{
+    text-align: center;
+}
+#demo-users-section button{
+    margin-bottom: 20px;
 }
 
 @media(max-height: 920px){
     #session-right-side{
         height: 1000px;
     }
+}
+
+@media(max-height: 903px){
+    .session-left-side #logo{
+        margin-top: 20px;
+        /* margin-left: -190px; */
+        /* margin-left: 30px; */
+        }
+
+    .session-left-side h2{
+            margin-top: 20px;
+            /* text-align: center; */
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 42px;
+            color: #333333;
+            /* margin-left: 30px; */
+            text-align: left;
+        }
+    #signup-offer p{
+            margin-top: 30px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 14px;
+            text-align: center;
+            color: #757575;
+        }
 }
