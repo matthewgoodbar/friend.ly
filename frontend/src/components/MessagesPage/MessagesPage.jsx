@@ -21,7 +21,6 @@ const MessagesPage = () => {
   const [activeChatRoom, setActiveChatRoom] = useState("")
 
   const mainChatBool = window.location.pathname === "/messages-page"
-  if (mainChatBool) console.log(chats)
 
   useEffect(() => {
     if (chats.daily && mainChatBool) {
@@ -91,7 +90,7 @@ const MessagesPage = () => {
 
                 <div className="content">
             {chats && chats.daily && (<MessagesLeftSideBar setActiveChatRoom={setActiveChatRoom} chats={chats} socket={socket} mainChatBool={mainChatBool} />)}
-                  <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket}/>
+            <ChatBox activeChatRoom={activeChatRoom} messages={messages} socket={socket} mainChatBool={mainChatBool}/>
                   { mainChatBool && (<YelpDataItems props={chats.daily.topic}/>)}
                 </div>
 

@@ -13,7 +13,7 @@ import Message from "../Message/Message";
 // import ryan from '../../assets/ryan.png'
 
 
-const ChatBox = ({ activeChatRoom, messages, socket }) => {
+const ChatBox = ({ activeChatRoom, messages, socket, mainChatBool }) => {
   const chatHistory = useRef(null);
   const lastMessage = useRef(null);
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
     
 
 const bannerName = () => {
-  if (chats.chats.length === 0 && mainChatBool!) return "Click on a friend to chat with them"
+  if (chats.chats.length === 0 && !mainChatBool) return "You haven't connected with anyone yet"
   if (!activeChatRoom) return "Click on a friend to chat with them"
 
 
