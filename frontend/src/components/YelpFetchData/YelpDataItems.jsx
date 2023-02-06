@@ -33,7 +33,7 @@ const YelpDataItems =({props}) => {
             setRestaurants(parsedData);
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
         });
     }
 

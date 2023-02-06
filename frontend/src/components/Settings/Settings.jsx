@@ -47,9 +47,7 @@ const Settings = () => {
         },
         password
       }
-      dispatch(updateUser(editedUser,user._id)).then(()=>{
-        console.log("submited personalInfo form")
-      })
+      dispatch(updateUser(editedUser,user._id))
       
 
     } else if (tab === "password") {

@@ -12,17 +12,12 @@ export const createFriendship = (data, socket) => async dispatch => {
         });
         if (res.ok) {
             socket.emit("force chatrooms", { userId: data.userId, contactId: data.contactId })
-            // dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
         } else {
             console.log("error in createFriendship response")
         }
     } catch (err) {
         console.log("error in createFriendship")
-        // const resBody = await err.json();
-        // if (resBody.statusCode === 400) {
-        //   return dispatch(receiveErrors(resBody.errors));
-        // }
     }
 };
 
@@ -33,16 +28,11 @@ export const destroyFriendship = (data, socket) => async dispatch => {
         });
         if (res.ok) {
             socket.emit("force chatrooms", { userId: data.userId, contactId: data.contactId})
-            // dispatch(fetchUserChatrooms(data.userId));
             dispatch(getCurrentUser())
         } else {
             console.log("error in destroyFriendship response")
         }
     } catch (err) {
         console.log("error in destroyFriendship")
-        // const resBody = await err.json();
-        // if (resBody.statusCode === 400) {
-        //   return dispatch(receiveErrors(resBody.errors));
-        // }
     }
 };

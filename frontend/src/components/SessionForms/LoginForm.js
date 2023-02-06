@@ -30,9 +30,7 @@ function LoginForm () {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password })).then((res)=>{
-      console.log('im in dispatch login',res)
       dispatch(fetchUserChatrooms(res.currentUser._id)).then((chatrooms)=>{
-        console.log("im in dispatch chatrooms", chatrooms)
         if(!chatrooms.daily){
           history.push('/interests')
         }

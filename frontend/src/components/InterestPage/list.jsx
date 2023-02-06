@@ -17,7 +17,6 @@ const List = ({ topic, setActiveChatName, removeUserInterestHandler }) => {
 
 
     const swapActiveChat = (e) => {
-        console.log(topic.chat)
         e.stopPropagation()
         e.preventDefault()
         dispatch(changeUserChatroom(socket, topic.chat)).then(()=>{

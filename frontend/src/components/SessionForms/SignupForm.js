@@ -94,7 +94,6 @@ function SignupForm () {
     // dispatch(signup(user))
 
     dispatch(signup(user)).then((res)=> {
-      console.log(res)
       if(!res.errors){
         history.push('/interests')
       }

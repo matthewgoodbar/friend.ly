@@ -28,7 +28,7 @@ const MessagesRightSideBar = (props) => {
             // setRestaurantName(parsedData[0].name)
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
         });
     }
 

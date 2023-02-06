@@ -23,7 +23,6 @@ const Test = ({ contact, setActiveChatRoom, socket}) => {
     const letter = contact.username.split('')[0].toUpperCase()
     const colors = ['#14eecd', '#d170d0', '#8a2be2','#ffd700'];
     const random_color = colors[Math.floor(Math.random() * colors.length)];
-    console.log(random_color)
 
     const createConnection = (e) => {
         e.stopPropagation()
