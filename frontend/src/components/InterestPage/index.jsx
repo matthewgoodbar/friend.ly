@@ -54,8 +54,6 @@ const InterestPage = () => {
         history.push('/')
     }
 
-
-    // i need a different socket path for leaving a room, because this makes it the next socket
     const removeUserInterestHandler = (topic) => {
         dispatch(deleteUserTopic(user._id, topic._id)).then((userTopicRes)=>{
             let chatId = userTopicRes[0]?.chat || null
@@ -82,11 +80,6 @@ const InterestPage = () => {
                         <div className="title">
                             <h1>My Interests</h1> 
                             <p>Choose your favorite topics and we'll pair you with people who love what you love.</p>
-                            {/* {!user && 
-                            <ul className="empty">
-                            <li>Please login to add interests</li>
-                            </ul>
-                        } */}
                             {userTopics.length < 1 ? 
                             <>
                                 <div className="coverSideBar" onMouseOver={highlightEmpty} onMouseOut={highlightEmpty}></div> 
@@ -97,7 +90,7 @@ const InterestPage = () => {
                             :
 
                             <>
-                                {activeChatName && (<button id="join-chat-btn" onClick={handleJoin}>{`${activeChatName} Chat`}</button>)}
+                                {activeChatName && (<button id="vist-git-btn" onClick={handleJoin}>{`${activeChatName} Chat`}</button>)}
                             </>
                             }
                             

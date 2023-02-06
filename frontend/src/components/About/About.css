@@ -79,3 +79,31 @@
     margin-top: 20px;
     margin-bottom: 30px
 }
+
+.join-chat-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+#visit-git-btn {
+    width: 250px;
+    height: 62px;
+    background: #AD00FF;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-style: normal;
+    /* font-weight: 700; */
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border: 0;
+}
+
+#visit-git-btn {
+    background: #8904c6;
+}

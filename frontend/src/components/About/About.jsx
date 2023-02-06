@@ -1,7 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./About.css"
 
+
 function About() {
+    const history = useHistory()
     const authors = [
         {
             name: "Diego Novaes",
@@ -38,8 +41,11 @@ function About() {
         <div className="about-modal">
             <div className="description-container">
                 <h1>About this project</h1>
-                <div className="about-description">Friend.ly is a social media website for meeting new people based on user location and interests. It is a group project built with MongoDB, Express.js, Node.js, React.js (MERN) stack.
+                <div className="about-description">Friend.ly is a social media website for meeting new people based on user location and interests. It is a group project built using the MERN Stack (MongoDB, Express.js, Node.js, React.js).<br /><br />
+                Visit our project GitHub and ReadMe to learn more about the technologies we used and created.
                 </div>
+
+                <div className="join-chat-btn-container"><a target="_blank" href="https://github.com/matthewgoodbar/friend.ly"><button id="join-chat-btn">Learn More</button></a></div>
             </div>
             <h1>Creators of Friendly</h1>
             <div className="authors">
