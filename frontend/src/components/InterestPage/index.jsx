@@ -10,6 +10,7 @@ import List from './list'
 import { useHistory } from 'react-router-dom';
 
 import {changeUserChatroom, fetchUserChatrooms,joinQueue} from "../../store/chats";
+import socket from "../../utils/socket";
 
 const InterestPage = () => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const InterestPage = () => {
 
     useEffect(() => {
         if (userTopics.length === 1 && !activeChatName) {
-            dispatch(changeUserChatroom(userTopics[0].chat))
+            dispatch(changeUserChatroom(socket, userTopics[0].chat))
             setActiveChatName(userTopics[0].name)
         }
     }, [userTopics])
@@ -54,14 +55,13 @@ const InterestPage = () => {
     }
 
 
-
+    // i need a different socket path for leaving a room, because this makes it the next socket
     const removeUserInterestHandler = (topic) => {
         dispatch(deleteUserTopic(user._id, topic._id)).then((userTopicRes)=>{
-            console.log(userTopicRes)
             let chatId = userTopicRes[0]?.chat || null
             if (activeChatName === topic.name) {
-                console.log(chatId)
-                dispatch(changeUserChatroom(chatId))
+                dispatch(changeUserChatroom(socket, chatId))
+                socket.emit("transition chatroom", topic.chat)
                 if (chatId)  {
                     setActiveChatName(userTopicRes[0].name)
                 } else {

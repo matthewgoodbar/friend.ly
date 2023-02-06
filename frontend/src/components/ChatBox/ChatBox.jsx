@@ -45,7 +45,7 @@ const ChatBox = ({ activeChatRoom, messages, socket }) => {
     
 
 const bannerName = () => {
-
+  if (chats.chats.length === 0 && mainChatBool!) return "Click on a friend to chat with them"
   if (!activeChatRoom) return "Click on a friend to chat with them"
 
 

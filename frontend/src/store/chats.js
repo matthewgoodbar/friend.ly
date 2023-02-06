@@ -42,7 +42,7 @@ export const fetchUserChatrooms = (userId) => async dispatch => {
     }
 };
 
-export const changeUserChatroom = (chatId) => async dispatch => {
+export const changeUserChatroom = (socket, chatId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/users/chatswap/`, {
             method: 'PATCH',
@@ -50,6 +50,7 @@ export const changeUserChatroom = (chatId) => async dispatch => {
         });
         const chatrooms = await res.json();
         dispatch(receiveUserChatrooms(chatrooms));
+        socket.emit("transition chatroom", chatId )
         return chatrooms
     } catch (err) {
         console.log("error in changeUserChatroom")

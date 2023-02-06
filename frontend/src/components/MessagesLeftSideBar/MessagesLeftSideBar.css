@@ -186,7 +186,6 @@ aside.leftSidebar .directMessages button.awaiting:hover span:hover {
     cursor: pointer;
 }
 aside.leftSidebar .directMessages button.friend span {
-    display: none;
     background-color: var(--color-pink-light);
     color: var(--color-transparent-black-dark);
 }

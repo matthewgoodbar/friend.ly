@@ -41,6 +41,10 @@ io.on("connection", (socket) => {
     io.emit("fetch chatrooms", contactObj);
   });
 
+  socket.on("transition chatroom", (chatId) => {
+    socket.to(chatId).emit("fetch chatrooms", {allBool: true});
+  });
+
   socket.on("new message", ({ message, activeChatRoom }) => {
     console.log(message)
     socket.to(activeChatRoom).emit("message recieved", message);

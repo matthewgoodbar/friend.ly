@@ -26,13 +26,17 @@ const DMPartition = ({ contact, setActiveChatRoom, socket}) => {
   const createConnection = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(createFriendship({ userId: user._id, contactId: contact._id }, socket))
+    dispatch(createFriendship({ userId: user._id, contactId: contact._id }, socket)).then(()=>{
+      dispatch(fetchUserChatrooms(user._id))
+    })
   }
 
   const closeConnection = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }, socket))
+    dispatch(destroyFriendship({ userId: user._id, contactId: contact._id }, socket)).then(() => {
+      dispatch(fetchUserChatrooms(user._id))
+    })
   }
 
   const initial = contact.username.split('')[0].toUpperCase()

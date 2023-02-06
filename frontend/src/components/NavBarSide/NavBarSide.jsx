@@ -10,6 +10,7 @@ const ModalContext = React.createContext();
 const NavBarSide = () => {
     const dispatch = useDispatch();
     const dailyChat = useSelector(state => state.chats.daily)
+    const dmChats = useSelector(state => state.chats.chats)
 
     
     const logoutUser = e => {
@@ -74,6 +75,7 @@ const NavBarSide = () => {
                                         <span>Messages</span>
                                     </NavLink>
                                 </li>
+          
                                 <li>
                                     <NavLink to={'/direct-messages-page'} activeClassName="active">
                                         <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +83,7 @@ const NavBarSide = () => {
                                         </svg>
                                         <span>Messages</span>
                                     </NavLink>
-                                </li>
+                                      </li>
                                 </>
                                 )}
                                 <li>

@@ -2,6 +2,7 @@ import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserChatroom, fetchUserChatrooms } from "../../store/chats";
 import { deleteUserTopic } from "../../store/topics";
+import socket from "../../utils/socket";
 
 const List = ({ topic, setActiveChatName, removeUserInterestHandler }) => {
     const user = useSelector(state => state.session.user)
@@ -19,7 +20,7 @@ const List = ({ topic, setActiveChatName, removeUserInterestHandler }) => {
         console.log(topic.chat)
         e.stopPropagation()
         e.preventDefault()
-        dispatch(changeUserChatroom(topic.chat)).then(()=>{
+        dispatch(changeUserChatroom(socket, topic.chat)).then(()=>{
             dispatch(fetchUserChatrooms(user._id))
             setActiveChatName(topic.name)
         })

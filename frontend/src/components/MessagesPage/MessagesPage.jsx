@@ -59,15 +59,22 @@ const MessagesPage = () => {
         dispatch(removeMessage(msgId))
       });
 
-      socket.on("fetch chatrooms", ({ userId, contactId}) => {
-        if (contactId === user._id || userId === user._id) {
-          dispatch(fetchUserChatrooms(user._id)).then((chatrooms) => {
-            chatrooms.chats.forEach((chatroom) => {
-              socket.emit("leave", chatroom._id)
-              socket.emit("setup", chatroom._id)
+      socket.on("fetch chatrooms", ({ allBool, userId, contactId}) => {
+
+        if (allBool) {
+          dispatch(fetchUserChatrooms(user._id))
+        } else {
+          if (contactId === user._id || userId === user._id) {
+            dispatch(fetchUserChatrooms(user._id)).then((chatrooms) => {
+              chatrooms.chats.forEach((chatroom) => {
+                socket.emit("leave", chatroom._id)
+                socket.emit("setup", chatroom._id)
+              })
             })
-          })
+          }
         }
+
+
       });
     })
 
