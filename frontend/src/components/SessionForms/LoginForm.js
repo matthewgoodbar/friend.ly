@@ -42,12 +42,12 @@ function LoginForm () {
 
   const demoLoginV1 = (e) => {
     e.preventDefault();
-    dispatch(login({ email:"evgenii@friend.ly", password:"password" })); 
+    dispatch(login({ email:"demo-user-1@friend.ly", password:"password" })); 
   }
 
   const demoLoginV2 = (e) => {
     e.preventDefault();
-    dispatch(login({ email:"marcos@friend.ly", password:"password" }))
+    dispatch(login({ email:"demo-user-2@friend.ly", password:"password" }))
   }
 
   return (
