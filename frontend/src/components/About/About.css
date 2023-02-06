@@ -104,6 +104,6 @@
     border: 0;
 }
 
-#visit-git-btn {
+#visit-git-btn:hover {
     background: #8904c6;
 }

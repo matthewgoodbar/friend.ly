@@ -45,7 +45,7 @@ function About() {
                 Visit our project GitHub and ReadMe to learn more about the technologies we used and created.
                 </div>
 
-                <div className="join-chat-btn-container"><a target="_blank" href="https://github.com/matthewgoodbar/friend.ly"><button id="join-chat-btn">Learn More</button></a></div>
+                <div className="join-chat-btn-container"><a target="_blank" href="https://github.com/matthewgoodbar/friend.ly"><button id="visit-git-btn">Learn More</button></a></div>
             </div>
             <h1>Creators of Friendly</h1>
             <div className="authors">

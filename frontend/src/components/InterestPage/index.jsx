@@ -90,7 +90,7 @@ const InterestPage = () => {
                             :
 
                             <>
-                                {activeChatName && (<button id="vist-git-btn" onClick={handleJoin}>{`${activeChatName} Chat`}</button>)}
+                                {activeChatName && (<button id="join-chat-btn" onClick={handleJoin}>{`${activeChatName} Chat`}</button>)}
                             </>
                             }
                             
